@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 
-namespace PrismaCore.CustomCommands
+namespace ServerCore.CustomCommands
 {
     public class LocationTrackerCommand : ConsoleCmdAbstract
     {
@@ -87,13 +87,13 @@ namespace PrismaCore.CustomCommands
             else
             {
                 SdtdConsole.Instance.Output("Active location tracker settings:");
-                SdtdConsole.Instance.Output(string.Format("Enabled: {0}", PrismaCoreSettings.Instance.LocationTracker_Enabled));
-                SdtdConsole.Instance.Output(string.Format("ChatCommand: {0}", PrismaCoreSettings.Instance.LocationTracker_ChatCommand));
-                SdtdConsole.Instance.Output(string.Format("CommandEnabled: {0}", PrismaCoreSettings.Instance.LocationTracker_ChatCommandEnabled));
-                SdtdConsole.Instance.Output(string.Format("RecordingInterval: {0} seconds", PrismaCoreSettings.Instance.LocationTracker_RecordingIntervalSeconds));
-                SdtdConsole.Instance.Output(string.Format("MaxAgeData: {0} hours", PrismaCoreSettings.Instance.LocationTracker_MaximumDataAgeHours));
-                SdtdConsole.Instance.Output(string.Format("NearDistance: {0} meters", PrismaCoreSettings.Instance.LocationTracker_NearDistance));
-                SdtdConsole.Instance.Output(string.Format("ResponseColor: {0}", PrismaCoreSettings.Instance.LocationTracker_ResponseColor));
+                SdtdConsole.Instance.Output(string.Format("Enabled: {0}", ServerCoreSettings.Instance.LocationTracker_Enabled));
+                SdtdConsole.Instance.Output(string.Format("ChatCommand: {0}", ServerCoreSettings.Instance.LocationTracker_ChatCommand));
+                SdtdConsole.Instance.Output(string.Format("CommandEnabled: {0}", ServerCoreSettings.Instance.LocationTracker_ChatCommandEnabled));
+                SdtdConsole.Instance.Output(string.Format("RecordingInterval: {0} seconds", ServerCoreSettings.Instance.LocationTracker_RecordingIntervalSeconds));
+                SdtdConsole.Instance.Output(string.Format("MaxAgeData: {0} hours", ServerCoreSettings.Instance.LocationTracker_MaximumDataAgeHours));
+                SdtdConsole.Instance.Output(string.Format("NearDistance: {0} meters", ServerCoreSettings.Instance.LocationTracker_NearDistance));
+                SdtdConsole.Instance.Output(string.Format("ResponseColor: {0}", ServerCoreSettings.Instance.LocationTracker_ResponseColor));
             }
         }
 
@@ -213,10 +213,10 @@ namespace PrismaCore.CustomCommands
                 SdtdConsole.Instance.Output(string.Format("ERR: The parameter for enabled is not true/false. Parameter: {0}", _params[1]));
             else
             {
-                PrismaCoreSettings.Instance.LocationTracker_Enabled = enabled;
+                ServerCoreSettings.Instance.LocationTracker_Enabled = enabled;
                 if (enabled) LocationTracker.Start();
                 else LocationTracker.Unload();
-                PrismaCoreSettings.Instance.Save();
+                ServerCoreSettings.Instance.Save();
                 SdtdConsole.Instance.Output(string.Format("Enabled has been set to {0}", enabled));
             }
         }
@@ -231,8 +231,8 @@ namespace PrismaCore.CustomCommands
             {
                 command = _params[1].ToLower().Trim();
 
-                PrismaCoreSettings.Instance.LocationTracker_ChatCommand = command;
-                PrismaCoreSettings.Instance.Save();
+                ServerCoreSettings.Instance.LocationTracker_ChatCommand = command;
+                ServerCoreSettings.Instance.Save();
                 SdtdConsole.Instance.Output(string.Format("Command has been set to {0}", command));
             }
         }
@@ -251,8 +251,8 @@ namespace PrismaCore.CustomCommands
                     SdtdConsole.Instance.Output(string.Format("ERR: The parameter for responsecolor is not a valid hexadecimal number. Parameter: {0}", _params[1]));
                     return;
                 }
-                PrismaCoreSettings.Instance.LocationTracker_ResponseColor = color;
-                PrismaCoreSettings.Instance.Save();
+                ServerCoreSettings.Instance.LocationTracker_ResponseColor = color;
+                ServerCoreSettings.Instance.Save();
                 SdtdConsole.Instance.Output(string.Format("ResponseColor has been set to {0}", color));
             }
         }
@@ -264,8 +264,8 @@ namespace PrismaCore.CustomCommands
                 SdtdConsole.Instance.Output(string.Format("ERR: The parameter for enabled is not true/false. Parameter: {0}", _params[1]));
             else
             {
-                PrismaCoreSettings.Instance.LocationTracker_ChatCommandEnabled = enabled;
-                PrismaCoreSettings.Instance.Save();
+                ServerCoreSettings.Instance.LocationTracker_ChatCommandEnabled = enabled;
+                ServerCoreSettings.Instance.Save();
                 SdtdConsole.Instance.Output(string.Format("CommandEnabled has been set to {0}", enabled));
             }
         }
@@ -277,8 +277,8 @@ namespace PrismaCore.CustomCommands
                 SdtdConsole.Instance.Output(string.Format("ERR: The parameter for interval is not a valid integer. Parameter: {0}", _params[1]));
             else
             {
-                PrismaCoreSettings.Instance.LocationTracker_RecordingIntervalSeconds = interval;
-                PrismaCoreSettings.Instance.Save();
+                ServerCoreSettings.Instance.LocationTracker_RecordingIntervalSeconds = interval;
+                ServerCoreSettings.Instance.Save();
                 SdtdConsole.Instance.Output(string.Format("Interval has been set to {0}", interval));
             }
         }
@@ -388,8 +388,8 @@ namespace PrismaCore.CustomCommands
                 SdtdConsole.Instance.Output(string.Format("ERR: The parameter for maxagedata is not a valid integer. Parameter: {0}", _params[1]));
             else
             {
-                PrismaCoreSettings.Instance.LocationTracker_MaximumDataAgeHours = maxagedata;
-                PrismaCoreSettings.Instance.Save();
+                ServerCoreSettings.Instance.LocationTracker_MaximumDataAgeHours = maxagedata;
+                ServerCoreSettings.Instance.Save();
                 SdtdConsole.Instance.Output(string.Format("MaxAgeData has been set to {0}", maxagedata));
             }
         }
@@ -401,8 +401,8 @@ namespace PrismaCore.CustomCommands
                 SdtdConsole.Instance.Output(string.Format("ERR: The parameter for neardistance is not a valid integer. Parameter: {0}", _params[1]));
             else
             {
-                PrismaCoreSettings.Instance.LocationTracker_NearDistance = neardistance;
-                PrismaCoreSettings.Instance.Save();
+                ServerCoreSettings.Instance.LocationTracker_NearDistance = neardistance;
+                ServerCoreSettings.Instance.Save();
                 SdtdConsole.Instance.Output(string.Format("NearDistance has been set to {0}", neardistance));
             }
         }

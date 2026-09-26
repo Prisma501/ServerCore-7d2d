@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace PrismaCore
+namespace ServerCore
 {
     public class Get
     {
@@ -11,7 +11,7 @@ namespace PrismaCore
             {
                 int AdminLvL = GameManager.Instance.adminTools.Users.GetUserPermissionLevel(_cInfo);
 
-                if (AdminLvL <= PrismaCoreSettings.Instance.ChatCommandPermissions_get)
+                if (AdminLvL <= ServerCoreSettings.Instance.ChatCommandPermissions_get)
                 {
                     string movingPlayer = "";
                     string nameMoving = "";
@@ -42,8 +42,8 @@ namespace PrismaCore
                                     }
                                     else
                                     {
-                                        string mNO = PrismaCoreStrings.Instance.Get_PlayerOffline.Replace("{playerName}", p.Name);
-                                        _cInfo.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(PrismaCoreStrings.Instance.ServerChatName, mNO), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
+                                        string mNO = ServerCoreStrings.Instance.Get_PlayerOffline.Replace("{playerName}", p.Name);
+                                        _cInfo.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(ServerCoreStrings.Instance.ServerChatName, mNO), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
                                         return true;
                                     }
                                 }
@@ -60,8 +60,8 @@ namespace PrismaCore
                                     }
                                     else
                                     {
-                                        string mNO = PrismaCoreStrings.Instance.Get_PlayerOffline.Replace("{playerName}", p.Name);
-                                        _cInfo.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(PrismaCoreStrings.Instance.ServerChatName, mNO), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
+                                        string mNO = ServerCoreStrings.Instance.Get_PlayerOffline.Replace("{playerName}", p.Name);
+                                        _cInfo.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(ServerCoreStrings.Instance.ServerChatName, mNO), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
                                         return true;
                                     }
                                 }
@@ -70,8 +70,8 @@ namespace PrismaCore
 
                         if (movePlayer == null)
                         {
-                            string mPNF = PrismaCoreStrings.Instance.Get_PlayerNotFound;
-                            _cInfo.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(PrismaCoreStrings.Instance.ServerChatName, mPNF), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
+                            string mPNF = ServerCoreStrings.Instance.Get_PlayerNotFound;
+                            _cInfo.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(ServerCoreStrings.Instance.ServerChatName, mPNF), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
                             return true;
                         }
 
@@ -93,21 +93,21 @@ namespace PrismaCore
                             Move.dic.Add(cInfoMovePlayer.PlatformId.ToString(), originPos);
                         }
 
-                        string PMmsg = PrismaCoreStrings.Instance.Get_MoveSuccess.Replace("{namePlayer}", nameMoving);
-                        _cInfo.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(PrismaCoreStrings.Instance.ServerChatName, PMmsg), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
+                        string PMmsg = ServerCoreStrings.Instance.Get_MoveSuccess.Replace("{namePlayer}", nameMoving);
+                        _cInfo.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(ServerCoreStrings.Instance.ServerChatName, PMmsg), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
                         return true;
                     }
                     else
                     {
-                        string PMmsg = PrismaCoreStrings.Instance.Get_InvalidParameters;
-                        _cInfo.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(PrismaCoreStrings.Instance.ServerChatName, PMmsg), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
+                        string PMmsg = ServerCoreStrings.Instance.Get_InvalidParameters;
+                        _cInfo.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(ServerCoreStrings.Instance.ServerChatName, PMmsg), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
                         return true;
                     }
                 }
                 else
                 {
-                    string errMsg = PrismaCoreStrings.Instance.ChatCommandPermissions_NotAllowedMessage;
-                    _cInfo.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(PrismaCoreStrings.Instance.ServerChatName, errMsg), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
+                    string errMsg = ServerCoreStrings.Instance.ChatCommandPermissions_NotAllowedMessage;
+                    _cInfo.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(ServerCoreStrings.Instance.ServerChatName, errMsg), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
                     return true;
                 }
             }

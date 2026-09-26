@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace PrismaCore.CustomCommands
+namespace ServerCore.CustomCommands
 {
     public class GetParty : ConsoleCmdAbstract
     {

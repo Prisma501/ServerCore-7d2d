@@ -1,6 +1,6 @@
 using System.Net;
 
-namespace PrismaCore.Web.Handlers
+namespace ServerCore.Web.Handlers
 {
     public abstract class PathHandler
     {

@@ -1,6 +1,6 @@
 using System.Text;
 
-namespace PrismaCore.JSON
+namespace ServerCore.JSON
 {
     public abstract class JSONNode
     {

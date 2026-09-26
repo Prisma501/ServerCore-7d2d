@@ -1,8 +1,8 @@
-using PrismaCore.JSON;
+using ServerCore.JSON;
 using System.Net;
 using System.Text;
 
-namespace PrismaCore.Web.API
+namespace ServerCore.Web.API
 {
     public abstract class WebAPI
     {

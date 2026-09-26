@@ -6,7 +6,7 @@ using System.Diagnostics;
 using System.Threading;
 using UnityEngine;
 
-namespace PrismaCore.CustomCommands
+namespace ServerCore.CustomCommands
 {
     public class ResetRegionsNow : ConsoleCmdAbstract
     {
@@ -69,7 +69,7 @@ namespace PrismaCore.CustomCommands
             for (int i = 0; i < list.Count; i++)
             {
                 ClientInfo clientInfo = list[i];
-                GameUtils.KickPlayerForClientInfo(clientInfo, new GameUtils.KickPlayerData(GameUtils.EKickReason.ManualKick, 0, default(DateTime), PrismaCoreStrings.Instance.ResetPrefabs_KickMessage));
+                GameUtils.KickPlayerForClientInfo(clientInfo, new GameUtils.KickPlayerData(GameUtils.EKickReason.ManualKick, 0, default(DateTime), ServerCoreStrings.Instance.ResetPrefabs_KickMessage));
             }
 
             int fs = 0;

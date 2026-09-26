@@ -1,10 +1,10 @@
-using PrismaCore.JSON;
+using ServerCore.JSON;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using UnityEngine;
 
-namespace PrismaCore.Web.API
+namespace ServerCore.Web.API
 {
     public class GetDrones : WebAPI
     {

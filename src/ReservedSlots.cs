@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Xml;
 
-namespace PrismaCore
+namespace ServerCore
 {
     public class ReservedSlots
     {
@@ -143,7 +143,7 @@ namespace PrismaCore
                     case "admin":
                         string pMsg = string.Format("[ffff4d]Welcome [4da6ff]{0}[-], you are connecting to your admin slot.[-]", ci.playerName);
 
-                        GameManager.Instance.ChatMessageServer(ci, EChatType.Global, -1, Utils.CreateGameMessage(PrismaCoreStrings.Instance.ServerChatName, pMsg), null, EMessageSender.None);
+                        GameManager.Instance.ChatMessageServer(ci, EChatType.Global, -1, Utils.CreateGameMessage(ServerCoreStrings.Instance.ServerChatName, pMsg), null, EMessageSender.None);
                         
                         dicWelcomeStatus.Remove(ci.PlatformId.ToString());
                         break;
@@ -152,11 +152,11 @@ namespace PrismaCore
                         DateTime _dt;
                         Dict.TryGetValue(ci.PlatformId.ToString(), out _dt);
 
-                        string dMsg = PrismaCoreStrings.Instance.DonorSlots_WelcomeDonor;
+                        string dMsg = ServerCoreStrings.Instance.DonorSlots_WelcomeDonor;
                         dMsg = dMsg.Replace("{playerName}", ci.playerName);
                         dMsg = dMsg.Replace("{endOfDonorship}", _dt.ToShortDateString());
                         
-                        ci.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(PrismaCoreStrings.Instance.ServerChatName, dMsg), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
+                        ci.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(ServerCoreStrings.Instance.ServerChatName, dMsg), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
                         dicWelcomeStatus.Remove(ci.PlatformId.ToString());
                         break;
                     case "expired":
@@ -164,10 +164,10 @@ namespace PrismaCore
                         DateTime _dt2;
                         Dict.TryGetValue(ci.PlatformId.ToString(), out _dt2);
 
-                        string edMsg = PrismaCoreStrings.Instance.DonorSlots_WelcomeDonorExpired;
+                        string edMsg = ServerCoreStrings.Instance.DonorSlots_WelcomeDonorExpired;
                         edMsg = edMsg.Replace("{playerName}", ci.playerName);
                         edMsg = edMsg.Replace("{endOfDonorship}", _dt2.ToShortDateString());
-                        ci.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(PrismaCoreStrings.Instance.ServerChatName, edMsg), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
+                        ci.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(ServerCoreStrings.Instance.ServerChatName, edMsg), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
                         dicWelcomeStatus.Remove(ci.PlatformId.ToString());
                         break;
                     case "nondonor":
@@ -176,16 +176,16 @@ namespace PrismaCore
                         {
                             //existing nondonor
                             string endMsg = string.Format("[ffff4d]Welcome back [4da6ff]{0}[-][-]", ci.playerName);
-                            GameManager.Instance.ChatMessageServer(ci, EChatType.Global, -1, Utils.CreateGameMessage(PrismaCoreStrings.Instance.ServerChatName, endMsg), null, EMessageSender.None);
+                            GameManager.Instance.ChatMessageServer(ci, EChatType.Global, -1, Utils.CreateGameMessage(ServerCoreStrings.Instance.ServerChatName, endMsg), null, EMessageSender.None);
                         }
                         else
                         {
                             //new nondonor
                             string gndMsg = string.Format("[99ff33]We have a new player: [4da6ff]{0}[-][-]", ci.playerName);
-                            GameManager.Instance.ChatMessageServer(ci, EChatType.Global, -1, Utils.CreateGameMessage(PrismaCoreStrings.Instance.ServerChatName, gndMsg), null, EMessageSender.None);
+                            GameManager.Instance.ChatMessageServer(ci, EChatType.Global, -1, Utils.CreateGameMessage(ServerCoreStrings.Instance.ServerChatName, gndMsg), null, EMessageSender.None);
                             
                             string pndMsg = string.Format("[ffff4d]Welcome [4da6ff]{0}[-][-]", ci.playerName);
-                            GameManager.Instance.ChatMessageServer(ci, EChatType.Global, -1, Utils.CreateGameMessage(PrismaCoreStrings.Instance.ServerChatName, pndMsg), null, EMessageSender.None);
+                            GameManager.Instance.ChatMessageServer(ci, EChatType.Global, -1, Utils.CreateGameMessage(ServerCoreStrings.Instance.ServerChatName, pndMsg), null, EMessageSender.None);
                         }
                         dicWelcomeStatus.Remove(ci.PlatformId.ToString());
                         break;
@@ -250,7 +250,7 @@ namespace PrismaCore
                     if (_playerCount > API.MaxPlayers - DonorBuffer)
                     {
                         //server full -> kick expired donor
-                        string kickMsg = PrismaCoreStrings.Instance.DonorSlots_KickDonorExpired;
+                        string kickMsg = ServerCoreStrings.Instance.DonorSlots_KickDonorExpired;
                         kickMsg = kickMsg.Replace("{playerName}", _cInfo.playerName);
                         kickMsg = kickMsg.Replace("{endOfDonorship}", _dt.ToShortDateString());
 
@@ -269,7 +269,7 @@ namespace PrismaCore
                     string maxplayers = (API.MaxPlayers - DonorBuffer).ToString();
                     int maxminusone = API.MaxPlayers - DonorBuffer - 1;
 
-                    string kickMsg = PrismaCoreStrings.Instance.DonorSlots_Kick;
+                    string kickMsg = ServerCoreStrings.Instance.DonorSlots_Kick;
                     kickMsg = kickMsg.Replace("{playerName}", _cInfo.playerName);
                     kickMsg = kickMsg.Replace("{maxPlayers}", maxplayers);
                     kickMsg = kickMsg.Replace("{maxMinusOne}", maxminusone.ToString());
@@ -327,9 +327,9 @@ namespace PrismaCore
 
                 int AdminLvL = GameManager.Instance.adminTools.Users.GetUserPermissionLevel(ci2);
 
-                if (AdminLvL <= PrismaCoreSettings.Instance.NotifyAdmin_Level)
+                if (AdminLvL <= ServerCoreSettings.Instance.NotifyAdmin_Level)
                 {
-                    ci.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(PrismaCoreStrings.Instance.ServerChatName, msg), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
+                    ci.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(ServerCoreStrings.Instance.ServerChatName, msg), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
                 }
             }
         }

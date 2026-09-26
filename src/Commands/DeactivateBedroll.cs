@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
 
-namespace PrismaCore.CustomCommands
+namespace ServerCore.CustomCommands
 {
     public class DeactivateBedroll : ConsoleCmdAbstract
     {

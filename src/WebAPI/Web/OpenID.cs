@@ -9,7 +9,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace PrismaCore.Web
+namespace ServerCore.Web
 {
     public static class OpenID
     {
@@ -19,11 +19,11 @@ namespace PrismaCore.Web
             new Regex(@"^https?:\/\/steamcommunity\.com\/openid\/id\/([0-9]{17,18})");
 
         private static readonly X509Certificate2 caCert =
-            new X509Certificate2(PrismaCore.API.modPath +
+            new X509Certificate2(ServerCore.API.modPath +
                                   "/steam-rootca.cer");
 
         private static readonly X509Certificate2 caIntermediateCert =
-            new X509Certificate2(PrismaCore.API.modPath +
+            new X509Certificate2(ServerCore.API.modPath +
                                   "/steam-intermediate.cer");
 
         private const bool verboseSsl = false;

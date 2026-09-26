@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace PrismaCore.CustomCommands
+namespace ServerCore.CustomCommands
 {
     public class ChatCommandPermissions : ConsoleCmdAbstract
     {
@@ -43,75 +43,75 @@ namespace PrismaCore.CustomCommands
                 switch (_params[0].ToLower())
                 {
                     case "ft":
-                        PrismaCoreSettings.Instance.ChatCommandPermissions_ft = level;
+                        ServerCoreSettings.Instance.ChatCommandPermissions_ft = level;
                         break;
                     case "ftw":
-                        PrismaCoreSettings.Instance.ChatCommandPermissions_ftw = level;
+                        ServerCoreSettings.Instance.ChatCommandPermissions_ftw = level;
                         break;
                     case "mv":
-                        PrismaCoreSettings.Instance.ChatCommandPermissions_mv = level;
+                        ServerCoreSettings.Instance.ChatCommandPermissions_mv = level;
                         break;
                     case "mvw":
-                        PrismaCoreSettings.Instance.ChatCommandPermissions_mvw = level;
+                        ServerCoreSettings.Instance.ChatCommandPermissions_mvw = level;
                         break;
                     case "listwp":
-                        PrismaCoreSettings.Instance.ChatCommandPermissions_listwp = level;
+                        ServerCoreSettings.Instance.ChatCommandPermissions_listwp = level;
                         break;
                     case "setwp":
-                        PrismaCoreSettings.Instance.ChatCommandPermissions_setwp = level;
+                        ServerCoreSettings.Instance.ChatCommandPermissions_setwp = level;
                         break;
                     case "delwp":
-                        PrismaCoreSettings.Instance.ChatCommandPermissions_delwp = level;
+                        ServerCoreSettings.Instance.ChatCommandPermissions_delwp = level;
                         break;
                     case "bubble":
-                        PrismaCoreSettings.Instance.ChatCommandPermissions_bubble = level;
+                        ServerCoreSettings.Instance.ChatCommandPermissions_bubble = level;
                         break;
                     case "tb":
-                        PrismaCoreSettings.Instance.ChatCommandPermissions_tb = level;
+                        ServerCoreSettings.Instance.ChatCommandPermissions_tb = level;
                         break;
                     case "rt":
-                        PrismaCoreSettings.Instance.ChatCommandPermissions_rt = level;
+                        ServerCoreSettings.Instance.ChatCommandPermissions_rt = level;
                         break;
                     case "get":
-                        PrismaCoreSettings.Instance.ChatCommandPermissions_get = level;
+                        ServerCoreSettings.Instance.ChatCommandPermissions_get = level;
                         break;
                     case "bag":
-                        PrismaCoreSettings.Instance.ChatCommandPermissions_bag = level;
+                        ServerCoreSettings.Instance.ChatCommandPermissions_bag = level;
                         break;
                     case "ls":
-                        PrismaCoreSettings.Instance.ChatCommandPermissions_ls = level;
+                        ServerCoreSettings.Instance.ChatCommandPermissions_ls = level;
                         break;
                     case "day7":
-                        PrismaCoreSettings.Instance.ChatCommandPermissions_day7 = level;
+                        ServerCoreSettings.Instance.ChatCommandPermissions_day7 = level;
                         break;
                     case "hostiles":
-                        PrismaCoreSettings.Instance.ChatCommandPermissions_hostiles = level;
+                        ServerCoreSettings.Instance.ChatCommandPermissions_hostiles = level;
                         break;
                     case "bed":
-                        PrismaCoreSettings.Instance.ChatCommandPermissions_bed = level;
+                        ServerCoreSettings.Instance.ChatCommandPermissions_bed = level;
                         break;
                     case "loctrack":
-                        PrismaCoreSettings.Instance.ChatCommandPermissions_loctrack = level;
+                        ServerCoreSettings.Instance.ChatCommandPermissions_loctrack = level;
                         break;
                     case "list":
                         SdtdConsole.Instance.Output("Chat Command Permission Levels:");
-                        SdtdConsole.Instance.Output("ft: " + PrismaCoreSettings.Instance.ChatCommandPermissions_ft);
-                        SdtdConsole.Instance.Output("ftw: " + PrismaCoreSettings.Instance.ChatCommandPermissions_ftw);
-                        SdtdConsole.Instance.Output("mv: " + PrismaCoreSettings.Instance.ChatCommandPermissions_mv);
-                        SdtdConsole.Instance.Output("mvw: " + PrismaCoreSettings.Instance.ChatCommandPermissions_mvw);
-                        SdtdConsole.Instance.Output("tb: " + PrismaCoreSettings.Instance.ChatCommandPermissions_tb);
-                        SdtdConsole.Instance.Output("rt: " + PrismaCoreSettings.Instance.ChatCommandPermissions_rt);
-                        SdtdConsole.Instance.Output("get: " + PrismaCoreSettings.Instance.ChatCommandPermissions_get);
-                        SdtdConsole.Instance.Output("bag: " + PrismaCoreSettings.Instance.ChatCommandPermissions_bag);
-                        SdtdConsole.Instance.Output("ls: " + PrismaCoreSettings.Instance.ChatCommandPermissions_ls);
-                        SdtdConsole.Instance.Output("listwp: " + PrismaCoreSettings.Instance.ChatCommandPermissions_listwp);
-                        SdtdConsole.Instance.Output("setwp: " + PrismaCoreSettings.Instance.ChatCommandPermissions_setwp);
-                        SdtdConsole.Instance.Output("delwp: " + PrismaCoreSettings.Instance.ChatCommandPermissions_delwp);
-                        SdtdConsole.Instance.Output("bubble: " + PrismaCoreSettings.Instance.ChatCommandPermissions_bubble);
-                        SdtdConsole.Instance.Output("day7: " + PrismaCoreSettings.Instance.ChatCommandPermissions_day7);
-                        SdtdConsole.Instance.Output("hostiles: " + PrismaCoreSettings.Instance.ChatCommandPermissions_hostiles);
-                        SdtdConsole.Instance.Output("bed: " + PrismaCoreSettings.Instance.ChatCommandPermissions_bed);
-                        SdtdConsole.Instance.Output("loctrack: " + PrismaCoreSettings.Instance.ChatCommandPermissions_loctrack);
+                        SdtdConsole.Instance.Output("ft: " + ServerCoreSettings.Instance.ChatCommandPermissions_ft);
+                        SdtdConsole.Instance.Output("ftw: " + ServerCoreSettings.Instance.ChatCommandPermissions_ftw);
+                        SdtdConsole.Instance.Output("mv: " + ServerCoreSettings.Instance.ChatCommandPermissions_mv);
+                        SdtdConsole.Instance.Output("mvw: " + ServerCoreSettings.Instance.ChatCommandPermissions_mvw);
+                        SdtdConsole.Instance.Output("tb: " + ServerCoreSettings.Instance.ChatCommandPermissions_tb);
+                        SdtdConsole.Instance.Output("rt: " + ServerCoreSettings.Instance.ChatCommandPermissions_rt);
+                        SdtdConsole.Instance.Output("get: " + ServerCoreSettings.Instance.ChatCommandPermissions_get);
+                        SdtdConsole.Instance.Output("bag: " + ServerCoreSettings.Instance.ChatCommandPermissions_bag);
+                        SdtdConsole.Instance.Output("ls: " + ServerCoreSettings.Instance.ChatCommandPermissions_ls);
+                        SdtdConsole.Instance.Output("listwp: " + ServerCoreSettings.Instance.ChatCommandPermissions_listwp);
+                        SdtdConsole.Instance.Output("setwp: " + ServerCoreSettings.Instance.ChatCommandPermissions_setwp);
+                        SdtdConsole.Instance.Output("delwp: " + ServerCoreSettings.Instance.ChatCommandPermissions_delwp);
+                        SdtdConsole.Instance.Output("bubble: " + ServerCoreSettings.Instance.ChatCommandPermissions_bubble);
+                        SdtdConsole.Instance.Output("day7: " + ServerCoreSettings.Instance.ChatCommandPermissions_day7);
+                        SdtdConsole.Instance.Output("hostiles: " + ServerCoreSettings.Instance.ChatCommandPermissions_hostiles);
+                        SdtdConsole.Instance.Output("bed: " + ServerCoreSettings.Instance.ChatCommandPermissions_bed);
+                        SdtdConsole.Instance.Output("loctrack: " + ServerCoreSettings.Instance.ChatCommandPermissions_loctrack);
                         break;
                     default:
                         SdtdConsole.Instance.Output("ERR: Command is not a valid admin chatcommand or invalid subcommand.");
@@ -121,7 +121,7 @@ namespace PrismaCore.CustomCommands
                 if (_params.Count == 2)
                 {
                     SdtdConsole.Instance.Output("Permission level of command " + _params[0] + " has been set to " + _params[1]);
-                    PrismaCoreSettings.Instance.Save();
+                    ServerCoreSettings.Instance.Save();
                 }
             }
             catch (Exception e)

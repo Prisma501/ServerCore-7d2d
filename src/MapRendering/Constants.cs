@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace PrismaCore.MapRendering
+namespace ServerCore.MapRendering
 {
     public class Constants
     {

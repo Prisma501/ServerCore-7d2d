@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.Threading;
 using UnityEngine;
 
-namespace PrismaCore.CustomCommands
+namespace ServerCore.CustomCommands
 {
     public class ShutdownBA : ConsoleCmdAbstract
     {
@@ -40,10 +40,10 @@ namespace PrismaCore.CustomCommands
                 if (_params.Count == 0)
                 {
                     SdtdConsole.Instance.Output(string.Format("Active shutdownba settings:"));
-                    SdtdConsole.Instance.Output(string.Format("Shutdown count msg: {0}", PrismaCoreStrings.Instance.ShutdownBA_CountdownMessage));
-                    SdtdConsole.Instance.Output(string.Format("Shutdown delay msg: {0}", PrismaCoreStrings.Instance.ShutdownBA_RestartDelayedMessage));
-                    SdtdConsole.Instance.Output(string.Format("Delay shutdown bloodday after: {0}", PrismaCoreSettings.Instance.ShutdownBA_DelayRestartBloodDayAfter));
-                    SdtdConsole.Instance.Output(string.Format("Delay after bloodmoon until: {0}", PrismaCoreSettings.Instance.ShutdownBA_DelayRestartAfterBloodmoonUntil));
+                    SdtdConsole.Instance.Output(string.Format("Shutdown count msg: {0}", ServerCoreStrings.Instance.ShutdownBA_CountdownMessage));
+                    SdtdConsole.Instance.Output(string.Format("Shutdown delay msg: {0}", ServerCoreStrings.Instance.ShutdownBA_RestartDelayedMessage));
+                    SdtdConsole.Instance.Output(string.Format("Delay shutdown bloodday after: {0}", ServerCoreSettings.Instance.ShutdownBA_DelayRestartBloodDayAfter));
+                    SdtdConsole.Instance.Output(string.Format("Delay after bloodmoon until: {0}", ServerCoreSettings.Instance.ShutdownBA_DelayRestartAfterBloodmoonUntil));
                     return;
                 }
                 else if (_params.Count == 1)
@@ -93,8 +93,8 @@ namespace PrismaCore.CustomCommands
                             return;
                         }
 
-                        PrismaCoreSettings.Instance.ShutdownBA_DelayRestartBloodDayAfter = delayHour;
-                        PrismaCoreSettings.Instance.Save();
+                        ServerCoreSettings.Instance.ShutdownBA_DelayRestartBloodDayAfter = delayHour;
+                        ServerCoreSettings.Instance.Save();
 
                         SdtdConsole.Instance.Output(string.Format("delayfrom has been set to {0}", delayHour));
                         return;
@@ -107,8 +107,8 @@ namespace PrismaCore.CustomCommands
                             return;
                         }
 
-                        PrismaCoreSettings.Instance.ShutdownBA_DelayRestartAfterBloodmoonUntil = delayUntil;
-                        PrismaCoreSettings.Instance.Save();
+                        ServerCoreSettings.Instance.ShutdownBA_DelayRestartAfterBloodmoonUntil = delayUntil;
+                        ServerCoreSettings.Instance.Save();
 
                         SdtdConsole.Instance.Output(string.Format("delayuntil has been set to {0}.", delayUntil));
                         return;
@@ -121,8 +121,8 @@ namespace PrismaCore.CustomCommands
                         else
                         {
                             counttext = _params[1].Trim();
-                            PrismaCoreStrings.Instance.ShutdownBA_CountdownMessage = counttext;
-                            PrismaCoreStrings.Instance.Save();
+                            ServerCoreStrings.Instance.ShutdownBA_CountdownMessage = counttext;
+                            ServerCoreStrings.Instance.Save();
 
                             SdtdConsole.Instance.Output(string.Format("counttext has been set to \"{0}\"", counttext));
                         }
@@ -136,8 +136,8 @@ namespace PrismaCore.CustomCommands
                         else
                         {
                             delaytext = _params[1].Trim();
-                            PrismaCoreStrings.Instance.ShutdownBA_RestartDelayedMessage = delaytext;
-                            PrismaCoreStrings.Instance.Save();
+                            ServerCoreStrings.Instance.ShutdownBA_RestartDelayedMessage = delaytext;
+                            ServerCoreStrings.Instance.Save();
 
                             SdtdConsole.Instance.Output(string.Format("delaytext has been set to \"{0}\"", delaytext));
                         }
@@ -233,7 +233,7 @@ namespace PrismaCore.CustomCommands
 
                 if (!IsEnoughUptime())
                 {
-                    int minUptime = PrismaCoreSettings.Instance.ShutdownBA_MinimumUptimeRequired;
+                    int minUptime = ServerCoreSettings.Instance.ShutdownBA_MinimumUptimeRequired;
                     int uptime = Convert.ToInt32(Time.timeSinceLevelLoad / 60f);
 
                     Log.Out($"[PrismaCore] The server has not reached required uptime for a shutdownba yet. Uptime required: {minUptime} minutes. Server uptime: {uptime} minutes. Waiting for {minUptime - uptime} minutes.");
@@ -248,9 +248,9 @@ namespace PrismaCore.CustomCommands
                     delayedOnDay = 0;
                     if (MustDelay())
                     {
-                        string m = PrismaCoreStrings.Instance.ShutdownBA_RestartDelayedMessage.Replace("{DelayUntil}", PrismaCoreSettings.Instance.ShutdownBA_DelayRestartAfterBloodmoonUntil.ToString());
-                        SdtdConsole.Instance.Output(string.Format("Shutdown has been delayed until after bloodmoon at {0}", PrismaCoreSettings.Instance.ShutdownBA_DelayRestartAfterBloodmoonUntil.ToString()));
-                        GameManager.Instance.ChatMessageServer(null, EChatType.Global, -1, Utils.CreateGameMessage(PrismaCoreStrings.Instance.ServerChatName, string.Format("{0}", m)), null, EMessageSender.None);
+                        string m = ServerCoreStrings.Instance.ShutdownBA_RestartDelayedMessage.Replace("{DelayUntil}", ServerCoreSettings.Instance.ShutdownBA_DelayRestartAfterBloodmoonUntil.ToString());
+                        SdtdConsole.Instance.Output(string.Format("Shutdown has been delayed until after bloodmoon at {0}", ServerCoreSettings.Instance.ShutdownBA_DelayRestartAfterBloodmoonUntil.ToString()));
+                        GameManager.Instance.ChatMessageServer(null, EChatType.Global, -1, Utils.CreateGameMessage(ServerCoreStrings.Instance.ServerChatName, string.Format("{0}", m)), null, EMessageSender.None);
                         while (MustDelay())
                         {
                             Thread.Sleep(10000);
@@ -258,12 +258,12 @@ namespace PrismaCore.CustomCommands
                     }
                 }
 
-                string t = PrismaCoreStrings.Instance.ShutdownBA_CountdownMessage;
+                string t = ServerCoreStrings.Instance.ShutdownBA_CountdownMessage;
 
                 while (minutes != 1)
                 {
                     t = t.Replace("{Minutes}", minutes.ToString());
-                    GameManager.Instance.ChatMessageServer(null, EChatType.Global, -1, Utils.CreateGameMessage(PrismaCoreStrings.Instance.ServerChatName, string.Format("{0}", t)), null, EMessageSender.None);
+                    GameManager.Instance.ChatMessageServer(null, EChatType.Global, -1, Utils.CreateGameMessage(ServerCoreStrings.Instance.ServerChatName, string.Format("{0}", t)), null, EMessageSender.None);
                     int ov = minutes;
                     minutes = minutes - 1;
                     t = t.Replace(ov.ToString(), minutes.ToString());
@@ -271,7 +271,7 @@ namespace PrismaCore.CustomCommands
                 }
 
                 t = t.Replace("{Minutes}", minutes.ToString());
-                GameManager.Instance.ChatMessageServer(null, EChatType.Global, -1, Utils.CreateGameMessage(PrismaCoreStrings.Instance.ServerChatName, string.Format("{0}", t)), null, EMessageSender.None);
+                GameManager.Instance.ChatMessageServer(null, EChatType.Global, -1, Utils.CreateGameMessage(ServerCoreStrings.Instance.ServerChatName, string.Format("{0}", t)), null, EMessageSender.None);
                 Thread.Sleep(60000);
             }
 
@@ -290,7 +290,7 @@ namespace PrismaCore.CustomCommands
 
         private static bool IsEnoughUptime()
         {
-            int minUptime = PrismaCoreSettings.Instance.ShutdownBA_MinimumUptimeRequired;
+            int minUptime = ServerCoreSettings.Instance.ShutdownBA_MinimumUptimeRequired;
 
             if (minUptime > 0)
             {
@@ -329,7 +329,7 @@ namespace PrismaCore.CustomCommands
 
                 bool bmActive = (num == bmDay && SkyManager.TimeOfDay() >= 22f) || (num > 1 && num == bmDay + 1 && SkyManager.TimeOfDay() <= 4f);
 
-                if (days == bmDay && hours >= PrismaCoreSettings.Instance.ShutdownBA_DelayRestartBloodDayAfter)
+                if (days == bmDay && hours >= ServerCoreSettings.Instance.ShutdownBA_DelayRestartBloodDayAfter)
                 {
                     delayedOnDay = days;
                     return true;
@@ -341,7 +341,7 @@ namespace PrismaCore.CustomCommands
                     return true;
                 }
 
-                if (bmDay > days && !bmActive && delayedOnDay == days - 1 && hours < PrismaCoreSettings.Instance.ShutdownBA_DelayRestartAfterBloodmoonUntil)
+                if (bmDay > days && !bmActive && delayedOnDay == days - 1 && hours < ServerCoreSettings.Instance.ShutdownBA_DelayRestartAfterBloodmoonUntil)
                 {
                     return true;
                 }
@@ -358,7 +358,7 @@ namespace PrismaCore.CustomCommands
                 if (remainder == 0)
                 {
                     //bloodday!! check for time that should delay shutdown
-                    if (hours >= PrismaCoreSettings.Instance.ShutdownBA_DelayRestartBloodDayAfter && BMrange == 0)
+                    if (hours >= ServerCoreSettings.Instance.ShutdownBA_DelayRestartBloodDayAfter && BMrange == 0)
                     {
                         //its past delay time -> return true
                         return true;
@@ -369,7 +369,7 @@ namespace PrismaCore.CustomCommands
                     //bloodmoon is ongoing -> do delay
                     return true;
                 }
-                else if (remainder == 1 && hours < PrismaCoreSettings.Instance.ShutdownBA_DelayRestartAfterBloodmoonUntil && BMrange == 0)
+                else if (remainder == 1 && hours < ServerCoreSettings.Instance.ShutdownBA_DelayRestartAfterBloodmoonUntil && BMrange == 0)
                 {
                     //bloodmoon over -> delay until time is reached
                     return true;

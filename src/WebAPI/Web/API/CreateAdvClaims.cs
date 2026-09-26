@@ -1,7 +1,7 @@
 using System;
 using System.Net;
 
-namespace PrismaCore.Web.API
+namespace ServerCore.Web.API
 {
     public class CreateAdvClaims : WebAPI
     {

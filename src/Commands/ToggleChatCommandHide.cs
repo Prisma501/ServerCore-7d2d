@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace PrismaCore.CustomCommands
+namespace ServerCore.CustomCommands
 {
     public class ToggleChatCommandHide : ConsoleCmdAbstract
     {
@@ -45,17 +45,17 @@ namespace PrismaCore.CustomCommands
 
                 if (_params.Count == 0)
                 {
-                    PrismaCoreSettings.Instance.HideChatCommandPrefixes_Enabled = false;
-                    PrismaCoreSettings.Instance.Save();
+                    ServerCoreSettings.Instance.HideChatCommandPrefixes_Enabled = false;
+                    ServerCoreSettings.Instance.Save();
                     SdtdConsole.Instance.Output("Chat command hiding disabled");
                 }
                 else
                 {
                     if (_params[0].Trim().ToLower() == "list")
                     {
-                        if (PrismaCoreSettings.Instance.HideChatCommandPrefixes_Enabled)
+                        if (ServerCoreSettings.Instance.HideChatCommandPrefixes_Enabled)
                         {
-                            SdtdConsole.Instance.Output($"Enabled prefixes: {PrismaCoreSettings.Instance.HideChatCommandPrefixes_Prefixes}");
+                            SdtdConsole.Instance.Output($"Enabled prefixes: {ServerCoreSettings.Instance.HideChatCommandPrefixes_Prefixes}");
                         }
                         else
                         {
@@ -64,9 +64,9 @@ namespace PrismaCore.CustomCommands
 
                         return;
                     }
-                    PrismaCoreSettings.Instance.HideChatCommandPrefixes_Prefixes = _params[0];
-                    PrismaCoreSettings.Instance.HideChatCommandPrefixes_Enabled = true;
-                    PrismaCoreSettings.Instance.Save();
+                    ServerCoreSettings.Instance.HideChatCommandPrefixes_Prefixes = _params[0];
+                    ServerCoreSettings.Instance.HideChatCommandPrefixes_Enabled = true;
+                    ServerCoreSettings.Instance.Save();
                     SdtdConsole.Instance.Output("Prefix \"" + _params[0] + "\" defined for chat commands");
                 }
             }

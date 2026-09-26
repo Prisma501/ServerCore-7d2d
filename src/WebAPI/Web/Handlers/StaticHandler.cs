@@ -1,8 +1,8 @@
-using PrismaCore.FileCache;
+using ServerCore.FileCache;
 using System.IO;
 using System.Net;
 
-namespace PrismaCore.Web.Handlers
+namespace ServerCore.Web.Handlers
 {
     public class StaticHandler : PathHandler
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PrismaCore
+namespace ServerCore
 {
     class Hostiles
     {
@@ -10,7 +10,7 @@ namespace PrismaCore
             {
                 int AdminLvL = GameManager.Instance.adminTools.Users.GetUserPermissionLevel(_cInfo);
 
-                if (AdminLvL <= PrismaCoreSettings.Instance.ChatCommandPermissions_hostiles)
+                if (AdminLvL <= ServerCoreSettings.Instance.ChatCommandPermissions_hostiles)
                 {
 
                     int hostiles = 0;
@@ -62,47 +62,47 @@ namespace PrismaCore
 
                     if (hostiles == 0)
                     {
-                        PMmsg = PrismaCoreStrings.Instance.Hostiles_NoHostiles;
+                        PMmsg = ServerCoreStrings.Instance.Hostiles_NoHostiles;
                     }
                     else if (hostiles == 1)
                     {
-                        PMmsg = PrismaCoreStrings.Instance.Hostiles_OneHostile;
-                        if (feralradiated) PMmsg += PrismaCoreStrings.Instance.Hostiles_OneHostile_FerRad;
-                        else if (feral) PMmsg += PrismaCoreStrings.Instance.Hostiles_OneHostile_Feral;
-                        else if (cop) PMmsg += PrismaCoreStrings.Instance.Hostiles_OneHostile_Cop;
-                        else if (dog) PMmsg += PrismaCoreStrings.Instance.Hostiles_OneHostile_Dog;
-                        else if (zbear) PMmsg += PrismaCoreStrings.Instance.Hostiles_OneHostile_Zbear;
-                        else if (wolf) PMmsg += PrismaCoreStrings.Instance.Hostiles_OneHostile_Wolf;
-                        else if (direwolf) PMmsg += PrismaCoreStrings.Instance.Hostiles_OneHostile_DireWolf;
-                        else if (snake) PMmsg += PrismaCoreStrings.Instance.Hostiles_OneHostile_Snake;
-                        else if (vulture) PMmsg += PrismaCoreStrings.Instance.Hostiles_OneHostile_Vulture;
-                        else if (bear) PMmsg += PrismaCoreStrings.Instance.Hostiles_OneHostile_Bear;
+                        PMmsg = ServerCoreStrings.Instance.Hostiles_OneHostile;
+                        if (feralradiated) PMmsg += ServerCoreStrings.Instance.Hostiles_OneHostile_FerRad;
+                        else if (feral) PMmsg += ServerCoreStrings.Instance.Hostiles_OneHostile_Feral;
+                        else if (cop) PMmsg += ServerCoreStrings.Instance.Hostiles_OneHostile_Cop;
+                        else if (dog) PMmsg += ServerCoreStrings.Instance.Hostiles_OneHostile_Dog;
+                        else if (zbear) PMmsg += ServerCoreStrings.Instance.Hostiles_OneHostile_Zbear;
+                        else if (wolf) PMmsg += ServerCoreStrings.Instance.Hostiles_OneHostile_Wolf;
+                        else if (direwolf) PMmsg += ServerCoreStrings.Instance.Hostiles_OneHostile_DireWolf;
+                        else if (snake) PMmsg += ServerCoreStrings.Instance.Hostiles_OneHostile_Snake;
+                        else if (vulture) PMmsg += ServerCoreStrings.Instance.Hostiles_OneHostile_Vulture;
+                        else if (bear) PMmsg += ServerCoreStrings.Instance.Hostiles_OneHostile_Bear;
                     }
                     else
                     {
-                        PMmsg = PrismaCoreStrings.Instance.Hostiles_MoreHostiles.Replace("{hostileCount}", hostiles.ToString());
-                        if (feral || cop || dog || zbear || wolf || direwolf || bear || vulture || snake || feralradiated) PMmsg += PrismaCoreStrings.Instance.Hostiles_Including;
-                        if (dog) PMmsg += PrismaCoreStrings.Instance.Hostiles_Including_Dog;
-                        if (wolf) PMmsg += PrismaCoreStrings.Instance.Hostiles_Including_Wolf;
-                        if (direwolf) PMmsg += PrismaCoreStrings.Instance.Hostiles_Including_DireWolf;
-                        if (cop) PMmsg += PrismaCoreStrings.Instance.Hostiles_Including_Cop;
-                        if (feral) PMmsg += PrismaCoreStrings.Instance.Hostiles_Including_Feral;
-                        if (feralradiated) PMmsg += PrismaCoreStrings.Instance.Hostiles_Including_FerRad;
-                        if (zbear) PMmsg += PrismaCoreStrings.Instance.Hostiles_Including_Zbear;
-                        if (snake) PMmsg += PrismaCoreStrings.Instance.Hostiles_Including_Snake;
-                        if (vulture) PMmsg += PrismaCoreStrings.Instance.Hostiles_Including_Vulture;
-                        if (bear) PMmsg += PrismaCoreStrings.Instance.Hostiles_Including_Bear;
+                        PMmsg = ServerCoreStrings.Instance.Hostiles_MoreHostiles.Replace("{hostileCount}", hostiles.ToString());
+                        if (feral || cop || dog || zbear || wolf || direwolf || bear || vulture || snake || feralradiated) PMmsg += ServerCoreStrings.Instance.Hostiles_Including;
+                        if (dog) PMmsg += ServerCoreStrings.Instance.Hostiles_Including_Dog;
+                        if (wolf) PMmsg += ServerCoreStrings.Instance.Hostiles_Including_Wolf;
+                        if (direwolf) PMmsg += ServerCoreStrings.Instance.Hostiles_Including_DireWolf;
+                        if (cop) PMmsg += ServerCoreStrings.Instance.Hostiles_Including_Cop;
+                        if (feral) PMmsg += ServerCoreStrings.Instance.Hostiles_Including_Feral;
+                        if (feralradiated) PMmsg += ServerCoreStrings.Instance.Hostiles_Including_FerRad;
+                        if (zbear) PMmsg += ServerCoreStrings.Instance.Hostiles_Including_Zbear;
+                        if (snake) PMmsg += ServerCoreStrings.Instance.Hostiles_Including_Snake;
+                        if (vulture) PMmsg += ServerCoreStrings.Instance.Hostiles_Including_Vulture;
+                        if (bear) PMmsg += ServerCoreStrings.Instance.Hostiles_Including_Bear;
 
                         if (PMmsg.EndsWith(", ")) PMmsg = PMmsg.Substring(0, PMmsg.Length - 2);
                     }
 
-                    _cInfo.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(PrismaCoreStrings.Instance.ServerChatName, PMmsg), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
+                    _cInfo.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(ServerCoreStrings.Instance.ServerChatName, PMmsg), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
                     Log.Out(PMmsg);
                 }
                 else
                 {
-                    string errMsg = PrismaCoreStrings.Instance.ChatCommandPermissions_NotAllowedMessage;
-                    _cInfo.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(PrismaCoreStrings.Instance.ServerChatName, errMsg), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
+                    string errMsg = ServerCoreStrings.Instance.ChatCommandPermissions_NotAllowedMessage;
+                    _cInfo.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(ServerCoreStrings.Instance.ServerChatName, errMsg), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
                 }
             }
             catch { return false; }

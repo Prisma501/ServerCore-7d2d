@@ -1,5 +1,5 @@
-﻿using PrismaCore.JSON;
-using PrismaCore.Web.API;
+﻿using ServerCore.JSON;
+using ServerCore.Web.API;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading;
 using UnityEngine;
 
-namespace PrismaCore.Web
+namespace ServerCore.Web
 {
     public class WebCommandResult : IConsoleConnection
     {

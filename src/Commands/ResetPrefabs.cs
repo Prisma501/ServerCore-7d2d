@@ -6,7 +6,7 @@ using System.Diagnostics;
 using System.Threading;
 using UnityEngine;
 
-namespace PrismaCore.CustomCommands
+namespace ServerCore.CustomCommands
 {
     public class ResetRWGPrefabs : ConsoleCmdAbstract
     {
@@ -148,7 +148,7 @@ namespace PrismaCore.CustomCommands
 
                                     if (p.x <= BoxMax.x && p.x + int2 >= BoxMin.x && p.z <= BoxMax.z && p.z + int2 >= BoxMin.z)
                                     {
-                                        if (!PrismaCoreSettings.Instance.ResetPrefabs_ExcludeClaimedPrefabs)
+                                        if (!ServerCoreSettings.Instance.ResetPrefabs_ExcludeClaimedPrefabs)
                                         {
                                             if (!lpb.Contains(pos))
                                             {
@@ -279,7 +279,7 @@ namespace PrismaCore.CustomCommands
             for (int i = 0; i < list.Count; i++)
             {
                 ClientInfo clientInfo = list[i];
-                GameUtils.KickPlayerForClientInfo(clientInfo, new GameUtils.KickPlayerData(GameUtils.EKickReason.ManualKick, 0, default(DateTime), PrismaCoreStrings.Instance.ResetPrefabs_KickMessage));
+                GameUtils.KickPlayerForClientInfo(clientInfo, new GameUtils.KickPlayerData(GameUtils.EKickReason.ManualKick, 0, default(DateTime), ServerCoreStrings.Instance.ResetPrefabs_KickMessage));
             }
 
             int fs = 0;

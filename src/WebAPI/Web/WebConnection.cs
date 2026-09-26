@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Net;
 using UnityEngine;
 
-namespace PrismaCore.Web
+namespace ServerCore.Web
 {
     public class WebConnection : ConsoleConnectionAbstract
     {

@@ -1,8 +1,8 @@
-using PrismaCore.JSON;
-using PrismaCore.Web.API;
+using ServerCore.JSON;
+using ServerCore.Web.API;
 using System.Net;
 
-namespace PrismaCore.Web.Handlers
+namespace ServerCore.Web.Handlers
 {
     public class UserStatusHandler : PathHandler
     {

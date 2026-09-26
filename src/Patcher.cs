@@ -1,4 +1,4 @@
-﻿using PrismaCore.CustomCommands;
+﻿using ServerCore.CustomCommands;
 using Epic.OnlineServices.Presence;
 using HarmonyLib;
 using LiteNetLib;
@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace PrismaCore
+namespace ServerCore
 {
     internal static class Patcher
     {
@@ -15,7 +15,7 @@ namespace PrismaCore
         {
             try
             {
-                Harmony harmonyPatcher = new Harmony("com.prisma.core");
+                Harmony harmonyPatcher = new Harmony("io.takaro.servercore");
 
                 var gameMethod = AccessTools.Method(typeof(TEFeatureLandClaim), "OnAdded");
                 if (gameMethod == null)
@@ -575,15 +575,15 @@ namespace PrismaCore
                         Log.Out($"[PrismaCore]playerLeveled: {clientInfo.playerName} ({clientInfo.PlatformId}) made level {player.Progression.Level} (was {__state.Level})");
 
                         //check if level jump is > 1. Anticheat.
-                        if ((player.Progression.Level - __state.Level) >= PrismaCoreSettings.Instance.LevelJumpDetection_MinimumLevelJumpTrigger)
+                        if ((player.Progression.Level - __state.Level) >= ServerCoreSettings.Instance.LevelJumpDetection_MinimumLevelJumpTrigger)
                         {
                             Log.Out($"[PrismaCore] WARNING: {clientInfo.playerName} ({clientInfo.PlatformId}) jumped up more than one level ({__state.Level} -> {player.Progression.Level}).");
 
                             int AdminLvL = GameManager.Instance.adminTools.Users.GetUserPermissionLevel(clientInfo);
 
-                            if (AdminLvL > PrismaCoreSettings.Instance.LevelJumpDetection_ExcludeAdminLvl)
+                            if (AdminLvL > ServerCoreSettings.Instance.LevelJumpDetection_ExcludeAdminLvl)
                             {
-                                string command = PrismaCoreSettings.Instance.LevelJumpDetection_DetectedCommand;
+                                string command = ServerCoreSettings.Instance.LevelJumpDetection_DetectedCommand;
                                 if (!string.IsNullOrEmpty(command) && !command.EqualsCaseInsensitive("none"))
                                 {
                                     if (command.Contains(";"))
@@ -631,7 +631,7 @@ namespace PrismaCore
                 if (__instance == null || _list == null)
                     return true;
 
-                if (PrismaCoreSettings.Instance.PreventFallingBlocks > 0)
+                if (ServerCoreSettings.Instance.PreventFallingBlocks > 0)
                 {
                     DamageHandler.HandleFallingBlocks(__instance, _list);
                     return false;
@@ -653,7 +653,7 @@ namespace PrismaCore
                 if (__instance == null)
                     return true;
 
-                if (PrismaCoreSettings.Instance.PreventFallingBlocks > 0)
+                if (ServerCoreSettings.Instance.PreventFallingBlocks > 0)
                 {
                     DamageHandler.HandleFallingBlock(__instance, _blockPos);
                     return false;
@@ -710,7 +710,7 @@ namespace PrismaCore
                 return true;
             }
 
-            if (_dmResponse.Strength >= PrismaCoreSettings.Instance.DamageDetection_MinAmountDamage)
+            if (_dmResponse.Strength >= ServerCoreSettings.Instance.DamageDetection_MinAmountDamage)
             {
                 if (__instance.IsAlive())
                 {
@@ -725,11 +725,11 @@ namespace PrismaCore
 
                         int AdminLvL = GameManager.Instance.adminTools.Users.GetUserPermissionLevel(offenderClientInfo0);
 
-                        if (AdminLvL > PrismaCoreSettings.Instance.DamageDetection_ExcludeAdminLvl)
+                        if (AdminLvL > ServerCoreSettings.Instance.DamageDetection_ExcludeAdminLvl)
                         {
                             DamageHandler.LogDamageDetection(offenderClientInfo0.playerName, offenderClientInfo0.PlatformId.ToString(), _dmResponse.Strength);
 
-                            string command = PrismaCoreSettings.Instance.DamageDetection_DetectedCommand;
+                            string command = ServerCoreSettings.Instance.DamageDetection_DetectedCommand;
                             if (!string.IsNullOrEmpty(command) && !command.EqualsCaseInsensitive("none"))
                             {
                                 if (command.Contains(";"))
@@ -870,7 +870,7 @@ namespace PrismaCore
                     return true;
                 }
 
-                bool respawnDisabled = PrismaCoreSettings.Instance.DisableSleeperRespawn_Enabled;
+                bool respawnDisabled = ServerCoreSettings.Instance.DisableSleeperRespawn_Enabled;
 
                 if (respawnDisabled)
                 {
@@ -907,12 +907,12 @@ namespace PrismaCore
                     return true;
                 }
 
-                if (PrismaCoreSettings.Instance.DisableSleepers_Enabled)
+                if (ServerCoreSettings.Instance.DisableSleepers_Enabled)
                 {
                     return false;
                 }
 
-                if (PrismaCoreSettings.Instance.DisableSleepers_BloodmoonOnly_Enabled)
+                if (ServerCoreSettings.Instance.DisableSleepers_BloodmoonOnly_Enabled)
                 {
                     if (_world.aiDirector.BloodMoonComponent.BloodMoonActive)
                     {
@@ -1095,7 +1095,7 @@ namespace PrismaCore
 
         public static bool DAOBS(AIDirectorBloodMoonComponent __instance)
         {
-            if (PrismaCoreSettings.Instance.BloodmoonSpawner_DespawnAllOnStart)
+            if (ServerCoreSettings.Instance.BloodmoonSpawner_DespawnAllOnStart)
             {
                 try
                 {
@@ -1144,7 +1144,7 @@ namespace PrismaCore
         {
             try
             {
-                if (PrismaCoreSettings.Instance.BloodmoonSpawner_OverrideVanillaSpawner)
+                if (ServerCoreSettings.Instance.BloodmoonSpawner_OverrideVanillaSpawner)
                 {
                     if (__instance == null)
                     {
@@ -1190,7 +1190,7 @@ namespace PrismaCore
 
                         if(AIDirector.CanSpawn(1.9f))
                         {
-                            if (GameStats.GetInt(EnumGameStats.EnemyCount) < GamePrefs.GetInt(EnumGamePrefs.MaxSpawnedZombies) + PrismaCoreSettings.Instance.BloodmoonSpawner_Overridden_AddMaxAliveServerDuringBloodmoon)
+                            if (GameStats.GetInt(EnumGameStats.EnemyCount) < GamePrefs.GetInt(EnumGamePrefs.MaxSpawnedZombies) + ServerCoreSettings.Instance.BloodmoonSpawner_Overridden_AddMaxAliveServerDuringBloodmoon)
                             {
                                 int num = ___partySpawner.groupIndex;
                                 if (num != ___groupIndex)
@@ -1203,10 +1203,10 @@ namespace PrismaCore
                                 result = true;
                                 int count = ___partySpawner.partyMembers.Count;
 
-                                if (PrismaCoreSettings.Instance.BloodmoonSpawner_Overridden_AdjustBMEnemyCountPerPlayerToNrOnlinePlayers)
+                                if (ServerCoreSettings.Instance.BloodmoonSpawner_Overridden_AdjustBMEnemyCountPerPlayerToNrOnlinePlayers)
                                 {
                                     double playerCount = _world.Players.dict.Count;
-                                    int MaxSpawnedZombies = GamePrefs.GetInt(EnumGamePrefs.MaxSpawnedZombies) + PrismaCoreSettings.Instance.BloodmoonSpawner_Overridden_AddMaxAliveServerDuringBloodmoon;
+                                    int MaxSpawnedZombies = GamePrefs.GetInt(EnumGamePrefs.MaxSpawnedZombies) + ServerCoreSettings.Instance.BloodmoonSpawner_Overridden_AddMaxAliveServerDuringBloodmoon;
                                     int spawns = (int)Math.Round(MaxSpawnedZombies / playerCount);
 
                                     if (spawns > GameStats.GetInt(EnumGameStats.BloodMoonEnemyCount))
@@ -1247,7 +1247,7 @@ namespace PrismaCore
                                 }
                                 else
                                 {
-                                    if (___partySpawner.maxAlive <= 0 || ___zombies.Count < PrismaCoreSettings.Instance.BloodmoonSpawner_Overridden_BMEnemyCountPerPlayer * count)
+                                    if (___partySpawner.maxAlive <= 0 || ___zombies.Count < ServerCoreSettings.Instance.BloodmoonSpawner_Overridden_BMEnemyCountPerPlayer * count)
                                     {
                                         for (int j = count; j > 0; j--)
                                         {
@@ -1271,7 +1271,7 @@ namespace PrismaCore
                                                 ___nextPlayer++;
                                             }
 
-                                            if (___zombies.Count >= PrismaCoreSettings.Instance.BloodmoonSpawner_Overridden_BMEnemyCountPerPlayer * count)
+                                            if (___zombies.Count >= ServerCoreSettings.Instance.BloodmoonSpawner_Overridden_BMEnemyCountPerPlayer * count)
                                             {
                                                 break;
                                             }

@@ -6,7 +6,7 @@ using UnityEngine;
 using static Unity.IO.LowLevel.Unsafe.AsyncReadManagerMetrics;
 using static vp_Message;
 
-namespace PrismaCore
+namespace ServerCore
 {
     class ClaimProtector
     {
@@ -280,9 +280,9 @@ namespace PrismaCore
                                                             Database.Instance.SetDbClaimWhitelist(activeClaim.Id, currentWhitelist);
 
                                                             Database.Instance.SetAutoRelease(steamID, false);
-                                                            string notiMsg = PrismaCoreStrings.Instance.Arrest_AutoReleaseMsg;
+                                                            string notiMsg = ServerCoreStrings.Instance.Arrest_AutoReleaseMsg;
                                                                                                                                                                                     
-                                                            ci.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(PrismaCoreStrings.Instance.ServerChatName, notiMsg), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
+                                                            ci.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(ServerCoreStrings.Instance.ServerChatName, notiMsg), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
                                                             Log.Out(playerName + " has been automatically released from jail.");
                                                             continue;
                                                         }
@@ -797,7 +797,7 @@ namespace PrismaCore
                                                                     }
                                                                     else
                                                                     {
-                                                                        ci.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(PrismaCoreStrings.Instance.ServerChatName, notiMsg), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
+                                                                        ci.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(ServerCoreStrings.Instance.ServerChatName, notiMsg), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
 
                                                                     }
                                                                 }
@@ -812,7 +812,7 @@ namespace PrismaCore
                                                                     }
                                                                     else
                                                                     {
-                                                                        ci.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(PrismaCoreStrings.Instance.ServerChatName, notiMsg), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
+                                                                        ci.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(ServerCoreStrings.Instance.ServerChatName, notiMsg), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
                                                                     }
 
                                                                     ci.SendPackage(NetPackageManager.GetPackage<NetPackageConsoleCmdClient>().Setup("sgs PlayerKillingMode 0", true));
@@ -828,10 +828,10 @@ namespace PrismaCore
                                                                     }
                                                                     else
                                                                     {
-                                                                        ci.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(PrismaCoreStrings.Instance.ServerChatName, notiMsg), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
+                                                                        ci.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(ServerCoreStrings.Instance.ServerChatName, notiMsg), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
                                                                     }
 
-                                                                    int killMode = PrismaCoreSettings.Instance.AdvClaims_PVP_KillingMode;
+                                                                    int killMode = ServerCoreSettings.Instance.AdvClaims_PVP_KillingMode;
                                                                     ci.SendPackage(NetPackageManager.GetPackage<NetPackageConsoleCmdClient>().Setup($"sgs PlayerKillingMode {killMode}", true));
                                                                 }
                                                                 else
@@ -845,7 +845,7 @@ namespace PrismaCore
                                                                     }
                                                                     else
                                                                     {
-                                                                        ci.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(PrismaCoreStrings.Instance.ServerChatName, notiMsg), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
+                                                                        ci.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(ServerCoreStrings.Instance.ServerChatName, notiMsg), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
                                                                     }
                                                                 }
 
@@ -867,7 +867,7 @@ namespace PrismaCore
                                                                 }
                                                                 else
                                                                 {
-                                                                    ci.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(PrismaCoreStrings.Instance.ServerChatName, notiMsg), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
+                                                                    ci.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(ServerCoreStrings.Instance.ServerChatName, notiMsg), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
                                                                 }
                                                             }
                                                             else if (activeClaim.Id.ContainsCaseInsensitive("pve"))
@@ -880,7 +880,7 @@ namespace PrismaCore
                                                                 }
                                                                 else
                                                                 {
-                                                                    ci.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(PrismaCoreStrings.Instance.ServerChatName, notiMsg), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
+                                                                    ci.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(ServerCoreStrings.Instance.ServerChatName, notiMsg), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
                                                                 }
 
                                                                 ci.SendPackage(NetPackageManager.GetPackage<NetPackageConsoleCmdClient>().Setup("sgs PlayerKillingMode 0", true));
@@ -895,10 +895,10 @@ namespace PrismaCore
                                                                 }
                                                                 else
                                                                 {
-                                                                    ci.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(PrismaCoreStrings.Instance.ServerChatName, notiMsg), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
+                                                                    ci.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(ServerCoreStrings.Instance.ServerChatName, notiMsg), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
                                                                 }
 
-                                                                int killMode = PrismaCoreSettings.Instance.AdvClaims_PVP_KillingMode;
+                                                                int killMode = ServerCoreSettings.Instance.AdvClaims_PVP_KillingMode;
                                                                 ci.SendPackage(NetPackageManager.GetPackage<NetPackageConsoleCmdClient>().Setup($"sgs PlayerKillingMode {killMode}", true));
                                                             }
                                                             else
@@ -911,7 +911,7 @@ namespace PrismaCore
                                                                 }
                                                                 else
                                                                 {
-                                                                    ci.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(PrismaCoreStrings.Instance.ServerChatName, notiMsg), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
+                                                                    ci.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(ServerCoreStrings.Instance.ServerChatName, notiMsg), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
                                                                 }
                                                             }
 
@@ -959,7 +959,7 @@ namespace PrismaCore
                                                                             }
                                                                             else
                                                                             {
-                                                                                ci.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(PrismaCoreStrings.Instance.ServerChatName, PrismaCoreStrings.Instance.AdvClaims_OnVehicleWarning), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
+                                                                                ci.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(ServerCoreStrings.Instance.ServerChatName, ServerCoreStrings.Instance.AdvClaims_OnVehicleWarning), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
                                                                             }
 
                                                                             continue;
@@ -1014,7 +1014,7 @@ namespace PrismaCore
                                                                             }
                                                                             else
                                                                             {
-                                                                                ci.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(PrismaCoreStrings.Instance.ServerChatName, PrismaCoreStrings.Instance.AdvClaims_OnVehicleWarning), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
+                                                                                ci.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(ServerCoreStrings.Instance.ServerChatName, ServerCoreStrings.Instance.AdvClaims_OnVehicleWarning), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
                                                                             }
 
                                                                             continue;
@@ -1034,7 +1034,7 @@ namespace PrismaCore
                                                                         }
                                                                         else
                                                                         {
-                                                                            ci.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(PrismaCoreStrings.Instance.ServerChatName, PrismaCoreStrings.Instance.AdvClaims_OnVehicleWarning), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
+                                                                            ci.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(ServerCoreStrings.Instance.ServerChatName, ServerCoreStrings.Instance.AdvClaims_OnVehicleWarning), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
                                                                         }
 
                                                                         continue;
@@ -1167,7 +1167,7 @@ namespace PrismaCore
                                                                         }
                                                                         else
                                                                         {
-                                                                            ci.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(PrismaCoreStrings.Instance.ServerChatName, exitMsg), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
+                                                                            ci.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(ServerCoreStrings.Instance.ServerChatName, exitMsg), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
                                                                         }
                                                                     }
                                                                 }
@@ -1198,7 +1198,7 @@ namespace PrismaCore
                                                                         else
                                                                         {
                                                                             if (!string.IsNullOrEmpty(exitMsg))
-                                                                                ci.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(PrismaCoreStrings.Instance.ServerChatName, exitMsg), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
+                                                                                ci.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(ServerCoreStrings.Instance.ServerChatName, exitMsg), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
                                                                         }
 
                                                                         int serverKillingMode = GamePrefs.GetInt(EnumUtils.Parse<EnumGamePrefs>("PlayerKillingMode"));
@@ -1218,7 +1218,7 @@ namespace PrismaCore
                                                                         else
                                                                         {
                                                                             if (!string.IsNullOrEmpty(exitMsg))
-                                                                                ci.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(PrismaCoreStrings.Instance.ServerChatName, exitMsg), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
+                                                                                ci.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(ServerCoreStrings.Instance.ServerChatName, exitMsg), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
                                                                         }
 
                                                                         int serverKillingMode = GamePrefs.GetInt(EnumUtils.Parse<EnumGamePrefs>("PlayerKillingMode"));
@@ -1238,7 +1238,7 @@ namespace PrismaCore
                                                                         else
                                                                         {
                                                                             if (!string.IsNullOrEmpty(exitMsg))
-                                                                                ci.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(PrismaCoreStrings.Instance.ServerChatName, exitMsg), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
+                                                                                ci.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(ServerCoreStrings.Instance.ServerChatName, exitMsg), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
                                                                         }
                                                                     }
                                                                 }
@@ -1259,7 +1259,7 @@ namespace PrismaCore
                             }
                         }
 
-                        if (PrismaCoreSettings.Instance.NighttimeAnnouncer_Enabled)
+                        if (ServerCoreSettings.Instance.NighttimeAnnouncer_Enabled)
                             Announce();
 
                         //Check for illegal GodMode or flying
@@ -1278,15 +1278,15 @@ namespace PrismaCore
                                         {
                                             int AdminLvL = GameManager.Instance.adminTools.Users.GetUserPermissionLevel(clientInfo);
 
-                                            if (AdminLvL > PrismaCoreSettings.Instance.MaxAdminLevelGodMode)
+                                            if (AdminLvL > ServerCoreSettings.Instance.MaxAdminLevelGodMode)
                                             {
                                                 Log.Out($"[PrismaCore]Unauthorized GodMode detected on {clientInfo.playerName} ({clientInfo.PlatformId}) !!!!!");
-                                                Log.Out($"[PrismaCore]Permissionlevel: {AdminLvL} MaxAdminLevelGodMode: {PrismaCoreSettings.Instance.MaxAdminLevelGodMode}");
+                                                Log.Out($"[PrismaCore]Permissionlevel: {AdminLvL} MaxAdminLevelGodMode: {ServerCoreSettings.Instance.MaxAdminLevelGodMode}");
 
                                                 //fire optional command(s)
                                                 if (!GodModeCommandFired.Contains(clientInfo.PlatformId.ToString()))
                                                 {
-                                                    string command = PrismaCoreSettings.Instance.GodModeDetectedCommand;
+                                                    string command = ServerCoreSettings.Instance.GodModeDetectedCommand;
                                                     if (!string.IsNullOrEmpty(command))
                                                     {
                                                         if (command.Contains(";"))
@@ -1328,7 +1328,7 @@ namespace PrismaCore
                                 }
 
                                 //check if flying
-                                if (PrismaCoreSettings.Instance.PlayerFlying_TriggerHeight > 0)
+                                if (ServerCoreSettings.Instance.PlayerFlying_TriggerHeight > 0)
                                 {
                                     if (player.Value.IsSpawned())
                                     {
@@ -1341,11 +1341,11 @@ namespace PrismaCore
                                         if (!_isOnGyrocopter && !_isOnHelicopter && !_isOnBlimp && !_isSwimming && !_isInWater)
                                         {
                                             int height = getPlayerHeight(player.Value);
-                                            if (height >= PrismaCoreSettings.Instance.PlayerFlying_TriggerHeight)
+                                            if (height >= ServerCoreSettings.Instance.PlayerFlying_TriggerHeight)
                                             {
                                                 int AdminLvL = GameManager.Instance.adminTools.Users.GetUserPermissionLevel(clientInfo);
 
-                                                if (AdminLvL > PrismaCoreSettings.Instance.PlayerFlying_MaxAdminLevelFlying)
+                                                if (AdminLvL > ServerCoreSettings.Instance.PlayerFlying_MaxAdminLevelFlying)
                                                 {
                                                     Log.Out($"[PrismaCore]Player {clientInfo.playerName} ({clientInfo.PlatformId}) seems to be flying !!!!!");
                                                 }
@@ -1365,15 +1365,15 @@ namespace PrismaCore
 
                                     int AdminLvL = GameManager.Instance.adminTools.Users.GetUserPermissionLevel(clientInfo);
 
-                                    if (AdminLvL > PrismaCoreSettings.Instance.MaxAdminLevelSpectatorMode)
+                                    if (AdminLvL > ServerCoreSettings.Instance.MaxAdminLevelSpectatorMode)
                                     {
                                         Log.Out($"[PrismaCore]Unauthorized SpectatorMode detected on {clientInfo.playerName} ({clientInfo.PlatformId}) !!!!!");
-                                        Log.Out($"[PrismaCore]Permissionlevel: {AdminLvL} MaxAdminLevelSpectatorMode: {PrismaCoreSettings.Instance.MaxAdminLevelSpectatorMode}");
+                                        Log.Out($"[PrismaCore]Permissionlevel: {AdminLvL} MaxAdminLevelSpectatorMode: {ServerCoreSettings.Instance.MaxAdminLevelSpectatorMode}");
 
                                         //fire optional command(s)
                                         if (!SpectatorModeCommandFired.Contains(clientInfo.PlatformId.ToString()))
                                         {
-                                            string command = PrismaCoreSettings.Instance.SpectatorModeDetectedCommand;
+                                            string command = ServerCoreSettings.Instance.SpectatorModeDetectedCommand;
                                             if (!string.IsNullOrEmpty(command))
                                             {
                                                 if (command.Contains(";"))
@@ -1428,21 +1428,21 @@ namespace PrismaCore
         {
             int days = GameUtils.WorldTimeToDays(GameManager.Instance.World.worldTime);
             int hours = GameUtils.WorldTimeToHours(GameManager.Instance.World.worldTime);
-            int warnhours = PrismaCoreSettings.Instance.NighttimeAnnouncer_Warnhours;
+            int warnhours = ServerCoreSettings.Instance.NighttimeAnnouncer_Warnhours;
 
             int BMcycle = GamePrefs.GetInt(EnumUtils.Parse<EnumGamePrefs>("BloodMoonFrequency"));
             int BMrange = GamePrefs.GetInt(EnumUtils.Parse<EnumGamePrefs>("BloodMoonRange"));
 
             if (hours == (22 - warnhours) && !didAnnounce)
             {
-                string announcer = PrismaCoreStrings.Instance.NighttimeAnnouncer_AnnouncerName;
-                string nta = PrismaCoreStrings.Instance.NighttimeAnnouncer_NightTimeText;
-                string bdt = PrismaCoreStrings.Instance.NighttimeAnnouncer_BloodDayText;
-                string bdtt = PrismaCoreStrings.Instance.NighttimeAnnouncer_BloodDayTomorrowText;
-                string ct = PrismaCoreStrings.Instance.NighttimeAnnouncer_CounterText;
+                string announcer = ServerCoreStrings.Instance.NighttimeAnnouncer_AnnouncerName;
+                string nta = ServerCoreStrings.Instance.NighttimeAnnouncer_NightTimeText;
+                string bdt = ServerCoreStrings.Instance.NighttimeAnnouncer_BloodDayText;
+                string bdtt = ServerCoreStrings.Instance.NighttimeAnnouncer_BloodDayTomorrowText;
+                string ct = ServerCoreStrings.Instance.NighttimeAnnouncer_CounterText;
 
                 nta = nta.Replace("{hours}", warnhours.ToString());
-                GameManager.Instance.ChatMessageServer(null, EChatType.Global, -1, Utils.CreateGameMessage(PrismaCoreStrings.Instance.ServerChatName, nta), null, EMessageSender.None);
+                GameManager.Instance.ChatMessageServer(null, EChatType.Global, -1, Utils.CreateGameMessage(ServerCoreStrings.Instance.ServerChatName, nta), null, EMessageSender.None);
                 //Bloodmoon announcement
                 if (BMcycle > 0)
                 {
@@ -1459,12 +1459,12 @@ namespace PrismaCore
                     }
                     if (BMrange > 0)
                     {
-                        PMmsg = PrismaCoreStrings.Instance.NighttimeAnnouncer_RandomBloodmoon;
-                        GameManager.Instance.ChatMessageServer(null, EChatType.Global, -1, Utils.CreateGameMessage(PrismaCoreStrings.Instance.ServerChatName, PMmsg), null, EMessageSender.None);
+                        PMmsg = ServerCoreStrings.Instance.NighttimeAnnouncer_RandomBloodmoon;
+                        GameManager.Instance.ChatMessageServer(null, EChatType.Global, -1, Utils.CreateGameMessage(ServerCoreStrings.Instance.ServerChatName, PMmsg), null, EMessageSender.None);
                     }
                     else
                     {
-                        GameManager.Instance.ChatMessageServer(null, EChatType.Global, -1, Utils.CreateGameMessage(PrismaCoreStrings.Instance.ServerChatName, PMmsg), null, EMessageSender.None);
+                        GameManager.Instance.ChatMessageServer(null, EChatType.Global, -1, Utils.CreateGameMessage(ServerCoreStrings.Instance.ServerChatName, PMmsg), null, EMessageSender.None);
                     }
                 }
 
@@ -1480,7 +1480,7 @@ namespace PrismaCore
         {
             try
             {
-                string denied = PrismaCoreStrings.Instance.AdvClaims_Reversed;
+                string denied = ServerCoreStrings.Instance.AdvClaims_Reversed;
 
                 int halfwayX = Math.Abs((claim.E_bound - claim.W_bound) / 2);
                 int halfwayY = Math.Abs((claim.N_bound - claim.S_bound) / 2);
@@ -1491,7 +1491,7 @@ namespace PrismaCore
                 Vector3 destPos = new Vector3();
 
                 destPos.x = Convert.ToSingle(destX);
-                destPos.y = Convert.ToSingle(PrismaCoreSettings.Instance.AdvClaims_Reversed_TpHeight);
+                destPos.y = Convert.ToSingle(ServerCoreSettings.Instance.AdvClaims_Reversed_TpHeight);
                 destPos.z = Convert.ToSingle(destZ);
 
                 NetPackageTeleportPlayer pkg = NetPackageManager.GetPackage<NetPackageTeleportPlayer>().Setup(destPos);
@@ -1504,7 +1504,7 @@ namespace PrismaCore
                 }
                 else
                 {
-                    ci.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(PrismaCoreStrings.Instance.ServerChatName, denied), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
+                    ci.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(ServerCoreStrings.Instance.ServerChatName, denied), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
                 }
             }
             catch (Exception e) { Log.Error(e.ToString()); }
@@ -1532,7 +1532,7 @@ namespace PrismaCore
         private static void LevelIntrusionHandler(ClientInfo ci, Vector3i pos, DbClaim claim, string logic)
         {
             Vector3 newPos = new Vector3();
-            string msg = PrismaCoreStrings.Instance.AdvClaims_PlayerLevel.Replace("{logic}", logic);
+            string msg = ServerCoreStrings.Instance.AdvClaims_PlayerLevel.Replace("{logic}", logic);
 
             int halfwayX = Math.Abs((claim.E_bound - claim.W_bound) / 2);
             int halfwayY = Math.Abs((claim.N_bound - claim.S_bound) / 2);
@@ -1558,7 +1558,7 @@ namespace PrismaCore
                 }
                 else
                 {
-                    ci.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(PrismaCoreStrings.Instance.ServerChatName, msg), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
+                    ci.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(ServerCoreStrings.Instance.ServerChatName, msg), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
                 }
 
                 return;
@@ -1582,7 +1582,7 @@ namespace PrismaCore
                 }
                 else
                 {
-                    ci.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(PrismaCoreStrings.Instance.ServerChatName, msg), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
+                    ci.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(ServerCoreStrings.Instance.ServerChatName, msg), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
                 }
 
                 return;
@@ -1605,7 +1605,7 @@ namespace PrismaCore
                 }
                 else
                 {
-                    ci.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(PrismaCoreStrings.Instance.ServerChatName, msg), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
+                    ci.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(ServerCoreStrings.Instance.ServerChatName, msg), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
                 }
 
                 return;
@@ -1628,7 +1628,7 @@ namespace PrismaCore
                 }
                 else
                 {
-                    ci.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(PrismaCoreStrings.Instance.ServerChatName, msg), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
+                    ci.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(ServerCoreStrings.Instance.ServerChatName, msg), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
                 }
 
                 return;
@@ -1638,7 +1638,7 @@ namespace PrismaCore
         private static void IntrusionHandler(ClientInfo ci, Vector3i pos, DbClaim claim, string opentimes)
         {
             Vector3 newPos = new Vector3();
-            string msg = PrismaCoreStrings.Instance.AdvClaims_Normal;
+            string msg = ServerCoreStrings.Instance.AdvClaims_Normal;
 
             int halfwayX = Math.Abs((claim.E_bound - claim.W_bound) / 2);
             int halfwayY = Math.Abs((claim.N_bound - claim.S_bound) / 2);
@@ -1664,12 +1664,12 @@ namespace PrismaCore
                 }
                 else
                 {
-                    ci.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(PrismaCoreStrings.Instance.ServerChatName, msg), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
+                    ci.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(ServerCoreStrings.Instance.ServerChatName, msg), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
                 }
 
                 if (!string.IsNullOrEmpty(opentimes))
                 {
-                    ci.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(PrismaCoreStrings.Instance.ServerChatName, PrismaCoreStrings.Instance.AdvClaims_OpenTime.Replace("{openTime}", opentimes)), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
+                    ci.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(ServerCoreStrings.Instance.ServerChatName, ServerCoreStrings.Instance.AdvClaims_OpenTime.Replace("{openTime}", opentimes)), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
                 }
 
                 return;
@@ -1693,12 +1693,12 @@ namespace PrismaCore
                 }
                 else
                 {
-                    ci.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(PrismaCoreStrings.Instance.ServerChatName, msg), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
+                    ci.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(ServerCoreStrings.Instance.ServerChatName, msg), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
                 }
 
                 if (!string.IsNullOrEmpty(opentimes))
                 {
-                    ci.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(PrismaCoreStrings.Instance.ServerChatName, PrismaCoreStrings.Instance.AdvClaims_OpenTime.Replace("{openTime}", opentimes)), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
+                    ci.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(ServerCoreStrings.Instance.ServerChatName, ServerCoreStrings.Instance.AdvClaims_OpenTime.Replace("{openTime}", opentimes)), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
                 }
 
                 return;
@@ -1721,12 +1721,12 @@ namespace PrismaCore
                 }
                 else
                 {
-                    ci.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(PrismaCoreStrings.Instance.ServerChatName, msg), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
+                    ci.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(ServerCoreStrings.Instance.ServerChatName, msg), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
                 }
 
                 if (!string.IsNullOrEmpty(opentimes))
                 {
-                    ci.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(PrismaCoreStrings.Instance.ServerChatName, PrismaCoreStrings.Instance.AdvClaims_OpenTime.Replace("{openTime}", opentimes)), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
+                    ci.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(ServerCoreStrings.Instance.ServerChatName, ServerCoreStrings.Instance.AdvClaims_OpenTime.Replace("{openTime}", opentimes)), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
                 }
 
                 return;
@@ -1749,12 +1749,12 @@ namespace PrismaCore
                 }
                 else
                 {
-                    ci.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(PrismaCoreStrings.Instance.ServerChatName, msg), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
+                    ci.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(ServerCoreStrings.Instance.ServerChatName, msg), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
                 }
 
                 if (!string.IsNullOrEmpty(opentimes))
                 {
-                    ci.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(PrismaCoreStrings.Instance.ServerChatName, PrismaCoreStrings.Instance.AdvClaims_OpenTime.Replace("{openTime}", opentimes)), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
+                    ci.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(ServerCoreStrings.Instance.ServerChatName, ServerCoreStrings.Instance.AdvClaims_OpenTime.Replace("{openTime}", opentimes)), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
                 }
 
                 return;
@@ -1806,7 +1806,7 @@ namespace PrismaCore
                 if (counter >= 6)
                 {
                     //FE2E2E
-                    ci.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(PrismaCoreStrings.Instance.ServerChatName, "[FE2E2E]Protective bubble is ACTIVE![-]"), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
+                    ci.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(ServerCoreStrings.Instance.ServerChatName, "[FE2E2E]Protective bubble is ACTIVE![-]"), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
                     counter = 0;
                 }
 

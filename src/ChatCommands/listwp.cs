@@ -1,4 +1,4 @@
-﻿namespace PrismaCore
+﻿namespace ServerCore
 {
     class Listwp
     {
@@ -8,20 +8,20 @@
             {
                 int AdminLvL = GameManager.Instance.adminTools.Users.GetUserPermissionLevel(_cInfo);
 
-                if (AdminLvL <= PrismaCoreSettings.Instance.ChatCommandPermissions_listwp)
+                if (AdminLvL <= ServerCoreSettings.Instance.ChatCommandPermissions_listwp)
                 {
                     var result = Database.Instance.ListDbWaypoints();
 
                     string PMmsg = "";
                     if (result.Count == 0)
                     {
-                        PMmsg = PrismaCoreStrings.Instance.Listwp_NoWaypoints;
-                        _cInfo.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(PrismaCoreStrings.Instance.ServerChatName, "" + PMmsg + "[-]"), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
+                        PMmsg = ServerCoreStrings.Instance.Listwp_NoWaypoints;
+                        _cInfo.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(ServerCoreStrings.Instance.ServerChatName, "" + PMmsg + "[-]"), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
                         return true;
                     }
-                    else PMmsg = PrismaCoreStrings.Instance.Listwp_ListTitle;
+                    else PMmsg = ServerCoreStrings.Instance.Listwp_ListTitle;
 
-                    _cInfo.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(PrismaCoreStrings.Instance.ServerChatName, "" + PMmsg + "[-]"), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
+                    _cInfo.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(ServerCoreStrings.Instance.ServerChatName, "" + PMmsg + "[-]"), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
 
                     foreach (DbWaypoint wp in result)
                     {
@@ -32,8 +32,8 @@
                 }
                 else
                 {
-                    string errMsg = PrismaCoreStrings.Instance.ChatCommandPermissions_NotAllowedMessage;
-                    _cInfo.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(PrismaCoreStrings.Instance.ServerChatName, errMsg), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
+                    string errMsg = ServerCoreStrings.Instance.ChatCommandPermissions_NotAllowedMessage;
+                    _cInfo.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(ServerCoreStrings.Instance.ServerChatName, errMsg), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
                 }
             }
             catch { return false; }

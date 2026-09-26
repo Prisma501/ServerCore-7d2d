@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace PrismaCore.CustomCommands
+namespace ServerCore.CustomCommands
 {
     public class Serverchatname : ConsoleCmdAbstract
     {
@@ -32,7 +32,7 @@ namespace PrismaCore.CustomCommands
                 if (_params.Count == 0)
                 {
                     //show active
-                    string cn = PrismaCoreStrings.Instance.ServerChatName;
+                    string cn = ServerCoreStrings.Instance.ServerChatName;
                     SdtdConsole.Instance.Output("Current global servername for PrismaCore: " + cn);
                     return;
                 }
@@ -45,8 +45,8 @@ namespace PrismaCore.CustomCommands
                     }
                     else
                     {
-                        PrismaCoreStrings.Instance.ServerChatName = _params[0];
-                        PrismaCoreStrings.Instance.Save();
+                        ServerCoreStrings.Instance.ServerChatName = _params[0];
+                        ServerCoreStrings.Instance.Save();
                         SdtdConsole.Instance.Output("Global servername for PrismaCore has been set to " + _params[0]);
                     }
                 }

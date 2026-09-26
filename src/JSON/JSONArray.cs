@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace PrismaCore.JSON
+namespace ServerCore.JSON
 {
     public class JSONArray : JSONNode
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace PrismaCore
+namespace ServerCore
 {
     class day7
     {
@@ -11,7 +11,7 @@ namespace PrismaCore
             {
                 int AdminLvL = GameManager.Instance.adminTools.Users.GetUserPermissionLevel(_cInfo);
 
-                if (AdminLvL <= PrismaCoreSettings.Instance.ChatCommandPermissions_day7)
+                if (AdminLvL <= ServerCoreSettings.Instance.ChatCommandPermissions_day7)
                 {
                     int days = GameUtils.WorldTimeToDays(GameManager.Instance.World.worldTime);
                     int hours = GameUtils.WorldTimeToHours(GameManager.Instance.World.worldTime);
@@ -28,18 +28,18 @@ namespace PrismaCore
                         if (remainder == 0)
                         {
                             //if remainder=0 but hours < 4 report 22:00
-                            if (hours < 4) PMmsg = PrismaCoreStrings.Instance.Day7_BloodmoonWarningB4Four;
-                            else PMmsg = PrismaCoreStrings.Instance.Day7_BloodmoonWarningAfterFour;
+                            if (hours < 4) PMmsg = ServerCoreStrings.Instance.Day7_BloodmoonWarningB4Four;
+                            else PMmsg = ServerCoreStrings.Instance.Day7_BloodmoonWarningAfterFour;
                         }
-                        else if (remainder == 1 && hours < 4) PMmsg = PrismaCoreStrings.Instance.Day7_BloodmoonWarningDuring;
+                        else if (remainder == 1 && hours < 4) PMmsg = ServerCoreStrings.Instance.Day7_BloodmoonWarningDuring;
                         else
                         {
                             int daysleft = BMcycle - remainder;
                             int nexthorde = (q * BMcycle) + remainder + daysleft;
                             string strDay = "";
-                            if (daysleft == 1) strDay = PrismaCoreStrings.Instance.Day7_Day;
-                            else strDay = PrismaCoreStrings.Instance.Day7_Days;
-                            PMmsg = PrismaCoreStrings.Instance.Day7_BloodmoonWarningDaysleft;
+                            if (daysleft == 1) strDay = ServerCoreStrings.Instance.Day7_Day;
+                            else strDay = ServerCoreStrings.Instance.Day7_Days;
+                            PMmsg = ServerCoreStrings.Instance.Day7_BloodmoonWarningDaysleft;
                             // "Bloodmoon is in {daysLeft} {textDay} !  ( Day {nextBloodmoonDay} )"
                             PMmsg = PMmsg.Replace("{daysLeft}", daysleft.ToString());
                             PMmsg = PMmsg.Replace("{textDay}", strDay);
@@ -48,12 +48,12 @@ namespace PrismaCore
 
                         if (BMrange > 0)
                         {
-                            PMmsg = PrismaCoreStrings.Instance.Day7_Random;
-                            _cInfo.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(PrismaCoreStrings.Instance.ServerChatName, PMmsg), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
+                            PMmsg = ServerCoreStrings.Instance.Day7_Random;
+                            _cInfo.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(ServerCoreStrings.Instance.ServerChatName, PMmsg), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
                         }
                         else
                         {
-                            _cInfo.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(PrismaCoreStrings.Instance.ServerChatName, PMmsg), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
+                            _cInfo.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(ServerCoreStrings.Instance.ServerChatName, PMmsg), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
                         }
                     }
 
@@ -82,10 +82,10 @@ namespace PrismaCore
 
                     string fps = GameManager.Instance.fps.Counter.ToCultureInvariantString("F1");
 
-                    string StatMsg = PrismaCoreStrings.Instance.Day7_Stats.Replace("{players}", players.ToString());
+                    string StatMsg = ServerCoreStrings.Instance.Day7_Stats.Replace("{players}", players.ToString());
                     StatMsg = StatMsg.Replace("{zombies}", enemycount.ToString());
 
-                    string FpsMsg = PrismaCoreStrings.Instance.Day7_Fps.Replace("{fps}", fps);
+                    string FpsMsg = ServerCoreStrings.Instance.Day7_Fps.Replace("{fps}", fps);
 
                     if (!StatMsg.ToLower().Equals("off"))
                         _cInfo.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, "* " + StatMsg, null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
@@ -95,8 +95,8 @@ namespace PrismaCore
                 }
                 else
                 {
-                    string errMsg = PrismaCoreStrings.Instance.ChatCommandPermissions_NotAllowedMessage;
-                    _cInfo.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(PrismaCoreStrings.Instance.ServerChatName, errMsg), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
+                    string errMsg = ServerCoreStrings.Instance.ChatCommandPermissions_NotAllowedMessage;
+                    _cInfo.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(ServerCoreStrings.Instance.ServerChatName, errMsg), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
                 }
             }
             catch { return false; }

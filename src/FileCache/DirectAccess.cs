@@ -1,7 +1,7 @@
 using System;
 using System.IO;
 
-namespace PrismaCore.FileCache
+namespace ServerCore.FileCache
 {
     // Not caching at all, simply reading from disk on each request
     public class DirectAccess : AbstractCache

@@ -2,7 +2,7 @@
 using System.IO;
 using System.Xml;
 
-namespace PrismaCore
+namespace ServerCore
 {
     public class PermaDeathClass
     {

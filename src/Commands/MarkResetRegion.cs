@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace PrismaCore.CustomCommands
+namespace ServerCore.CustomCommands
 {
     public class MarkResetRegion : ConsoleCmdAbstract
     {
@@ -222,9 +222,9 @@ namespace PrismaCore.CustomCommands
                 {
                     if (_params[0].EqualsCaseInsensitive("notificationtext"))
                     {
-                        PrismaCoreStrings.Instance.Resetregion_EnterNotification = _params[1].Trim().Split(':')[0];
-                        PrismaCoreStrings.Instance.Resetregion_ExitNotification = _params[1].Trim().Split(':')[1];
-                        PrismaCoreStrings.Instance.Save();
+                        ServerCoreStrings.Instance.Resetregion_EnterNotification = _params[1].Trim().Split(':')[0];
+                        ServerCoreStrings.Instance.Resetregion_ExitNotification = _params[1].Trim().Split(':')[1];
+                        ServerCoreStrings.Instance.Save();
                         SdtdConsole.Instance.Output("Notification text (enter:exit) has been set to: " + _params[1]);
                     }
                     else
@@ -248,7 +248,7 @@ namespace PrismaCore.CustomCommands
                     Vector3i pos = new Vector3i();
                     pos = ep.GetBlockPosition();
 
-                    string notifyText = $"{PrismaCoreStrings.Instance.Resetregion_EnterNotification}:{PrismaCoreStrings.Instance.Resetregion_ExitNotification}";
+                    string notifyText = $"{ServerCoreStrings.Instance.Resetregion_EnterNotification}:{ServerCoreStrings.Instance.Resetregion_ExitNotification}";
 
                     SdtdConsole.Instance.Output("You are standing on region: " + GetRegion(pos));
                     SdtdConsole.Instance.Output("Notification text (enter:exit): " + notifyText);

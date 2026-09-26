@@ -1,5 +1,5 @@
-using PrismaCore.FileCache;
-using PrismaCore.JSON;
+using ServerCore.FileCache;
+using ServerCore.JSON;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -10,7 +10,7 @@ using UnityEngine;
 using UnityEngine.Profiling;
 using Object = UnityEngine.Object;
 
-namespace PrismaCore.MapRendering
+namespace ServerCore.MapRendering
 {
     public class MapRendering
     {

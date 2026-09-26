@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace PrismaCore
+namespace ServerCore
 {
     public class RegionWatcher
     {
@@ -29,7 +29,7 @@ namespace PrismaCore
             fileWatcher.Deleted += new FileSystemEventHandler(OnFileChanged2);
             fileWatcher.EnableRaisingEvents = true;
 
-            fileWatcherStrings = new FileSystemWatcher(API.GamePath, PrismaCoreStrings.SaveFileName);
+            fileWatcherStrings = new FileSystemWatcher(API.GamePath, ServerCoreStrings.SaveFileName);
             fileWatcherStrings.Changed += new FileSystemEventHandler(OnFileChanged3);
             fileWatcherStrings.Created += new FileSystemEventHandler(OnFileChanged3);
             fileWatcherStrings.Deleted += new FileSystemEventHandler(OnFileChanged3);
@@ -40,7 +40,7 @@ namespace PrismaCore
             fileWatcherDonorSlots.Deleted += new FileSystemEventHandler(OnFileChanged4);
             fileWatcherDonorSlots.EnableRaisingEvents = true;
 
-            fileWatcherSettings = new FileSystemWatcher(API.GamePath, PrismaCoreSettings.SaveFileName);
+            fileWatcherSettings = new FileSystemWatcher(API.GamePath, ServerCoreSettings.SaveFileName);
             fileWatcherSettings.Changed += new FileSystemEventHandler(OnFileChanged5);
             fileWatcherSettings.Created += new FileSystemEventHandler(OnFileChanged5);
             fileWatcherSettings.Deleted += new FileSystemEventHandler(OnFileChanged5);
@@ -64,7 +64,7 @@ namespace PrismaCore
 
         private static void OnFileChanged3(object source, FileSystemEventArgs e)
         {
-            PrismaCoreStrings.Load();
+            ServerCoreStrings.Load();
         }
 
         private static void OnFileChanged4(object source, FileSystemEventArgs e)
@@ -75,7 +75,7 @@ namespace PrismaCore
 
         private static void OnFileChanged5(object source, FileSystemEventArgs e)
         {
-            PrismaCoreSettings.Load();
+            ServerCoreSettings.Load();
         }
 
         private static void OnFileChanged6(object source, FileSystemEventArgs e)

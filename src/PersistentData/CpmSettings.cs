@@ -4,15 +4,15 @@ using System.IO;
 using System.Xml;
 using System.Xml.Serialization;
 
-namespace PrismaCore
+namespace ServerCore
 {
     [Serializable]
     [XmlRoot("PrismaCoreSettings")]
     [UsedImplicitly(ImplicitUseTargetFlags.Members)]
-    public class PrismaCoreSettings
+    public class ServerCoreSettings
     {
-        private static PrismaCoreSettings _instance;
-        public static PrismaCoreSettings Instance => _instance ?? (_instance = new PrismaCoreSettings());
+        private static ServerCoreSettings _instance;
+        public static ServerCoreSettings Instance => _instance ?? (_instance = new ServerCoreSettings());
 
         public const string SaveFileName = "PrismaCoreSettings.xml";
         
@@ -195,8 +195,8 @@ namespace PrismaCore
                 {
                     using (var reader = new StreamReader(saveFilePath))
                     {
-                        var serializer = new XmlSerializer(typeof(PrismaCoreSettings));
-                        _instance = serializer.Deserialize(reader) as PrismaCoreSettings;
+                        var serializer = new XmlSerializer(typeof(ServerCoreSettings));
+                        _instance = serializer.Deserialize(reader) as ServerCoreSettings;
                     }
                     Log.Out($"[PrismaCore] PrismaCoreSettings loaded from {SaveFileName}.");
                 }

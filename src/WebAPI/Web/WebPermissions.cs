@@ -3,7 +3,7 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Xml;
 
-namespace PrismaCore.Web
+namespace ServerCore.Web
 {
     public class WebPermissions
     {

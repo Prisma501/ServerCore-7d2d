@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace PrismaCore.CustomCommands
+namespace ServerCore.CustomCommands
 {
     public class bmsAdjustForOnlinePlayers : ConsoleCmdAbstract
     {
@@ -32,7 +32,7 @@ namespace PrismaCore.CustomCommands
                 if (_params.Count == 0)
                 {
                     //show active
-                    SdtdConsole.Instance.Output($"BloodmoonSpawner_Overridden_AdjustBMEnemyCountPerPlayerToNrOnlinePlayers: {PrismaCoreSettings.Instance.BloodmoonSpawner_Overridden_AdjustBMEnemyCountPerPlayerToNrOnlinePlayers}");
+                    SdtdConsole.Instance.Output($"BloodmoonSpawner_Overridden_AdjustBMEnemyCountPerPlayerToNrOnlinePlayers: {ServerCoreSettings.Instance.BloodmoonSpawner_Overridden_AdjustBMEnemyCountPerPlayerToNrOnlinePlayers}");
                     return;
                 }
                 else
@@ -44,7 +44,7 @@ namespace PrismaCore.CustomCommands
                     }
                     else
                     {
-                        PrismaCoreSettings.Instance.BloodmoonSpawner_Overridden_AdjustBMEnemyCountPerPlayerToNrOnlinePlayers = blocked;
+                        ServerCoreSettings.Instance.BloodmoonSpawner_Overridden_AdjustBMEnemyCountPerPlayerToNrOnlinePlayers = blocked;
                         SdtdConsole.Instance.Output($"BloodmoonSpawner_Overridden_AdjustBMEnemyCountPerPlayerToNrOnlinePlayers has been set to {blocked} for current server session.");
                     }
                 }

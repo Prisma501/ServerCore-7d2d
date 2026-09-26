@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace PrismaCore.CustomCommands
+namespace ServerCore.CustomCommands
 {
     public class AnnounceNightTime : ConsoleCmdAbstract
     {
@@ -47,8 +47,8 @@ namespace PrismaCore.CustomCommands
                         return;
                     }
 
-                    PrismaCoreSettings.Instance.NighttimeAnnouncer_Enabled = enabled;
-                    PrismaCoreSettings.Instance.Save();
+                    ServerCoreSettings.Instance.NighttimeAnnouncer_Enabled = enabled;
+                    ServerCoreSettings.Instance.Save();
 
                     if (enabled)
                         SdtdConsole.Instance.Output(string.Format("NightTimeAnnouncement has been turned ON."));
@@ -65,8 +65,8 @@ namespace PrismaCore.CustomCommands
                             return;
                         }
 
-                        PrismaCoreSettings.Instance.NighttimeAnnouncer_Warnhours = hours;
-                        PrismaCoreSettings.Instance.Save();
+                        ServerCoreSettings.Instance.NighttimeAnnouncer_Warnhours = hours;
+                        ServerCoreSettings.Instance.Save();
 
                         SdtdConsole.Instance.Output(string.Format("WarnHours has been set to {0} hours", hours));
                     }
@@ -78,8 +78,8 @@ namespace PrismaCore.CustomCommands
                         else
                         {
                             announcer = _params[1].Trim();
-                            PrismaCoreStrings.Instance.NighttimeAnnouncer_AnnouncerName = announcer;
-                            PrismaCoreStrings.Instance.Save();
+                            ServerCoreStrings.Instance.NighttimeAnnouncer_AnnouncerName = announcer;
+                            ServerCoreStrings.Instance.Save();
 
                             SdtdConsole.Instance.Output(string.Format("Announcer name has been set to \"{0}\"", announcer));
                         }
@@ -92,8 +92,8 @@ namespace PrismaCore.CustomCommands
                         else
                         {
                             text = _params[1].Trim();
-                            PrismaCoreStrings.Instance.NighttimeAnnouncer_NightTimeText = text;
-                            PrismaCoreStrings.Instance.Save();
+                            ServerCoreStrings.Instance.NighttimeAnnouncer_NightTimeText = text;
+                            ServerCoreStrings.Instance.Save();
 
                             SdtdConsole.Instance.Output(string.Format("Text for NightTime has been set to \"{0}\"", text));
                         }
@@ -106,8 +106,8 @@ namespace PrismaCore.CustomCommands
                         else
                         {
                             text = _params[1].Trim();
-                            PrismaCoreStrings.Instance.NighttimeAnnouncer_BloodDayText = text;
-                            PrismaCoreStrings.Instance.Save();
+                            ServerCoreStrings.Instance.NighttimeAnnouncer_BloodDayText = text;
+                            ServerCoreStrings.Instance.Save();
 
                             SdtdConsole.Instance.Output(string.Format("Text for BloodDay has been set to \"{0}\"", text));
                         }
@@ -120,8 +120,8 @@ namespace PrismaCore.CustomCommands
                         else
                         {
                             text = _params[1].Trim();
-                            PrismaCoreStrings.Instance.NighttimeAnnouncer_BloodDayTomorrowText = text;
-                            PrismaCoreStrings.Instance.Save();
+                            ServerCoreStrings.Instance.NighttimeAnnouncer_BloodDayTomorrowText = text;
+                            ServerCoreStrings.Instance.Save();
 
                             SdtdConsole.Instance.Output(string.Format("Text for BloodDayTomorrow has been set to \"{0}\"", text));
                         }
@@ -134,8 +134,8 @@ namespace PrismaCore.CustomCommands
                         else
                         {
                             text = _params[1].Trim();
-                            PrismaCoreStrings.Instance.NighttimeAnnouncer_CounterText = text;
-                            PrismaCoreStrings.Instance.Save();
+                            ServerCoreStrings.Instance.NighttimeAnnouncer_CounterText = text;
+                            ServerCoreStrings.Instance.Save();
 
                             SdtdConsole.Instance.Output(string.Format("Text for BloodDayCounter has been set to \"{0}\"", text));
                         }
@@ -145,13 +145,13 @@ namespace PrismaCore.CustomCommands
                 }
                 else
                 {
-                    SdtdConsole.Instance.Output(string.Format("AnnounceNightTime Enabled: {0}", PrismaCoreSettings.Instance.NighttimeAnnouncer_Enabled));
-                    SdtdConsole.Instance.Output(string.Format("Warn {0} hours before 22:00", PrismaCoreSettings.Instance.NighttimeAnnouncer_Warnhours));
-                    SdtdConsole.Instance.Output(string.Format("Announcer name: {0}", PrismaCoreStrings.Instance.NighttimeAnnouncer_AnnouncerName));
-                    SdtdConsole.Instance.Output(string.Format("NightTime text: {0}", PrismaCoreStrings.Instance.NighttimeAnnouncer_NightTimeText));
-                    SdtdConsole.Instance.Output(string.Format("BloodDay text: {0}", PrismaCoreStrings.Instance.NighttimeAnnouncer_BloodDayText));
-                    SdtdConsole.Instance.Output(string.Format("BloodDay Tomorrow text: {0}", PrismaCoreStrings.Instance.NighttimeAnnouncer_BloodDayTomorrowText));
-                    SdtdConsole.Instance.Output(string.Format("CounterDay text: {0}", PrismaCoreStrings.Instance.NighttimeAnnouncer_CounterText));
+                    SdtdConsole.Instance.Output(string.Format("AnnounceNightTime Enabled: {0}", ServerCoreSettings.Instance.NighttimeAnnouncer_Enabled));
+                    SdtdConsole.Instance.Output(string.Format("Warn {0} hours before 22:00", ServerCoreSettings.Instance.NighttimeAnnouncer_Warnhours));
+                    SdtdConsole.Instance.Output(string.Format("Announcer name: {0}", ServerCoreStrings.Instance.NighttimeAnnouncer_AnnouncerName));
+                    SdtdConsole.Instance.Output(string.Format("NightTime text: {0}", ServerCoreStrings.Instance.NighttimeAnnouncer_NightTimeText));
+                    SdtdConsole.Instance.Output(string.Format("BloodDay text: {0}", ServerCoreStrings.Instance.NighttimeAnnouncer_BloodDayText));
+                    SdtdConsole.Instance.Output(string.Format("BloodDay Tomorrow text: {0}", ServerCoreStrings.Instance.NighttimeAnnouncer_BloodDayTomorrowText));
+                    SdtdConsole.Instance.Output(string.Format("CounterDay text: {0}", ServerCoreStrings.Instance.NighttimeAnnouncer_CounterText));
                 }
             }
             catch (Exception e)

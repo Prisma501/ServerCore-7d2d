@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace PrismaCore.CustomCommands
+namespace ServerCore.CustomCommands
 {
     public class SetUndoSize : ConsoleCmdAbstract
     {
@@ -31,7 +31,7 @@ namespace PrismaCore.CustomCommands
             {
                 if (_params.Count == 0)
                 {
-                    SdtdConsole.Instance.Output("BUndo History Size is " + PrismaCoreSettings.Instance.Bundo_HistorySize);
+                    SdtdConsole.Instance.Output("BUndo History Size is " + ServerCoreSettings.Instance.Bundo_HistorySize);
                     return;
                 }
 
@@ -44,8 +44,8 @@ namespace PrismaCore.CustomCommands
                     SdtdConsole.Instance.Output("ERR: Invalid bundo history size. It must be greater than 0.");
                     return;
                 }
-                PrismaCoreSettings.Instance.Bundo_HistorySize = size;
-                PrismaCoreSettings.Instance.Save();
+                ServerCoreSettings.Instance.Bundo_HistorySize = size;
+                ServerCoreSettings.Instance.Save();
                 SdtdConsole.Instance.Output("BUndo History Size set to " + _params[0]);
             }
             catch (Exception e)

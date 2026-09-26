@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace PrismaCore.CustomCommands
+namespace ServerCore.CustomCommands
 {
     public class PrismaCorePrefix : ConsoleCmdAbstract
     {
@@ -32,7 +32,7 @@ namespace PrismaCore.CustomCommands
                 if (_params.Count == 0)
                 {
                     //show active
-                    string pf = PrismaCoreSettings.Instance.PrismaCorePrefix;
+                    string pf = ServerCoreSettings.Instance.PrismaCorePrefix;
                     SdtdConsole.Instance.Output("Current PrismaCore chatcommand prefix: " + pf);
                     return;
                 }
@@ -45,8 +45,8 @@ namespace PrismaCore.CustomCommands
                     }
                     else
                     {
-                        PrismaCoreSettings.Instance.PrismaCorePrefix = _params[0];
-                        PrismaCoreSettings.Instance.Save();
+                        ServerCoreSettings.Instance.PrismaCorePrefix = _params[0];
+                        ServerCoreSettings.Instance.Save();
                         SdtdConsole.Instance.Output("PrismaCore chatcommand prefix has been set to " + _params[0]);
                     }
                 }

@@ -1,10 +1,10 @@
-using PrismaCore.Web.API;
+using ServerCore.Web.API;
 using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Reflection;
 
-namespace PrismaCore.Web.Handlers
+namespace ServerCore.Web.Handlers
 {
     public class ApiHandler : PathHandler
     {

@@ -1,7 +1,7 @@
 using System;
 using System.Runtime.Serialization;
 
-namespace PrismaCore.JSON
+namespace ServerCore.JSON
 {
     public class MalformedJSONException : ApplicationException
     {

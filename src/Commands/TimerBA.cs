@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading;
 
-namespace PrismaCore.CustomCommands
+namespace ServerCore.CustomCommands
 {
     public class TimerBA : ConsoleCmdAbstract
     {
@@ -122,7 +122,7 @@ namespace PrismaCore.CustomCommands
                 while (minutes != 1)
                 {
                     t = t.Replace("{Minutes}", minutes.ToString());
-                    GameManager.Instance.ChatMessageServer(null, EChatType.Global, -1, Utils.CreateGameMessage(PrismaCoreStrings.Instance.ServerChatName, string.Format("{0}", t)), null, EMessageSender.None);
+                    GameManager.Instance.ChatMessageServer(null, EChatType.Global, -1, Utils.CreateGameMessage(ServerCoreStrings.Instance.ServerChatName, string.Format("{0}", t)), null, EMessageSender.None);
                     int ov = minutes;
                     minutes = minutes - 1;
                     t = t.Replace(ov.ToString(), minutes.ToString());
@@ -130,7 +130,7 @@ namespace PrismaCore.CustomCommands
                 }
 
                 t = t.Replace("{Minutes}", minutes.ToString());
-                GameManager.Instance.ChatMessageServer(null, EChatType.Global, -1, Utils.CreateGameMessage(PrismaCoreStrings.Instance.ServerChatName, string.Format("{0}", t)), null, EMessageSender.None);
+                GameManager.Instance.ChatMessageServer(null, EChatType.Global, -1, Utils.CreateGameMessage(ServerCoreStrings.Instance.ServerChatName, string.Format("{0}", t)), null, EMessageSender.None);
                 Thread.Sleep(60000);
             }
 
@@ -176,7 +176,7 @@ namespace PrismaCore.CustomCommands
 
                 bool bmActive = (num == bmDay && SkyManager.TimeOfDay() >= 22f) || (num > 1 && num == bmDay + 1 && SkyManager.TimeOfDay() <= 4f);
 
-                if (days == bmDay && hours >= PrismaCoreSettings.Instance.TimerBA_DelayBloodDayAfter)
+                if (days == bmDay && hours >= ServerCoreSettings.Instance.TimerBA_DelayBloodDayAfter)
                 {
                     delayedOnDay = days;
                     return true;
@@ -188,7 +188,7 @@ namespace PrismaCore.CustomCommands
                     return true;
                 }
 
-                if (bmDay > days && !bmActive && delayedOnDay == days - 1 && hours < PrismaCoreSettings.Instance.TimerBA_DelayAfterBloodmoonUntil)
+                if (bmDay > days && !bmActive && delayedOnDay == days - 1 && hours < ServerCoreSettings.Instance.TimerBA_DelayAfterBloodmoonUntil)
                 {
                     return true;
                 }
@@ -205,7 +205,7 @@ namespace PrismaCore.CustomCommands
                 if (remainder == 0)
                 {
                     //bloodday!! check for time that should delay shutdown
-                    if (hours >= PrismaCoreSettings.Instance.TimerBA_DelayBloodDayAfter && BMrange == 0)
+                    if (hours >= ServerCoreSettings.Instance.TimerBA_DelayBloodDayAfter && BMrange == 0)
                     {
                         //its past delay time -> return true
                         return true;
@@ -216,7 +216,7 @@ namespace PrismaCore.CustomCommands
                     //bloodmoon is ongoing -> do delay
                     return true;
                 }
-                else if (remainder == 1 && hours < PrismaCoreSettings.Instance.TimerBA_DelayAfterBloodmoonUntil && BMrange == 0)
+                else if (remainder == 1 && hours < ServerCoreSettings.Instance.TimerBA_DelayAfterBloodmoonUntil && BMrange == 0)
                 {
                     //bloodmoon over -> delay until time is reached
                     return true;

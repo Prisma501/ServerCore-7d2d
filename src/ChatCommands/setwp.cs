@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PrismaCore
+namespace ServerCore
 {
     class Setwp
     {
@@ -10,7 +10,7 @@ namespace PrismaCore
             {
                 int AdminLvL = GameManager.Instance.adminTools.Users.GetUserPermissionLevel(_cInfo);
 
-                if (AdminLvL <= PrismaCoreSettings.Instance.ChatCommandPermissions_setwp)
+                if (AdminLvL <= ServerCoreSettings.Instance.ChatCommandPermissions_setwp)
                 {
                     EntityPlayer targetPlayer = GameManager.Instance.World.Players.dict[_cInfo.entityId];
 
@@ -22,9 +22,9 @@ namespace PrismaCore
 
                     if (success)
                     {
-                        string PMmsg = PrismaCoreStrings.Instance.Setwp_Success.Replace("{waypointName}", parameter);
+                        string PMmsg = ServerCoreStrings.Instance.Setwp_Success.Replace("{waypointName}", parameter);
                         PMmsg = PMmsg.Replace("{coords}", string.Format("X:{0} Y:{1} Z:{2}.", (int)Math.Floor(destPos.x), (int)Math.Floor(destPos.y) + 1, (int)Math.Floor(destPos.z)));
-                        _cInfo.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(PrismaCoreStrings.Instance.ServerChatName, PMmsg), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
+                        _cInfo.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(ServerCoreStrings.Instance.ServerChatName, PMmsg), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
                     }
                     else
                     {
@@ -33,8 +33,8 @@ namespace PrismaCore
                 }
                 else
                 {
-                    string errMsg = PrismaCoreStrings.Instance.ChatCommandPermissions_NotAllowedMessage;
-                    _cInfo.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(PrismaCoreStrings.Instance.ServerChatName, errMsg), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
+                    string errMsg = ServerCoreStrings.Instance.ChatCommandPermissions_NotAllowedMessage;
+                    _cInfo.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(ServerCoreStrings.Instance.ServerChatName, errMsg), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
                 }
             }
             catch { return false; }

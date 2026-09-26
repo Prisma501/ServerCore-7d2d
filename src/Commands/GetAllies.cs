@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using static vp_ComponentPreset;
 
-namespace PrismaCore.CustomCommands
+namespace ServerCore.CustomCommands
 {
     public class GetAllies : ConsoleCmdAbstract
     {

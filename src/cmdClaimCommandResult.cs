@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace PrismaCore
+namespace ServerCore
 {
     public class CmdClaimCommandResult : IConsoleConnection
     {

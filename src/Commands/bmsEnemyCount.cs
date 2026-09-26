@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace PrismaCore.CustomCommands
+namespace ServerCore.CustomCommands
 {
     public class bmsEnemyCount : ConsoleCmdAbstract
     {
@@ -32,7 +32,7 @@ namespace PrismaCore.CustomCommands
                 if (_params.Count == 0)
                 {
                     //show active
-                    SdtdConsole.Instance.Output($"BloodmoonSpawner_Overridden_BMEnemyCountPerPlayer: {PrismaCoreSettings.Instance.BloodmoonSpawner_Overridden_BMEnemyCountPerPlayer}");
+                    SdtdConsole.Instance.Output($"BloodmoonSpawner_Overridden_BMEnemyCountPerPlayer: {ServerCoreSettings.Instance.BloodmoonSpawner_Overridden_BMEnemyCountPerPlayer}");
                     return;
                 }
                 else
@@ -44,7 +44,7 @@ namespace PrismaCore.CustomCommands
                     }
                     else
                     {
-                        PrismaCoreSettings.Instance.BloodmoonSpawner_Overridden_BMEnemyCountPerPlayer = nr;
+                        ServerCoreSettings.Instance.BloodmoonSpawner_Overridden_BMEnemyCountPerPlayer = nr;
                         SdtdConsole.Instance.Output($"BloodmoonSpawner_Overridden_BMEnemyCountPerPlayer has been set to {nr} for current server session.");
                     }
                 }

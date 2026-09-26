@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Profiling;
 using Object = UnityEngine.Object;
 
-namespace PrismaCore.FileCache
+namespace ServerCore.FileCache
 {
     // Special "cache" for map tile folder as both map rendering and webserver access files in there.
     // Only map rendering tiles are cached. Writing is done by WriteThrough.

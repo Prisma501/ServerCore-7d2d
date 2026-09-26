@@ -2,7 +2,7 @@ using System.IO;
 using System.Net;
 using System.Text;
 
-namespace PrismaCore.Web.Handlers
+namespace ServerCore.Web.Handlers
 {
     public class SessionHandler : PathHandler
     {

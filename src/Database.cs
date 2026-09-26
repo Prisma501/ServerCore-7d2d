@@ -5,7 +5,7 @@ using System.IO;
 using System.Linq;
 using UnityEngine;
 
-namespace PrismaCore
+namespace ServerCore
 {
     class Database
     {
@@ -988,7 +988,7 @@ namespace PrismaCore
 
         public void CleanDataBases()
         {
-            if (PrismaCoreSettings.Instance.LocationTracker_MaximumDataAgeHours == 0) return;
+            if (ServerCoreSettings.Instance.LocationTracker_MaximumDataAgeHours == 0) return;
 
             DirectoryInfo d = new DirectoryInfo(LocationTracker.StatisticsPath);
 
@@ -998,10 +998,10 @@ namespace PrismaCore
                 {
                     try
                     {
-                        if (PrismaCoreSettings.Instance.LocationTracker_MaximumDataAgeHours > 0)
+                        if (ServerCoreSettings.Instance.LocationTracker_MaximumDataAgeHours > 0)
                         {
                             var col = db.GetCollection<PlayerLocation>("playerlocation");
-                            var res = col.Delete(x => (DateTime.Now - x.Dt).TotalHours > PrismaCoreSettings.Instance.LocationTracker_MaximumDataAgeHours);
+                            var res = col.Delete(x => (DateTime.Now - x.Dt).TotalHours > ServerCoreSettings.Instance.LocationTracker_MaximumDataAgeHours);
                         }
                     }
                     catch { Log.Out($"[PrismaCore]: Error in CleanDataBases. Corruption/open filehandle in {file.FullName}"); }

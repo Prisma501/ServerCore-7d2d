@@ -1,4 +1,4 @@
-namespace PrismaCore.FileCache
+namespace ServerCore.FileCache
 {
     public abstract class AbstractCache
     {

@@ -1,7 +1,7 @@
 ﻿using System.Net;
 using System.Text;
 
-namespace PrismaCore.Web.API
+namespace ServerCore.Web.API
 {
     public class Null : WebAPI
     {

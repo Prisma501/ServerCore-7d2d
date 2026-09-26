@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace PrismaCore.Web
+namespace ServerCore.Web
 {
     public class MimeType
     {

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading;
 
-namespace PrismaCore
+namespace ServerCore
 {
     public class DamageHandler
     {
@@ -69,7 +69,7 @@ namespace PrismaCore
             if (changes.Count != 0)
             {
                 GameManager.Instance.SetBlocksRPC(changes);
-                if (changes.Count > PrismaCoreSettings.Instance.PreventFallingBlocks)
+                if (changes.Count > ServerCoreSettings.Instance.PreventFallingBlocks)
                 {
                     Log.Out($"[PrismaCore] {changes.Count} falling blocks prevented! @ {colPos.ToString()}");
                 }

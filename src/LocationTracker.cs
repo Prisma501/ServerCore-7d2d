@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading;
 
-namespace PrismaCore
+namespace ServerCore
 {
     class LocationTracker
     {
@@ -12,7 +12,7 @@ namespace PrismaCore
 
         public static void Start()
         {
-            if (PrismaCoreSettings.Instance.LocationTracker_Enabled)
+            if (ServerCoreSettings.Instance.LocationTracker_Enabled)
             {
                 if (!IsLocationRunning)
                 {
@@ -46,7 +46,7 @@ namespace PrismaCore
 
             while (IsLocationRunning)
             {
-                if (!PrismaCoreSettings.Instance.LocationTracker_Enabled)
+                if (!ServerCoreSettings.Instance.LocationTracker_Enabled)
                 {
                     IsLocationRunning = false;
                     Log.Out("[PrismaCore] Stopped Location monitoring.");
@@ -78,7 +78,7 @@ namespace PrismaCore
                     catch { }
                 }
 
-                Thread.Sleep(PrismaCoreSettings.Instance.LocationTracker_RecordingIntervalSeconds * 1000);
+                Thread.Sleep(ServerCoreSettings.Instance.LocationTracker_RecordingIntervalSeconds * 1000);
             }
         }
     }

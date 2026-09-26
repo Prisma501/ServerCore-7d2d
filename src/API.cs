@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading;
 using UnityEngine;
 
-namespace PrismaCore
+namespace ServerCore
 {
 
     public class API : IModApi
@@ -38,7 +38,7 @@ namespace PrismaCore
 
         private void SavePlayerData(ref ModEvents.SSavePlayerDataData _data)
         {
-            if(PrismaCoreSettings.Instance.BannedItems_Enabled)
+            if(ServerCoreSettings.Instance.BannedItems_Enabled)
             {
                 RegionReset.HandleBannedItems(_data);
             }
@@ -54,19 +54,19 @@ namespace PrismaCore
             switch (_data.MessageType)
             {
                 case EnumGameMessages.JoinedGame:
-                    if (!PrismaCoreSettings.Instance.GMSG_PlayerJoined_Enabled) return ModEvents.EModEventResult.StopHandlersAndVanilla;
+                    if (!ServerCoreSettings.Instance.GMSG_PlayerJoined_Enabled) return ModEvents.EModEventResult.StopHandlersAndVanilla;
                     break;
                 case EnumGameMessages.LeftGame:
-                    if (!PrismaCoreSettings.Instance.GMSG_PlayerLeft_Enabled) return ModEvents.EModEventResult.StopHandlersAndVanilla;
+                    if (!ServerCoreSettings.Instance.GMSG_PlayerLeft_Enabled) return ModEvents.EModEventResult.StopHandlersAndVanilla;
                     break;
                 case EnumGameMessages.EntityWasKilled:
                     if (!string.IsNullOrEmpty(_data.SecondaryName))
                     {
-                        if (!PrismaCoreSettings.Instance.GMSG_PlayerKilled_Enabled) return ModEvents.EModEventResult.StopHandlersAndVanilla;
+                        if (!ServerCoreSettings.Instance.GMSG_PlayerKilled_Enabled) return ModEvents.EModEventResult.StopHandlersAndVanilla;
                     }
                     else
                     {
-                        if (!PrismaCoreSettings.Instance.GMSG_PlayerDied_Enabled) return ModEvents.EModEventResult.StopHandlersAndVanilla;
+                        if (!ServerCoreSettings.Instance.GMSG_PlayerDied_Enabled) return ModEvents.EModEventResult.StopHandlersAndVanilla;
                     }
                     break;
                 default:
@@ -132,12 +132,12 @@ namespace PrismaCore
                 Log.Out("[PrismaCore] Created new empty AllPoi_Exceptions.txt in " + RegionReset.RegionPath);
             }
 
-            PrismaCoreStrings.Load();
-            PrismaCoreSettings.Load();
+            ServerCoreStrings.Load();
+            ServerCoreSettings.Load();
 
             //save on server initialization for getting new strings into xml
-            PrismaCoreStrings.Instance.Save();
-            PrismaCoreSettings.Instance.Save();
+            ServerCoreStrings.Instance.Save();
+            ServerCoreSettings.Instance.Save();
 
             PermaDeathClass.Loadxml();
             ReservedSlots.LoadXml();
@@ -168,7 +168,7 @@ namespace PrismaCore
             {
                 try
                 {
-                    if (PrismaCoreSettings.Instance.Vehicles_RemoveOnRestart || RegionReset.resetVehicles)
+                    if (ServerCoreSettings.Instance.Vehicles_RemoveOnRestart || RegionReset.resetVehicles)
                     {
                         Log.Out("[PrismaCore] Resetting vehicles.");
 
@@ -191,7 +191,7 @@ namespace PrismaCore
 
                 try
                 {
-                    if (PrismaCoreSettings.Instance.Drones_RemoveOnRestart || RegionReset.resetDrones)
+                    if (ServerCoreSettings.Instance.Drones_RemoveOnRestart || RegionReset.resetDrones)
                     {
                         Log.Out("[PrismaCore] Resetting drones.");
 
@@ -225,7 +225,7 @@ namespace PrismaCore
                 //copy logfile
                 try
                 {
-                    if (PrismaCoreSettings.Instance.CreateTimeStampedCopyLogFile)
+                    if (ServerCoreSettings.Instance.CreateTimeStampedCopyLogFile)
                     {
                         string logFile = Application.consoleLogPath;
                         string logTime = DateTime.Now.ToString("yyyy-MM-dd_hh-mm-ss");
@@ -333,7 +333,7 @@ namespace PrismaCore
                         NetPackageTeleportPlayer pkg = NetPackageManager.GetPackage<NetPackageTeleportPlayer>().Setup(dest);
                         _data.ClientInfo.SendPackage(pkg);
                         Database.Instance.RemoveTeleSpawn(_data.ClientInfo.PlatformId.ToString());
-                        _data.ClientInfo.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(PrismaCoreStrings.Instance.ServerChatName, PrismaCoreStrings.Instance.Offline_Teleport), null, EMessageSender.None,GeneratedTextManager.BbCodeSupportMode.Supported));
+                        _data.ClientInfo.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(ServerCoreStrings.Instance.ServerChatName, ServerCoreStrings.Instance.Offline_Teleport), null, EMessageSender.None,GeneratedTextManager.BbCodeSupportMode.Supported));
 
                     }
                 }
@@ -371,24 +371,24 @@ namespace PrismaCore
                 ReservedSlots.CheckReservedSlot(_data.ClientInfo);
             }
 
-            if (PrismaCoreSettings.Instance.BlockUTF8Names_Enabled)
+            if (ServerCoreSettings.Instance.BlockUTF8Names_Enabled)
             {
                 if (Encoding.UTF8.GetByteCount(_data.ClientInfo.playerName) != _data.ClientInfo.playerName.Length)
                 {
                     //contains NOT only ascii chars -> kick player
                     Log.Out(string.Format("[PrismaCore] Kicking Player {0}: Non ASCII characters detected in playername.", _data.ClientInfo.playerName));
-                    GameUtils.KickPlayerForClientInfo(_data.ClientInfo, new GameUtils.KickPlayerData(GameUtils.EKickReason.ManualKick, 0, default(DateTime), PrismaCoreStrings.Instance.BlockUTF8Names_KickMessage));
+                    GameUtils.KickPlayerForClientInfo(_data.ClientInfo, new GameUtils.KickPlayerData(GameUtils.EKickReason.ManualKick, 0, default(DateTime), ServerCoreStrings.Instance.BlockUTF8Names_KickMessage));
                     return ModEvents.EModEventResult.StopHandlersRunVanilla;
                 }
             }
 
-            if (PrismaCoreSettings.Instance.SpecialCharactersNameBlock_Enabled)
+            if (ServerCoreSettings.Instance.SpecialCharactersNameBlock_Enabled)
             {
                 if (hasSpecialChar(_data.ClientInfo.playerName))
                 {
                     //contains forbidden chars -> kick player
                     Log.Out(string.Format("[PrismaCore] Kicking Player {0}: Forbidden characters detected in playername.", _data.ClientInfo.playerName));
-                    string msg = PrismaCoreStrings.Instance.SpecialCharactersNameBlock_KickMessage.Replace("{forbiddenChars}", PrismaCoreSettings.Instance.SpecialCharacters);
+                    string msg = ServerCoreStrings.Instance.SpecialCharactersNameBlock_KickMessage.Replace("{forbiddenChars}", ServerCoreSettings.Instance.SpecialCharacters);
                     GameUtils.KickPlayerForClientInfo(_data.ClientInfo, new GameUtils.KickPlayerData(GameUtils.EKickReason.ManualKick, 0, default(DateTime), msg));
                 }
             }
@@ -413,7 +413,7 @@ namespace PrismaCore
 
         private static bool hasSpecialChar(string input)
         {
-            string specialChars = PrismaCoreSettings.Instance.SpecialCharacters;
+            string specialChars = ServerCoreSettings.Instance.SpecialCharacters;
             foreach (var item in specialChars)
             {
                 if (input.Contains(item)) return true;
@@ -425,7 +425,7 @@ namespace PrismaCore
         private static void permaDeathHandler(ClientInfo pdClientInfo)
         {
             string steamID = pdClientInfo.PlatformId.ToString();
-            string msg = PrismaCoreStrings.Instance.Permadeath_Kickmessage;
+            string msg = ServerCoreStrings.Instance.Permadeath_Kickmessage;
 
             EntityPlayer pl = GameManager.Instance.World.Players.dict[pdClientInfo.entityId];
 

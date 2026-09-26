@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using static AllyStore;
 
-namespace PrismaCore.CustomCommands
+namespace ServerCore.CustomCommands
 {
     public class AddFriend : ConsoleCmdAbstract
     {

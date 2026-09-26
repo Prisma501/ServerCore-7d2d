@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace PrismaCore.CustomCommands
+namespace ServerCore.CustomCommands
 {
     public class bmsMaxAlive : ConsoleCmdAbstract
     {
@@ -32,7 +32,7 @@ namespace PrismaCore.CustomCommands
                 if (_params.Count == 0)
                 {
                     //show active
-                    SdtdConsole.Instance.Output($"BloodmoonSpawner_Overridden_AddMaxAliveServerDuringBloodmoon: {PrismaCoreSettings.Instance.BloodmoonSpawner_Overridden_AddMaxAliveServerDuringBloodmoon}");
+                    SdtdConsole.Instance.Output($"BloodmoonSpawner_Overridden_AddMaxAliveServerDuringBloodmoon: {ServerCoreSettings.Instance.BloodmoonSpawner_Overridden_AddMaxAliveServerDuringBloodmoon}");
                     return;
                 }
                 else
@@ -44,7 +44,7 @@ namespace PrismaCore.CustomCommands
                     }
                     else
                     {
-                        PrismaCoreSettings.Instance.BloodmoonSpawner_Overridden_AddMaxAliveServerDuringBloodmoon = nr;
+                        ServerCoreSettings.Instance.BloodmoonSpawner_Overridden_AddMaxAliveServerDuringBloodmoon = nr;
                         SdtdConsole.Instance.Output($"BloodmoonSpawner_Overridden_AddMaxAliveServerDuringBloodmoon has been set to {nr} for current server session.");
                     }
                 }

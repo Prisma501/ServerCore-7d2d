@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace PrismaCore.CustomCommands
+namespace ServerCore.CustomCommands
 {
     public class ProtectPlayer : ConsoleCmdAbstract
     {
@@ -58,14 +58,14 @@ namespace PrismaCore.CustomCommands
                     //allready on => switch off
                     ClaimProtector.adminBubble.Remove(ci.PlatformId.ToString());
                     string off = "[F7FE2E]Protective bubble disabled![-]";
-                    ci.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(PrismaCoreStrings.Instance.ServerChatName, off), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
+                    ci.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(ServerCoreStrings.Instance.ServerChatName, off), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
                     SdtdConsole.Instance.Output("Protective bubble disabled for " + ci.playerName);
                 }
                 else
                 {
                     ClaimProtector.adminBubble.Add(ci.PlatformId.ToString());
                     string on = "[F7FE2E]Protective bubble enabled![-]";
-                    ci.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(PrismaCoreStrings.Instance.ServerChatName, on), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
+                    ci.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(ServerCoreStrings.Instance.ServerChatName, on), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
                     SdtdConsole.Instance.Output("Protective bubble enabled for " + ci.playerName);
                 }
             }

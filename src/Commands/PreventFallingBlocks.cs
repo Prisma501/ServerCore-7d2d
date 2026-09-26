@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace PrismaCore.CustomCommands
+namespace ServerCore.CustomCommands
 {
     public class PreventFallingBlocks : ConsoleCmdAbstract
     {
@@ -34,7 +34,7 @@ namespace PrismaCore.CustomCommands
                 if (_params.Count == 0)
                 {
                     //show active
-                    int mb = PrismaCoreSettings.Instance.PreventFallingBlocks;
+                    int mb = ServerCoreSettings.Instance.PreventFallingBlocks;
                     SdtdConsole.Instance.Output("Current logBlockCount (0 = disabled, blocks do fall): " + mb);
                     return;
                 }
@@ -47,8 +47,8 @@ namespace PrismaCore.CustomCommands
                     }
                     else
                     {
-                        PrismaCoreSettings.Instance.PreventFallingBlocks = maxBlocks;
-                        PrismaCoreSettings.Instance.Save();
+                        ServerCoreSettings.Instance.PreventFallingBlocks = maxBlocks;
+                        ServerCoreSettings.Instance.Save();
                         SdtdConsole.Instance.Output("logBlockCount of falling blocks has been set to " + maxBlocks);
                     }
                 }

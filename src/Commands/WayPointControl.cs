@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace PrismaCore.CustomCommands
+namespace ServerCore.CustomCommands
 {
     public class WaypointControl : ConsoleCmdAbstract
     {

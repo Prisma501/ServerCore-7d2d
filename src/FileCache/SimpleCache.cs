@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 
-namespace PrismaCore.FileCache
+namespace ServerCore.FileCache
 {
     // Caching all files, useful for completely static folders only
     public class SimpleCache : AbstractCache

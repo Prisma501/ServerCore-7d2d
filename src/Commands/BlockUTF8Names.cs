@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace PrismaCore.CustomCommands
+namespace ServerCore.CustomCommands
 {
     public class BlockUTF8Names : ConsoleCmdAbstract
     {
@@ -32,7 +32,7 @@ namespace PrismaCore.CustomCommands
                 if (_params.Count == 0)
                 {
                     //show active
-                    bool blockUTF8 = PrismaCoreSettings.Instance.BlockUTF8Names_Enabled;
+                    bool blockUTF8 = ServerCoreSettings.Instance.BlockUTF8Names_Enabled;
                     SdtdConsole.Instance.Output("Blocking players with UTF-8 chars in playername enabled: " + blockUTF8);
                     return;
                 }
@@ -45,8 +45,8 @@ namespace PrismaCore.CustomCommands
                     }
                     else
                     {
-                        PrismaCoreSettings.Instance.BlockUTF8Names_Enabled = blocked;
-                        PrismaCoreSettings.Instance.Save();
+                        ServerCoreSettings.Instance.BlockUTF8Names_Enabled = blocked;
+                        ServerCoreSettings.Instance.Save();
                         SdtdConsole.Instance.Output("Blocking players with UTF-8 chars in playername has been set to " + _params[0]);
                     }
                 }

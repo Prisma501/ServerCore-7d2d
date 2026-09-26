@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 
-namespace PrismaCore
+namespace ServerCore
 {
     class Who
     {
@@ -13,16 +13,16 @@ namespace PrismaCore
             {
                 int AdminLvL = GameManager.Instance.adminTools.Users.GetUserPermissionLevel(_cInfo);
 
-                if (AdminLvL <= PrismaCoreSettings.Instance.ChatCommandPermissions_loctrack)
+                if (AdminLvL <= ServerCoreSettings.Instance.ChatCommandPermissions_loctrack)
                 {
                     string radius = "";
                     string timespan = "";
                     ClientInfo clientinfo = null;
-                    int nearDistance = PrismaCoreSettings.Instance.LocationTracker_NearDistance;
-                    bool locationEnabled = PrismaCoreSettings.Instance.LocationTracker_Enabled;
-                    int maxDataAge = PrismaCoreSettings.Instance.LocationTracker_MaximumDataAgeHours;
-                    string command = PrismaCoreSettings.Instance.LocationTracker_ChatCommand;
-                    string color = PrismaCoreSettings.Instance.LocationTracker_ResponseColor;
+                    int nearDistance = ServerCoreSettings.Instance.LocationTracker_NearDistance;
+                    bool locationEnabled = ServerCoreSettings.Instance.LocationTracker_Enabled;
+                    int maxDataAge = ServerCoreSettings.Instance.LocationTracker_MaximumDataAgeHours;
+                    string command = ServerCoreSettings.Instance.LocationTracker_ChatCommand;
+                    string color = ServerCoreSettings.Instance.LocationTracker_ResponseColor;
                     color = string.Format("[{0}]", color);
 
                     EntityPlayer player = GameManager.Instance.World.Players.dict[_cInfo.entityId];
@@ -35,7 +35,7 @@ namespace PrismaCore
                         bool playerFound = false;
 
                         string PMmsg = "Players within " + nearDistance.ToString() + " meters of your current location:";
-                        _cInfo.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(PrismaCoreStrings.Instance.ServerChatName, color + PMmsg + "[-]"), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
+                        _cInfo.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(ServerCoreStrings.Instance.ServerChatName, color + PMmsg + "[-]"), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
 
                         //scan for players
                         foreach (KeyValuePair<int, EntityPlayer> pl in GameManager.Instance.World.Players.dict)
@@ -49,11 +49,11 @@ namespace PrismaCore
                             if (Math.Abs(x - xn) < nearDistance && Math.Abs(z - zn) < nearDistance)
                             {
                                 playerFound = true;
-                                _cInfo.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(PrismaCoreStrings.Instance.ServerChatName, color + clientinfo.playerName + "[-]"), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
+                                _cInfo.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(ServerCoreStrings.Instance.ServerChatName, color + clientinfo.playerName + "[-]"), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
                             }
 
                         }
-                        if (!playerFound) _cInfo.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(PrismaCoreStrings.Instance.ServerChatName, color + "No players are within " + nearDistance.ToString() + " meters of your current location.[-]"), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
+                        if (!playerFound) _cInfo.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(ServerCoreStrings.Instance.ServerChatName, color + "No players are within " + nearDistance.ToString() + " meters of your current location.[-]"), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
                         return true;
                     }
 
@@ -76,38 +76,38 @@ namespace PrismaCore
                             if (r < 0)
                             {
                                 // only radius > 0 allowed
-                                _cInfo.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(PrismaCoreStrings.Instance.ServerChatName, color + "Something went wrong! Radius (first parameter) can NOT be negative![-]"), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
+                                _cInfo.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(ServerCoreStrings.Instance.ServerChatName, color + "Something went wrong! Radius (first parameter) can NOT be negative![-]"), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
                                 return true;
                             }
 
                             if (t < 1 || t > maxDataAge)
                             {
                                 // only timespan between 1 and "whoUtils.maxAgeDataLocation" allowed
-                                _cInfo.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(PrismaCoreStrings.Instance.ServerChatName, color + "Something went wrong! Timespan (second parameter) must be 1-" + maxDataAge.ToString() + " hours![-]"), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
+                                _cInfo.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(ServerCoreStrings.Instance.ServerChatName, color + "Something went wrong! Timespan (second parameter) must be 1-" + maxDataAge.ToString() + " hours![-]"), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
                                 return true;
                             }
 
                             string PMmsg = "Players within " + r.ToString() + " meters (last " + t.ToString() + " hours):";
-                            _cInfo.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(PrismaCoreStrings.Instance.ServerChatName, color + PMmsg + "[-]"), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
+                            _cInfo.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(ServerCoreStrings.Instance.ServerChatName, color + PMmsg + "[-]"), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
                             DoWho(x, y, z, r, t, _cInfo, color);
                         }
                         else
                         {
                             string PMmsg = "Players within 50 meters (last 24 hours):";
-                            _cInfo.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(PrismaCoreStrings.Instance.ServerChatName, color + PMmsg + "[-]"), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
+                            _cInfo.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(ServerCoreStrings.Instance.ServerChatName, color + PMmsg + "[-]"), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
                             DoWho(x, y, z, 50, 24, _cInfo, color);
                         }
                     }
                     else
                     {
                         string PMmsg = "Locationrecording is OFF. Only command you can use is: " + command + " near";
-                        _cInfo.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(PrismaCoreStrings.Instance.ServerChatName, color + PMmsg + "[-]"), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
+                        _cInfo.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(ServerCoreStrings.Instance.ServerChatName, color + PMmsg + "[-]"), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
                     }
                 }
                 else
                 {
-                    string errMsg = PrismaCoreStrings.Instance.ChatCommandPermissions_NotAllowedMessage;
-                    _cInfo.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(PrismaCoreStrings.Instance.ServerChatName, errMsg), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
+                    string errMsg = ServerCoreStrings.Instance.ChatCommandPermissions_NotAllowedMessage;
+                    _cInfo.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(ServerCoreStrings.Instance.ServerChatName, errMsg), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
                 }
             }
             catch (Exception e)
@@ -139,12 +139,12 @@ namespace PrismaCore
 
                         //found players in range and timespan -> pm to calling player
                         playerFound = true;
-                        _cInfo.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(PrismaCoreStrings.Instance.ServerChatName, color + res.Name + "[-]"), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
+                        _cInfo.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(ServerCoreStrings.Instance.ServerChatName, color + res.Name + "[-]"), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
                     }
 
                 }
             }
-            if (!playerFound) _cInfo.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(PrismaCoreStrings.Instance.ServerChatName, color + "No players recorded on your location yet.[-]"), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
+            if (!playerFound) _cInfo.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(ServerCoreStrings.Instance.ServerChatName, color + "No players recorded on your location yet.[-]"), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
 
         }
 

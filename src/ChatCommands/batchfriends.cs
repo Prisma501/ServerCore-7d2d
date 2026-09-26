@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using static vp_ComponentPreset;
 
-namespace PrismaCore
+namespace ServerCore
 {
     class batchFriends
     {
@@ -31,7 +31,7 @@ namespace PrismaCore
 
                             if (ownedClaims.Count == 0)
                             {
-                                _cInfo.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(PrismaCoreStrings.Instance.ServerChatName, PrismaCoreStrings.Instance.Aaf_Raf_NoAdancedClaim), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
+                                _cInfo.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(ServerCoreStrings.Instance.ServerChatName, ServerCoreStrings.Instance.Aaf_Raf_NoAdancedClaim), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
                                 return true;
                             }
                             foreach (string ownedClaim in ownedClaims)
@@ -62,9 +62,9 @@ namespace PrismaCore
                                                 string currentWhitelist = activeClaim.Whitelist;
                                                 currentWhitelist += pl + "(" + steamId + ")";
                                                 Database.Instance.SetDbClaimWhitelist(activeClaim.Id, currentWhitelist);
-                                                string msg = PrismaCoreStrings.Instance.Aaf_AddSucces.Replace("{playerName}", pl);
+                                                string msg = ServerCoreStrings.Instance.Aaf_AddSucces.Replace("{playerName}", pl);
                                                 msg = msg.Replace("{claimName}", activeClaim.Id);
-                                                _cInfo.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(PrismaCoreStrings.Instance.ServerChatName, msg), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
+                                                _cInfo.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(ServerCoreStrings.Instance.ServerChatName, msg), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
                                             }
                                         }
                                     }
@@ -86,7 +86,7 @@ namespace PrismaCore
 
                             if (ownedClaims.Count == 0)
                             {
-                                _cInfo.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(PrismaCoreStrings.Instance.ServerChatName, PrismaCoreStrings.Instance.Aaf_Raf_NoAdancedClaim), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
+                                _cInfo.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(ServerCoreStrings.Instance.ServerChatName, ServerCoreStrings.Instance.Aaf_Raf_NoAdancedClaim), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
                                 return true;
                             }
                             foreach (string ownedClaim in ownedClaims)
@@ -113,9 +113,9 @@ namespace PrismaCore
                                                 string currentWhitelist = activeClaim.Whitelist;
                                                 currentWhitelist = currentWhitelist.Replace(player.Name + "(" + player.Id + ")", "");
                                                 Database.Instance.SetDbClaimWhitelist(activeClaim.Id, currentWhitelist);
-                                                string msg = PrismaCoreStrings.Instance.Raf_RemoveSucces.Replace("{playerName}", pl);
+                                                string msg = ServerCoreStrings.Instance.Raf_RemoveSucces.Replace("{playerName}", pl);
                                                 msg = msg.Replace("{claimName}", activeClaim.Id);
-                                                _cInfo.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(PrismaCoreStrings.Instance.ServerChatName, msg), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
+                                                _cInfo.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(ServerCoreStrings.Instance.ServerChatName, msg), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
                                             }
                                         }
                                     }
@@ -130,8 +130,8 @@ namespace PrismaCore
 
                 if (!friends)
                 {
-                    string msg = PrismaCoreStrings.Instance.Aaf_Raf_NoIngameFriends;
-                    _cInfo.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(PrismaCoreStrings.Instance.ServerChatName, msg), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
+                    string msg = ServerCoreStrings.Instance.Aaf_Raf_NoIngameFriends;
+                    _cInfo.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(ServerCoreStrings.Instance.ServerChatName, msg), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
                 }
             }
             catch { return false; }

@@ -2,7 +2,7 @@ using Epic.OnlineServices.Presence;
 using System;
 using System.Collections.Generic;
 
-namespace PrismaCore.CustomCommands
+namespace ServerCore.CustomCommands
 {
     public class SayAdmin : ConsoleCmdAbstract
     {

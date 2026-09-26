@@ -1,11 +1,11 @@
-using PrismaCore.FileCache;
+using ServerCore.FileCache;
 using System;
 using System.IO;
 using Unity.Collections;
 using UnityEngine;
 using UnityEngine.Profiling;
 
-namespace PrismaCore.MapRendering
+namespace ServerCore.MapRendering
 {
     public class MapRenderBlockBuffer
     {

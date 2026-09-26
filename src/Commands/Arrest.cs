@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace PrismaCore.CustomCommands
+namespace ServerCore.CustomCommands
 {
     public class Arrest : ConsoleCmdAbstract
     {
@@ -91,9 +91,9 @@ namespace PrismaCore.CustomCommands
 
                     if (ci != null)
                     {
-                        string notiMsg = PrismaCoreStrings.Instance.Arrest_Notification_Timed;
+                        string notiMsg = ServerCoreStrings.Instance.Arrest_Notification_Timed;
                         notiMsg = notiMsg.Replace("{minutes}", minutes.ToString());
-                        ci.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(PrismaCoreStrings.Instance.ServerChatName, notiMsg), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
+                        ci.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(ServerCoreStrings.Instance.ServerChatName, notiMsg), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
                     }
                     SdtdConsole.Instance.Output(playerName + " has been put in jail. And will automatically released in " + minutes + " minutes.");
                 }
@@ -102,8 +102,8 @@ namespace PrismaCore.CustomCommands
                     Database.Instance.SetAutoRelease(steamID, false);
                     if (ci != null)
                     {
-                        string notiMsg = PrismaCoreStrings.Instance.Arrest_Notification;
-                        ci.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(PrismaCoreStrings.Instance.ServerChatName, notiMsg), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
+                        string notiMsg = ServerCoreStrings.Instance.Arrest_Notification;
+                        ci.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(ServerCoreStrings.Instance.ServerChatName, notiMsg), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
                     }
                     SdtdConsole.Instance.Output(playerName + " has been put in jail. Use \"release\" command to set free.");
                 }

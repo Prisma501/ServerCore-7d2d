@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Net;
 
-namespace PrismaCore.Web
+namespace ServerCore.Web
 {
     public class ConnectionHandler
     {

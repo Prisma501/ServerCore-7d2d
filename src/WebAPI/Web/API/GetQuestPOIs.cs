@@ -1,9 +1,9 @@
-using PrismaCore.JSON;
+using ServerCore.JSON;
 using System;
 using System.Collections.Generic;
 using System.Net;
 
-namespace PrismaCore.Web.API
+namespace ServerCore.Web.API
 {
     public class GetQuestPOIs : WebAPI
     {

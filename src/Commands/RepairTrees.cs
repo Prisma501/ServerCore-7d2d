@@ -1,7 +1,7 @@
 ﻿using JetBrains.Annotations;
 using System.Collections.Generic;
 
-namespace PrismaCore.CustomCommands
+namespace ServerCore.CustomCommands
 {
     public class RepairTrees : ConsoleCmdAbstract
     {

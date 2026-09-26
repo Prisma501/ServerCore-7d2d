@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 
-namespace PrismaCore.CustomCommands
+namespace ServerCore.CustomCommands
 {
     public class PrefabUndo : ConsoleCmdAbstract
     {
@@ -184,7 +184,7 @@ namespace PrismaCore.CustomCommands
                 list = new List<PrefabUndoObj>();
                 undoObjs.Add(entityID, list);
             }
-            if (list.Count >= PrismaCoreSettings.Instance.Bundo_HistorySize)
+            if (list.Count >= ServerCoreSettings.Instance.Bundo_HistorySize)
             {
                 list.RemoveAt(list.Count - 1);
             }

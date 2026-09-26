@@ -1,4 +1,4 @@
-﻿namespace PrismaCore
+﻿namespace ServerCore
 {
     class Flytowp
     {
@@ -7,7 +7,7 @@
             try
             {
                 int AdminLvL = GameManager.Instance.adminTools.Users.GetUserPermissionLevel(_cInfo);
-                if (AdminLvL <= PrismaCoreSettings.Instance.ChatCommandPermissions_ftw)
+                if (AdminLvL <= ServerCoreSettings.Instance.ChatCommandPermissions_ftw)
                 {
                     DbWaypoint wp = Database.Instance.GetDbWaypoint(parameter);
                     if (wp == null)
@@ -44,8 +44,8 @@
                 }
                 else
                 {
-                    string errMsg = PrismaCoreStrings.Instance.ChatCommandPermissions_NotAllowedMessage;
-                    _cInfo.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(PrismaCoreStrings.Instance.ServerChatName, errMsg), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
+                    string errMsg = ServerCoreStrings.Instance.ChatCommandPermissions_NotAllowedMessage;
+                    _cInfo.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(ServerCoreStrings.Instance.ServerChatName, errMsg), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
                 }
             }
             catch { return false; }

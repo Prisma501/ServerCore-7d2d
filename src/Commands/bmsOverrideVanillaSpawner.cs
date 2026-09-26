@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace PrismaCore.CustomCommands
+namespace ServerCore.CustomCommands
 {
     public class bmsOverrideVanillaSpawner : ConsoleCmdAbstract
     {
@@ -32,7 +32,7 @@ namespace PrismaCore.CustomCommands
                 if (_params.Count == 0)
                 {
                     //show active
-                    SdtdConsole.Instance.Output($"PrismaCoreSettings.Instance.BloodmoonSpawner_OverrideVanillaSpawner: {PrismaCoreSettings.Instance.BloodmoonSpawner_OverrideVanillaSpawner}");
+                    SdtdConsole.Instance.Output($"PrismaCoreSettings.Instance.BloodmoonSpawner_OverrideVanillaSpawner: {ServerCoreSettings.Instance.BloodmoonSpawner_OverrideVanillaSpawner}");
                     return;
                 }
                 else
@@ -44,7 +44,7 @@ namespace PrismaCore.CustomCommands
                     }
                     else
                     {
-                        PrismaCoreSettings.Instance.BloodmoonSpawner_OverrideVanillaSpawner = blocked;
+                        ServerCoreSettings.Instance.BloodmoonSpawner_OverrideVanillaSpawner = blocked;
                         SdtdConsole.Instance.Output($"BloodmoonSpawner_OverrideVanillaSpawner has been set to {blocked} for current server session.");
                     }
                 }

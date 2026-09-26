@@ -1,5 +1,5 @@
-using PrismaCore.FileCache;
-using PrismaCore.Web.Handlers;
+using ServerCore.FileCache;
+using ServerCore.Web.Handlers;
 using Platform.EOS;
 using System;
 using System.Collections.Generic;
@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading;
 using UnityEngine;
 
-namespace PrismaCore.Web
+namespace ServerCore.Web
 {
     public class Web : IConsoleServer
     {
@@ -36,7 +36,7 @@ namespace PrismaCore.Web
                     return;
                 }
 
-                if (!Directory.Exists(PrismaCore.API.modPath + "/ClaimCreator"))
+                if (!Directory.Exists(ServerCore.API.modPath + "/ClaimCreator"))
                 {
                     Log.Out("ClaimCreator not started (folder \"ClaimCreator\" not found in mod folder)");
                     return;
@@ -45,7 +45,7 @@ namespace PrismaCore.Web
                 // TODO: Read from config
                 useStaticCache = false;
 
-                dataFolder = PrismaCore.API.modPath + "/ClaimCreator";
+                dataFolder = ServerCore.API.modPath + "/ClaimCreator";
 
                 if (!HttpListener.IsSupported)
                 {
@@ -110,14 +110,14 @@ namespace PrismaCore.Web
 
                 connectionHandler = new ConnectionHandler();
 
-                _listener.Prefixes.Add(string.Format("http://*:{0}/", PrismaCoreSettings.Instance.WebUI_Port));
+                _listener.Prefixes.Add(string.Format("http://*:{0}/", ServerCoreSettings.Instance.WebUI_Port));
                 _listener.Start();
 
                 SdtdConsole.Instance.RegisterServer(this);
 
                 _listener.BeginGetContext(HandleRequest, _listener);
 
-                Log.Out("[PrismaCore] Started ClaimCreator on " + (PrismaCoreSettings.Instance.WebUI_Port));
+                Log.Out("[PrismaCore] Started ClaimCreator on " + (ServerCoreSettings.Instance.WebUI_Port));
             }
             catch (Exception e)
             {
