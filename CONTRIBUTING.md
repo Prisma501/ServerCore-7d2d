@@ -51,9 +51,20 @@ When you need another game assembly, add it to the `GameReference` list in `Serv
 
 There are no automated in-game tests yet. Before opening a PR:
 
-1. Copy the build output (`Mods/ServerCore/`) into a local dedicated server on the pinned game version.
+1. Run the build on a local dedicated server on the pinned game version (see [Run a dev server](#run-a-dev-server)).
 2. Run the commands you changed, and check their output and the server log.
 3. Say in the PR what you tested and on which game version.
+
+### Run a dev server
+
+`scripts/dev-server.sh` runs a 7D2D dedicated server in Docker, with your build in it. You need Docker with Compose, `rsync` and `xmllint`, about 17 GB of disk space per game version, and 8 GB of free RAM. The .NET SDK is optional here: without it the script builds in the SDK container.
+
+```sh
+./scripts/dev-server.sh stable install   # once: downloads the server pinned in game-version.json
+./scripts/dev-server.sh stable test      # builds, deploys, boots and runs the smoke checks
+```
+
+`test --from <folder or zip>` tests a build you already have, such as a CI artifact, instead of building. `test` stops the server when the smoke checks are done. Run `up` to start it again, `logs` to follow the log and `down` to stop it. Telnet only listens inside the container, and the Web UI is on http://127.0.0.1:8285/. Replace `stable` with `experimental` for the head of Steam's `latest_experimental` branch (Web UI on port 8295), and use `experimental build-refs` to compile against it. Run one server at a time. The servers and their saves live in `_data/dev-server/`.
 
 ## Docs
 

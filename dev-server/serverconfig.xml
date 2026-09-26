@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!--
+  Dev server config, rendered by scripts/dev-server.sh into serverfiles/sdtdserver.xml.
+  Only the properties that matter here are set; the game uses its defaults for the rest.
+  @TARGET@ and @SERVER_PORT@ are replaced at render time.
+-->
+<ServerSettings>
+  <property name="ServerName" value="ServerCore dev (@TARGET@)"/>
+  <property name="ServerPort" value="@SERVER_PORT@"/>
+  <property name="ServerVisibility" value="0"/>
+  <property name="ServerMaxPlayerCount" value="4"/>
+  <property name="EACEnabled" value="false"/>
+
+  <!-- A small pregenerated world keeps the first boot fast. -->
+  <property name="GameWorld" value="Pregen06k01"/>
+  <property name="GameName" value="ServerCoreDev"/>
+  <property name="WorldGenSeed" value="ServerCoreDev"/>
+
+  <!-- An empty password keeps telnet on loopback, reachable only through docker compose exec. -->
+  <property name="TelnetEnabled" value="true"/>
+  <property name="TelnetPort" value="8081"/>
+  <property name="TelnetPassword" value=""/>
+
+  <!-- ServerCore's Web UI listens on WebDashboardPort + 1, so this puts it on 8083.
+       The game's default of 8080 would put it on 8081, the telnet port. -->
+  <property name="WebDashboardEnabled" value="false"/>
+  <property name="WebDashboardPort" value="8082"/>
+</ServerSettings>

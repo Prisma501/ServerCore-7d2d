@@ -1,0 +1,43 @@
+---
+# Local 7D2D dedicated servers for smoke-testing ServerCore builds.
+# Driven by scripts/dev-server.sh, which installs the game into ../_data/dev-server/<target>/
+# before the first `up`. Run one target at a time: each server needs several GB of RAM.
+name: servercore-dev
+
+x-server: &server
+  image: vinanrra/7dtd-server:v0.9.3@sha256:75d1193fb2470687ee8748f27482524c170f6cbca110e15f48db8d8ff48f15ca
+  environment:
+    # 1 = start the installed server only. The install writes DONT_REMOVE.txt, so the
+    # image's LinuxGSM never runs SteamCMD and the installed build cannot drift.
+    START_MODE: "1"
+    PUID: "${PUID:-1000}"
+    PGID: "${PGID:-1000}"
+    TimeZone: "Etc/UTC"
+  # LinuxGSM shuts the server down over telnet so it saves the world and mod data;
+  # Docker's default 10 s would kill it mid-save.
+  stop_grace_period: 2m
+
+services:
+  stable:
+    <<: *server
+    container_name: servercore-dev-stable
+    volumes:
+      - ../_data/dev-server/stable/serverfiles:/home/sdtdserver/serverfiles
+      - ../_data/dev-server/stable/saves:/home/sdtdserver/.local/share/7DaysToDie
+      - ../_data/dev-server/stable/log:/home/sdtdserver/log
+    ports:
+      - "127.0.0.1:26910:26910/tcp"
+      - "127.0.0.1:26910-26912:26910-26912/udp"
+      - "127.0.0.1:8285:8083/tcp"
+
+  experimental:
+    <<: *server
+    container_name: servercore-dev-experimental
+    volumes:
+      - ../_data/dev-server/experimental/serverfiles:/home/sdtdserver/serverfiles
+      - ../_data/dev-server/experimental/saves:/home/sdtdserver/.local/share/7DaysToDie
+      - ../_data/dev-server/experimental/log:/home/sdtdserver/log
+    ports:
+      - "127.0.0.1:26920:26920/tcp"
+      - "127.0.0.1:26920-26922:26920-26922/udp"
+      - "127.0.0.1:8295:8083/tcp"
