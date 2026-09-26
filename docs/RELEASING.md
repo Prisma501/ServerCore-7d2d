@@ -9,7 +9,7 @@ Maintainers only. See [ADR 2](adr/0002-branch-per-game-version.md) for why stabl
 | `vX.Y.Z` (for example `v3.0.0`) | `main` | stable (`game-version.json` on `main`) | normal release |
 | `vX.Y.Z-exp.N` (for example `v3.1.0-exp.1`) | `experimental` | experimental (`game-version.json` on `experimental`) | pre-release |
 
-Pushing a tag runs `.github/workflows/release.yml`: it builds the mod, stamps the version into `ModInfo.xml`, zips `Mods/ServerCore/` as `ServerCore-<version>.zip` and publishes a GitHub release with the matching `CHANGELOG.md` section as notes. Any tag containing `-` becomes a pre-release.
+Pushing a tag runs `.github/workflows/release.yml`: it builds the mod, stamps the version into `ModInfo.xml`, zips `Mods/ServerCore/` as `ServerCore-<version>.zip` and publishes a GitHub release with the matching `CHANGELOG.md` section as notes. Any tag containing `-` becomes a pre-release. The release fails if the tagged commit isn't on the branch in the table: `main` for plain tags, `experimental` for tags with a `-`.
 
 ## Cutting a release
 
@@ -25,7 +25,7 @@ There are no automated tests yet, so every release gets this manual check on a d
 
 1. Install the build in `Mods/ServerCore/`, with an existing PrismaCore data set in place if you have one (settings, claims, waypoints).
 2. Start the server and read the log:
-   - the mod loader lists `ServerCore` with the release version
+   - the mod loader lists `ServerCore` (a branch build shows the placeholder version in `ModInfo.xml`; only the release stamps the real one)
    - the `[PrismaCore]` startup lines appear (settings and strings loaded, databases opened) and there are no exceptions from `ServerCore`
 3. In the server console:
    - `version` lists ServerCore
