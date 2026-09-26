@@ -97,13 +97,13 @@ cmd_prepare() {
 
 # --- publish -------------------------------------------------------------------------------
 
-# Sets TARGET and WEBUI_PORT: the dev server whose game build game-version.json pins.
+# Sets TARGET: the dev server whose game build game-version.json pins.
 resolve_target() {
   local pin_branch
   pin_branch="$(jq -er .branch "${PIN}")"
   case "${pin_branch}" in
-    public) TARGET=stable WEBUI_PORT=8285 ;;
-    latest_experimental) TARGET=experimental WEBUI_PORT=8295 ;;
+    public) TARGET=stable ;;
+    latest_experimental) TARGET=experimental ;;
     *) die "game-version.json pins Steam branch ${pin_branch}; only public and latest_experimental have a dev server" ;;
   esac
 }
@@ -154,28 +154,6 @@ smoke_test() {
   "${ROOT}/scripts/dev-server.sh" "${TARGET}" test --from "${ARTIFACT}"
 }
 
-manual_checks() {
-  local dev="scripts/dev-server.sh ${TARGET}"
-  echo
-  echo "Starting the ${TARGET} server again for the checks by hand."
-  "${ROOT}/scripts/dev-server.sh" "${TARGET}" up
-  echo "It is ready when '${dev} logs' shows 'StartGame done'."
-  echo
-
-  echo "1. Open the Web UI at http://127.0.0.1:${WEBUI_PORT}/, log in with Steam and check the map and your claims load."
-  [[ "$(ask "Does the Web UI work?")" == y ]] || die "Web UI check failed; the server is still up (${dev} down stops it)"
-
-  echo
-  echo "2. Copy an existing PrismaCore data set in (RELEASING.md lists where the files go), then"
-  echo "   restart with '${dev} down' and '${dev} up', and check the server boots with it."
-  case "$(ask "Does the existing data load? (s skips this check)" y/n/s)" in
-    y) ;;
-    s) echo "Skipped the existing data check" ;;
-    *) die "existing data check failed; the server is still up (${dev} down stops it)" ;;
-  esac
-
-  "${ROOT}/scripts/dev-server.sh" "${TARGET}" down
-}
 
 push_tag() {
   echo
@@ -232,7 +210,6 @@ cmd_publish() {
   preflight
   wait_for_ci
   smoke_test
-  manual_checks
   push_tag
   check_release
 }

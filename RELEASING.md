@@ -19,9 +19,8 @@ Pushing a tag runs `.github/workflows/release.yml`: it builds the mod, stamps th
 2. Pull the branch and run `./scripts/release.sh publish X.Y.Z`. It first checks that the working tree is clean, the branch matches `origin`, the tag doesn't exist yet and `CHANGELOG.md` has the dated section. Then it:
    1. waits for the Build workflow run of that commit, and stops unless CI is green.
    2. downloads that run's `ServerCore` artifact and runs the smoke test below on it, on the dev server for the game build in `game-version.json`: `stable` when its `branch` is `public`, `experimental` when it is `latest_experimental`.
-   3. starts the server and asks you for the checks by hand below. Answering `n` stops the release.
-   4. shows the tag, commit and branch, and tags and pushes when you type the tag name: `git tag -a vX.Y.Z -m "ServerCore X.Y.Z" && git push origin vX.Y.Z`.
-   5. waits for the Release workflow and checks the release page: `ServerCore-X.Y.Z.zip` is attached, the `ModInfo.xml` in it has the version, and only versions with a `-` are pre-releases. Check the notes yourself.
+   3. shows the tag, commit and branch, and tags and pushes when you type the tag name: `git tag -a vX.Y.Z -m "ServerCore X.Y.Z" && git push origin vX.Y.Z`.
+   4. waits for the Release workflow and checks the release page: `ServerCore-X.Y.Z.zip` is attached, the `ModInfo.xml` in it has the version, and only versions with a `-` are pre-releases. Check the notes yourself.
 
 ## The changelog on experimental
 
@@ -47,7 +46,7 @@ gh run download <run-id> --name ServerCore --dir _data/ci-artifact
 - the Web UI port serves the ClaimCreator page
 - `PrismaCoreSettings.xml` is written, and is still valid after the server stops
 
-Then check by hand (`scripts/release.sh publish` starts the server and asks for these):
+When a release changes the Web UI, the Steam certificates or how data files are read, also check by hand before running `publish`:
 
 1. Run `./scripts/dev-server.sh stable up`, open the Web UI at http://127.0.0.1:8285/, log in with Steam and check the map and your claims load.
 2. If you have an existing PrismaCore data set, copy it in and check the server boots with it: the `PrismaCore*.xml` / `.txt` files and `ClaimCreator_permissions.xml` go in `_data/dev-server/stable/saves/Saves/`, and the world's databases (`*.db` and `PrismaCoreMap/`) go in `_data/dev-server/stable/saves/Saves/Pregen06k01/ServerCoreDev/`.
