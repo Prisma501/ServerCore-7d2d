@@ -69,12 +69,11 @@ namespace ServerCore
                         if (!ServerCoreSettings.Instance.GMSG_PlayerDied_Enabled) return ModEvents.EModEventResult.StopHandlersAndVanilla;
                     }
                     break;
-                default:
-                    return ModEvents.EModEventResult.StopHandlersRunVanilla;
             }
 
-            return ModEvents.EModEventResult.StopHandlersRunVanilla;
-            throw new NotImplementedException();
+            // Continue, not StopHandlersRunVanilla: stopping would hide the message from mods loaded
+            // after this one and make the game skip its "GMSG:" log line.
+            return ModEvents.EModEventResult.Continue;
         }
 
         private void GameAwake(ref ModEvents.SGameStartDoneData _data)

@@ -6,7 +6,7 @@ All notable changes to ServerCore are documented here. The format is based on [K
 
 ## [3.0.0]
 
-The first ServerCore release: PrismaCore 2.5 as open source, for game version 3.2.0 b10. It behaves exactly like PrismaCore 2.5.
+The first ServerCore release: PrismaCore 2.5 as open source, for game version 3.2.0 b10. It behaves like PrismaCore 2.5, apart from the fix below.
 
 ### Changed
 
@@ -16,6 +16,10 @@ The first ServerCore release: PrismaCore 2.5 as open source, for game version 3.
 
 - The ClaimCreator web UI (v2.2.0) ships in the release zip, with Steam login certificates that match the chain Steam serves today.
 - Documentation site at [gettakaro.github.io/ServerCore-7d2d](https://gettakaro.github.io/ServerCore-7d2d/).
+
+### Fixed
+
+- Other mods, such as the Takaro connector, now receive player deaths, kills and leaves, and the server log again shows the game's `GMSG: Player '…' died` and `left the game` lines. PrismaCore claimed every game message and stopped both. Turning a message off with a `GMSG_*_Enabled` setting still hides it.
 
 ## [2.5] - PrismaCore
 
