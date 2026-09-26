@@ -18,5 +18,8 @@ When a release changes any of these, it's a new major version, and the [changelo
 
 | ServerCore | PrismaCore | Game version |
 |---|---|---|
-| 3.0.0 | – | 3.3 |
+| 3.1.0-exp.N (pre-release) | – | 3.3.0 EXP (experimental branch) |
+| 3.0.0 | – | 3.2.0 b10 |
 | – | 2.5 (last PrismaCore release) | 3.2.0 b10 |
+
+Pre-releases are builds for the game's experimental branch. Use them on test servers.

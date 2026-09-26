@@ -9,7 +9,7 @@ So you can switch from PrismaCore without touching your data, settings or server
 
 ## Can I go back to PrismaCore?
 
-Only on game 3.2.0 b10. Restore your backup and put `Mods/PrismaCore` back.
+On game 3.2.0 b10, yes: stop the server, remove `Mods/ServerCore` and put `Mods/PrismaCore` back. Both use the same data files.
 
 ## Something doesn't work the way it did in PrismaCore.
 
