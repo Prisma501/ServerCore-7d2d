@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace RemoveItemConsoleByTree
+namespace ServerCore.CustomCommands
 {
     public class RemoveItemConsole : ConsoleCmdAbstract
     {
@@ -170,7 +170,7 @@ namespace RemoveItemConsoleByTree
             // ---- LIVE REMOVAL ----
             int removedLive = 0;
 
-            Inventory toolbelt = (player.saveInventory != null) ? player.saveInventory : player.inventory;
+            global::Inventory toolbelt = (player.saveInventory != null) ? player.saveInventory : player.inventory;
             removedLive += RemoveFromInventory(toolbelt, player, targetIv, toRemove - removedLive);
 
             if (removedLive < toRemove)
@@ -202,7 +202,7 @@ namespace RemoveItemConsoleByTree
         }
 
         // Toolbelt (Inventory) – DecItem + held-item sync
-        private static int RemoveFromInventory(Inventory inv, EntityPlayer player, ItemValue targetIv, int remaining)
+        private static int RemoveFromInventory(global::Inventory inv, EntityPlayer player, ItemValue targetIv, int remaining)
         {
             if (inv == null || remaining <= 0) return 0;
 
@@ -219,7 +219,7 @@ namespace RemoveItemConsoleByTree
         }
 
         // Backpack (Bag)
-        private static int RemoveFromBag(Bag bag, int remaining, ItemValue targetIv)
+        private static int RemoveFromBag(global::Bag bag, int remaining, ItemValue targetIv)
         {
             if (bag == null || remaining <= 0) return 0;
             return bag.DecItem(targetIv, remaining);
