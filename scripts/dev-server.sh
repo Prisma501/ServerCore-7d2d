@@ -12,8 +12,10 @@
 #   test [--from P]    stop, deploy, start and smoke in one go
 #   build-refs         (experimental only) compile against the installed experimental server
 #
-# stable installs the exact build pinned in game-version.json. experimental installs the
-# current head of Steam's latest_experimental branch and records what it got in installed.json.
+# stable installs the exact build pinned in game-version.json, and refuses to run (apart from
+# down and logs) when that pin isn't for Steam's public branch. experimental installs the pin
+# when it is for latest_experimental (the experimental git branch), and otherwise the current
+# head of latest_experimental. installed.json records what was installed.
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
@@ -26,7 +28,7 @@ SDK_IMAGE="mcr.microsoft.com/dotnet/sdk:8.0@sha256:78235e09001f52b6592c458ac0107
 source "${ROOT}/scripts/lib/depotdownloader.sh"
 
 usage() {
-  sed -n '2,16p' "${BASH_SOURCE[0]}" | sed 's/^# \{0,1\}//' >&2
+  sed -n '2,18p' "${BASH_SOURCE[0]}" | sed 's/^# \{0,1\}//' >&2
   exit 2
 }
 
@@ -57,6 +59,22 @@ export PUID="${PUID:-$(id -u)}" PGID="${PGID:-$(id -g)}"
 
 compose() { docker compose -f "${COMPOSE_FILE}" "$@"; }
 
+pin_branch() { jq -er .branch "${PIN}"; }
+
+# Whether the target installs the build pinned in game-version.json.
+pinned() { [[ "${TARGET}" == stable || "$(pin_branch)" == latest_experimental ]]; }
+
+# A stable server on another branch's pin would smoke-test a release on the wrong game build.
+require_public_pin() {
+  command -v jq >/dev/null || { echo "error: jq is required" >&2; exit 1; }
+  local branch
+  branch="$(pin_branch)"
+  if [[ "${TARGET}" == stable && "${branch}" != public ]]; then
+    echo "error: game-version.json pins Steam branch ${branch}, but stable runs the public branch: use scripts/dev-server.sh experimental" >&2
+    exit 1
+  fi
+}
+
 require_installed() {
   [[ -f "${INSTALLED}" ]] || { echo "error: ${TARGET} isn't installed: run scripts/dev-server.sh ${TARGET} install" >&2; exit 1; }
 }
@@ -80,13 +98,13 @@ dotnet_run() {
 resolve_build() {
   APP="$(jq -er .app "${PIN}")"
   DEPOT="$(jq -er .depot "${PIN}")"
-  if [[ "${TARGET}" == stable ]]; then
+  if pinned; then
     MANIFEST="$(jq -er .manifest "${PIN}")"
     BUILDID="$(jq -er .buildid "${PIN}")"
     VERSION="$(jq -er .version "${PIN}")"
     return
   fi
-  # No pin for experimental yet: take the branch head from Steam's public app info and
+  # No experimental pin on this branch: take the branch head from Steam's public app info and
   # download that exact manifest, so what installed.json records is what was installed.
   local info
   info="$(curl -fsS "https://api.steamcmd.net/v1/info/${APP}")"
@@ -107,13 +125,12 @@ render_config() {
 cmd_install() {
   local force=false
   [[ "${1:-}" == --force ]] && force=true
-  command -v jq >/dev/null || { echo "error: jq is required" >&2; exit 1; }
 
   local reuse=false
   if [[ -f "${INSTALLED}" && "${force}" == false ]]; then
     reuse=true
-    if [[ "${TARGET}" == stable && "$(jq -r .manifest "${INSTALLED}")" != "$(jq -er .manifest "${PIN}")" ]]; then
-      echo "The installed stable build isn't the one pinned in game-version.json: updating it"
+    if pinned && [[ "$(jq -r .manifest "${INSTALLED}")" != "$(jq -er .manifest "${PIN}")" ]]; then
+      echo "The installed ${TARGET} build isn't the one pinned in game-version.json: updating it"
       reuse=false
     fi
   fi
@@ -131,7 +148,7 @@ cmd_install() {
 
     local sha
     sha="$(sha256sum "${SERVERFILES}/7DaysToDieServer_Data/Managed/Assembly-CSharp.dll" | cut -d' ' -f1)"
-    if [[ "${TARGET}" == stable && "${sha}" != "$(jq -er .assemblyCSharpSha256 "${PIN}")" ]]; then
+    if pinned && [[ "${sha}" != "$(jq -er .assemblyCSharpSha256 "${PIN}")" ]]; then
       echo "error: Assembly-CSharp.dll doesn't match the sha256 in game-version.json" >&2
       exit 1
     fi
@@ -390,6 +407,11 @@ cmd_build_refs() {
   fi
   return "${status}"
 }
+
+case "${COMMAND}" in
+  down | logs) ;;
+  *) require_public_pin ;;
+esac
 
 case "${COMMAND}" in
   install) cmd_install "$@" ;;

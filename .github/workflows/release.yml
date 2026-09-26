@@ -54,11 +54,8 @@ jobs:
         run: |
           version="${TAG#v}"
           (cd dist && zip -r -X "ServerCore-${version}.zip" Mods)
-          awk -v v="${version}" '
-            $0 ~ "^## \\[" v "\\]" { found = 1; next }
-            found && /^## \[/ { exit }
-            found { print }
-          ' CHANGELOG.md > dist/notes.md
+          source scripts/lib/changelog.sh
+          changelog_notes "${version}" > dist/notes.md
           if [[ ! -s dist/notes.md ]]; then
             echo "::error::CHANGELOG.md has no section for [${version}]"
             exit 1

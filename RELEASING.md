@@ -13,15 +13,23 @@ Pushing a tag runs `.github/workflows/release.yml`: it builds the mod, stamps th
 
 ## Cutting a release
 
-1. Make sure CI is green on the branch you release from.
-2. In `CHANGELOG.md`, move the `Unreleased` entries into a `## [X.Y.Z] - YYYY-MM-DD` section (the release fails without one) and add its link at the bottom.
-3. Run the smoke test below on the CI build of that commit (the `ServerCore` artifact of the Build workflow).
-4. Tag and push: `git tag vX.Y.Z && git push origin vX.Y.Z`.
-5. Check the release page: the zip is attached, the notes are right, and experimental builds show the pre-release badge.
+`scripts/release.sh` does the steps below. Run it from the branch you release from: `main` for `X.Y.Z`, `experimental` for `X.Y.Z-exp.N`. It needs `git`, `gh` (logged in), `jq` and `python3`, and what the dev server needs.
+
+1. Run `./scripts/release.sh prepare X.Y.Z`. It moves the `Unreleased` entries in `CHANGELOG.md` into a `## [X.Y.Z] - YYYY-MM-DD` section (the release fails without one) and adds its link at the bottom. If `CHANGELOG.md` already has an undated `## [X.Y.Z]` section, the entries are added to it and it gets the date. It commits this on a `release/X.Y.Z` branch and, when you confirm, pushes it and opens a PR. Review and merge the PR.
+2. Pull the branch and run `./scripts/release.sh publish X.Y.Z`. It first checks that the working tree is clean, the branch matches `origin`, the tag doesn't exist yet and `CHANGELOG.md` has the dated section. Then it:
+   1. waits for the Build workflow run of that commit, and stops unless CI is green.
+   2. downloads that run's `ServerCore` artifact and runs the smoke test below on it, on the dev server for the game build in `game-version.json`: `stable` when its `branch` is `public`, `experimental` when it is `latest_experimental`.
+   3. starts the server and asks you for the checks by hand below. Answering `n` stops the release.
+   4. shows the tag, commit and branch, and tags and pushes when you type the tag name: `git tag -a vX.Y.Z -m "ServerCore X.Y.Z" && git push origin vX.Y.Z`.
+   5. waits for the Release workflow and checks the release page: `ServerCore-X.Y.Z.zip` is attached, the `ModInfo.xml` in it has the version, and only versions with a `-` are pre-releases. Check the notes yourself.
+
+## The changelog on experimental
+
+`experimental` keeps its own `## [X.Y.Z-exp.N]` sections in `CHANGELOG.md`, and they stay on `experimental`. `main` is merged into `experimental`, never the other way round, so `main`'s changelog only has stable releases. When merging `main` brings a changelog conflict, keep the sections from both sides.
 
 ## Smoke test
 
-Every release gets this check on a dedicated server running the target game version. Most of it is automated by `scripts/dev-server.sh`, which runs a local server in Docker (see [CONTRIBUTING.md](CONTRIBUTING.md#run-a-dev-server)):
+Every release gets this check on a dedicated server running the target game version. `scripts/release.sh publish` runs it for you. Most of it is automated by `scripts/dev-server.sh`, which runs a local server in Docker (see [CONTRIBUTING.md](CONTRIBUTING.md#run-a-dev-server)):
 
 ```sh
 ./scripts/dev-server.sh stable install   # once per game build; experimental for the experimental branch
@@ -39,7 +47,7 @@ gh run download <run-id> --name ServerCore --dir _data/ci-artifact
 - the Web UI port serves the ClaimCreator page
 - `PrismaCoreSettings.xml` is written, and is still valid after the server stops
 
-Then check by hand:
+Then check by hand (`scripts/release.sh publish` starts the server and asks for these):
 
 1. Run `./scripts/dev-server.sh stable up`, open the Web UI at http://127.0.0.1:8285/, log in with Steam and check the map and your claims load.
 2. If you have an existing PrismaCore data set, copy it in and check the server boots with it: the `PrismaCore*.xml` / `.txt` files and `ClaimCreator_permissions.xml` go in `_data/dev-server/stable/saves/Saves/`, and the world's databases (`*.db` and `PrismaCoreMap/`) go in `_data/dev-server/stable/saves/Saves/Pregen06k01/ServerCoreDev/`.
