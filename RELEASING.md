@@ -1,6 +1,6 @@
 # Releasing ServerCore
 
-Maintainers only. See [ADR 2](adr/0002-branch-per-game-version.md) for why stable and experimental builds live on different branches.
+Maintainers only. `main` builds for the stable game version and `experimental` for the experimental one, each with its own `game-version.json`. Fixes land on `main` first and are merged into `experimental`.
 
 ## Tags and branches
 
@@ -38,7 +38,7 @@ There are no automated tests yet, so every release gets this manual check on a d
 
 1. Update `version`, `buildid`, `manifest` and `assemblyCSharpSha256` in `game-version.json` (SteamDB lists build ids and manifests for app 294420, depot 294422). Fetch once with the new manifest to get the `Assembly-CSharp.dll` sha256.
 2. Run `./scripts/fetch-game-refs.sh` and build. Fix each compile break in its own commit, quoting the game API that changed.
-3. Update the supported versions tables in `README.md` and `website/src/content/docs/project/compatibility.md`.
+3. Update the supported versions tables in `README.md` and `docs/project/compatibility.md`.
 
 ## Bumping the Web UI
 

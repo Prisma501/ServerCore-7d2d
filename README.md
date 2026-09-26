@@ -28,7 +28,7 @@ ServerCore 3.0.0 is a drop-in replacement for PrismaCore 2.5. Console commands (
 | 3.0.0 | – | 3.2.0 b10 |
 | – | 2.5 (last PrismaCore release) | 3.2.0 b10 |
 
-Pre-releases are built from the `experimental` branch for the game's experimental branch. See [RELEASING.md](docs/RELEASING.md) for how releases are made.
+Pre-releases are built from the `experimental` branch for the game's experimental branch. See [RELEASING.md](RELEASING.md) for how releases are made.
 
 ## Installation
 

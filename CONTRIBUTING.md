@@ -83,11 +83,11 @@ A maintainer reviews every PR. We aim to respond within a week. If we haven't, p
 2. Run `./scripts/fetch-game-refs.sh` and `dotnet build`, then fix what broke.
 3. Test on a dev server and update the supported versions table in the README.
 
-Stable game versions are built on `main`, the experimental game version on the `experimental` branch ([ADR 2](docs/adr/0002-branch-per-game-version.md)).
+Stable game versions are built on `main`, the experimental game version on the `experimental` branch.
 
 ## Releases
 
-Maintainers release by pushing a `vX.Y.Z` tag, or `vX.Y.Z-exp.N` on `experimental` for a pre-release. CI builds the mod, stamps the version into `ModInfo.xml`, zips `Mods/ServerCore/` and publishes a GitHub release with the changelog notes. [docs/RELEASING.md](docs/RELEASING.md) has the checklist and the smoke test. We use [semantic versioning](https://semver.org): patch for fixes, minor for new features, major for anything that breaks the compatibility rule.
+Maintainers release by pushing a `vX.Y.Z` tag, or `vX.Y.Z-exp.N` on `experimental` for a pre-release. CI builds the mod, stamps the version into `ModInfo.xml`, zips `Mods/ServerCore/` and publishes a GitHub release with the changelog notes. [RELEASING.md](RELEASING.md) has the checklist and the smoke test. We use [semantic versioning](https://semver.org): patch for fixes, minor for new features, major for anything that breaks the compatibility rule.
 
 ## Code of conduct
 

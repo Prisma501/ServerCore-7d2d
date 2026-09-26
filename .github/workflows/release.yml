@@ -15,7 +15,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      # Stable releases come from main, pre-releases from experimental (docs/adr/0002-branch-per-game-version.md)
+      # Stable releases come from main, pre-releases from experimental (see RELEASING.md)
       - name: Check the tag is on its release branch
         env:
           TAG: ${{ github.ref_name }}
