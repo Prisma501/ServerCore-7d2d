@@ -16,7 +16,8 @@
 #
 # --rename maps Prisma's identifiers to ours (PrismaCore namespaces, the
 # PrismaCoreSettings/PrismaCoreStrings classes, RemoveItemConsoleByTree) before
-# diffing types and members. String literals are never mapped.
+# diffing types and members. String literals are never mapped in the strings
+# diff; the decompiled C# is mapped on both sides because it mixes the two.
 #
 # Needs Docker and the game references (scripts/fetch-game-refs.sh). Output
 # lands in _data/compare/; the exit code is non-zero when any diff is non-empty.
@@ -142,7 +143,8 @@ for side in theirs ours; do
   find "${dir}/cs" -name '*.cs' ! -path '*/Properties/*' | while read -r f; do
     flat="$(echo "${f#"${dir}/cs/"}" | tr '/' '.')"
     [[ "${side}" == theirs ]] && echo "${flat%.cs}" | grep -qE "${REMOVED_TYPES}" && continue
-    normalize_generated < "${f}" | ${map} > "${dir}/cs-flat/$(echo "${flat}" | ${map})"
+    # Mapped on both sides: this text includes literals, which the strings diff checks unmapped.
+    normalize_generated < "${f}" | map_identifiers > "${dir}/cs-flat/$(echo "${flat}" | map_identifiers)"
   done
 done
 
