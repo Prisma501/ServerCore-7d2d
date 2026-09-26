@@ -19,3 +19,9 @@ dist/
 .vscode/
 *.user
 *.suo
+
+# Documentation site (website/dist is covered by dist/ above)
+website/node_modules/
+website/.astro/
+website/src/content/docs/project/changelog.md
+!website/public/downloads/*.zip
