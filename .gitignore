@@ -1,0 +1,21 @@
+# Game reference assemblies and tools fetched by scripts/fetch-game-refs.sh
+_data/
+
+# Build output
+bin/
+obj/
+Mods/
+dist/
+*.zip
+
+# Game assemblies must never be committed. Third-party DLLs that really
+# belong in the repo need an explicit exception below this line.
+*.dll
+*.pdb
+
+# IDEs
+.vs/
+.idea/
+.vscode/
+*.user
+*.suo

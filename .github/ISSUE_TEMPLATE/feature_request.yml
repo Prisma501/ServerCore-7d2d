@@ -1,0 +1,33 @@
+name: Feature request
+description: Suggest a new command, option or behaviour.
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        For bigger ideas, starting a thread in [Discussions](https://github.com/gettakaro/ServerCore-7d2d/discussions) first helps shape them before anyone writes code.
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem does this solve?
+      description: What are you trying to do on your server, and what gets in the way today?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed behaviour
+      description: The command, option or change you have in mind, including example usage and output if you can.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives
+      description: Other ways you've tried or considered, such as other mods or server manager features.
+  - type: checkboxes
+    id: contribute
+    attributes:
+      label: Contributing
+      options:
+        - label: I'd like to work on this myself.

@@ -1,0 +1,61 @@
+name: Bug report
+description: Something in ServerCore doesn't work, or works differently than in PrismaCore.
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting. For questions or help with setup, use [Discussions](https://github.com/gettakaro/ServerCore-7d2d/discussions) or the [Takaro Discord](https://aka.takaro.io/discord) instead.
+
+        Security issue? Don't file it here. See [SECURITY.md](https://github.com/gettakaro/ServerCore-7d2d/blob/main/SECURITY.md).
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: What did you do, what did you expect, and what happened instead?
+    validations:
+      required: true
+  - type: textarea
+    id: command
+    attributes:
+      label: Command and output
+      description: The exact console command you ran and its full output, if a command is involved.
+      render: text
+  - type: input
+    id: servercore-version
+    attributes:
+      label: ServerCore version
+      description: From `Mods/ServerCore/ModInfo.xml`, or say "PrismaCore 2.5".
+      placeholder: "3.0.0"
+    validations:
+      required: true
+  - type: input
+    id: game-version
+    attributes:
+      label: Game version
+      description: As shown in the server log at startup.
+      placeholder: "3.3 b5"
+    validations:
+      required: true
+  - type: dropdown
+    id: server-manager
+    attributes:
+      label: Server manager
+      options:
+        - Takaro
+        - CSMM
+        - None (console / telnet only)
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: other-mods
+    attributes:
+      label: Other mods
+      description: The other server-side mods you run, with versions if you know them.
+  - type: textarea
+    id: logs
+    attributes:
+      label: Server log excerpt
+      description: Relevant lines from the server log, including any exceptions. Remove IP addresses and player IDs you don't want public.
+      render: text

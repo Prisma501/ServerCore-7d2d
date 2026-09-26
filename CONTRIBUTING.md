@@ -1,0 +1,88 @@
+# Contributing to ServerCore
+
+Thanks for helping keep ServerCore alive. Every contribution counts: bug reports, testing on your server, docs fixes and code.
+
+## Ways to help
+
+- **Report bugs** with the [bug report template](https://github.com/gettakaro/ServerCore-7d2d/issues/new/choose). The game version, ServerCore version and console output matter most.
+- **Test new game versions.** When a new 7D2D build comes out, reports from real servers are the fastest way to find what broke.
+- **Propose features** in [Discussions](https://github.com/gettakaro/ServerCore-7d2d/discussions) first, so we can agree on the shape before anyone writes code.
+- **Send pull requests.** Issues labelled `good first issue` are small and well-defined. `help wanted` means maintainers would welcome a PR.
+
+## The compatibility rule
+
+Server managers (Takaro, CSMM) and community modules call ServerCore commands and parse their output. Changing a string can silently break a module on thousands of servers. So, within a major version:
+
+- Don't rename or remove console commands or aliases, including the `pc-` forms.
+- Don't change command output text that tools may parse, even to fix a typo.
+- Don't change log line formats, including the `[PrismaCore]` prefixed lines.
+- Don't rename data or config files (`PrismaCore*.db`, `PrismaCoreSettings.xml`, `PrismaCoreStrings.xml`) or change their format incompatibly.
+
+Adding new commands, new options and new output lines is fine. If a change to the above is really needed, open an issue first. It goes into the next major version with a deprecation period.
+
+## Building locally
+
+You need:
+- the [.NET SDK](https://dotnet.microsoft.com/download) (8 or later)
+- Linux x86_64 (on Windows, use WSL) with `curl`, `unzip`, `jq` and `sha256sum`
+
+ServerCore compiles against the dedicated server's own assemblies. We never commit those to the repository. Fetch them from Steam instead:
+
+```sh
+./scripts/fetch-game-refs.sh
+```
+
+This downloads only the DLLs needed to compile (a few MB, not the whole server) into `_data/7dtd-binaries/`, anonymously, for the game build pinned in [`game-version.json`](game-version.json). Then build:
+
+```sh
+dotnet build -c Release
+```
+
+The build output lands in `Mods/ServerCore/`, ready to copy into a server.
+
+When you add a reference to a game assembly:
+- Point its `HintPath` at `_data/7dtd-binaries/<name>.dll`, so CI finds it too.
+- Set `<Private>false</Private>` on it. Otherwise the build copies the game's DLL into `Mods/ServerCore/`, and we'd ship Steam's files in the release. CI fails the build if that happens.
+
+```xml
+<Reference Include="Assembly-CSharp">
+  <HintPath>../_data/7dtd-binaries/Assembly-CSharp.dll</HintPath>
+  <Private>false</Private>
+</Reference>
+```
+
+## Testing your change
+
+There are no automated in-game tests yet. Before opening a PR:
+
+1. Copy the build output (`Mods/ServerCore/`) into a local dedicated server on the pinned game version.
+2. Run the commands you changed, and check their output and the server log.
+3. Say in the PR what you tested and on which game version.
+
+## Pull requests
+
+- Branch from `main`, and keep a PR to one change.
+- Fill in the PR template.
+- Add a line to `CHANGELOG.md` under `Unreleased`.
+- Never commit game DLLs or other files from the game install.
+- CI must pass: it fetches the game references and builds the mod.
+
+A maintainer reviews every PR. We aim to respond within a week. If we haven't, ping us in the PR or on Discord.
+
+## Bumping the game version
+
+1. Update `buildid`, `manifest` and the `Assembly-CSharp.dll` sha256 in `game-version.json`.
+2. Run `./scripts/fetch-game-refs.sh` and `dotnet build`, then fix what broke.
+3. Test on a dev server and update the supported versions table in the README.
+
+## Releases
+
+Maintainers release by pushing a `vX.Y.Z` tag. CI builds the mod, stamps the version into `ModInfo.xml`, zips `Mods/ServerCore/` and publishes a GitHub release with the changelog notes. We use [semantic versioning](https://semver.org): patch for fixes, minor for new features, major for anything that breaks the compatibility rule.
+
+## Code of conduct
+
+Everyone taking part agrees to our [Code of Conduct](CODE_OF_CONDUCT.md).
+
+## Licence
+
+By contributing, you agree that your contributions are licensed under the [MIT licence](LICENSE).

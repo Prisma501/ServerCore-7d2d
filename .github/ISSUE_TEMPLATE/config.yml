@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Questions and ideas
+    url: https://github.com/gettakaro/ServerCore-7d2d/discussions
+    about: Ask for help, share ideas and discuss features.
+  - name: Takaro Discord
+    url: https://aka.takaro.io/discord
+    about: Chat with the community and maintainers.
