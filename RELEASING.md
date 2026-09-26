@@ -21,18 +21,29 @@ Pushing a tag runs `.github/workflows/release.yml`: it builds the mod, stamps th
 
 ## Smoke test
 
-There are no automated tests yet, so every release gets this manual check on a dedicated server running the target game version.
+Every release gets this check on a dedicated server running the target game version. Most of it is automated by `scripts/dev-server.sh`, which runs a local server in Docker (see [CONTRIBUTING.md](CONTRIBUTING.md#run-a-dev-server)):
 
-1. Install the build in `Mods/ServerCore/`, with an existing PrismaCore data set in place if you have one (settings, claims, waypoints).
-2. Start the server and read the log:
-   - the mod loader lists `ServerCore` (a branch build shows the placeholder version in `ModInfo.xml`; only the release stamps the real one)
-   - the `[PrismaCore]` startup lines appear (settings and strings loaded, databases opened) and there are no exceptions from `ServerCore`
-3. In the server console:
-   - `version` lists ServerCore
-   - `pc-help` prints the command list
-   - `ccc` prints its help; create and remove one test claim with it
-4. Open the Web UI at `http://<server>:<WebUI_Port>/` (by default the web dashboard port + 1, set in `PrismaCoreSettings.xml`), log in with Steam and check the map and your claims load.
-5. Stop the server and check `PrismaCoreSettings.xml` still has your settings.
+```sh
+./scripts/dev-server.sh stable install   # once per game build; experimental for the experimental branch
+gh run download <run-id> --name ServerCore --dir _data/ci-artifact
+./scripts/dev-server.sh stable test --from _data/ci-artifact
+```
+
+`<run-id>` is the Build workflow run for the release commit (`gh run list --workflow build.yml --commit <sha>`). `--from` also takes a release zip. Without `--from`, `test` builds the checked-out commit instead.
+
+`test` deploys the build, boots the server and fails if any of these fail:
+
+- the mod loader lists `ServerCore` (a branch build shows the placeholder version in `ModInfo.xml`; only the release stamps the real one)
+- the `[PrismaCore]` startup lines appear, ending with `Started ClaimCreator`, and no exception mentions `ServerCore`
+- in the console, `version` lists ServerCore, `pc-help` prints the command list, `help ccc` prints its help, and `ccc` adds, lists and removes a test claim
+- the Web UI port serves the ClaimCreator page
+- `PrismaCoreSettings.xml` is written, and is still valid after the server stops
+
+Then check by hand:
+
+1. Run `./scripts/dev-server.sh stable up`, open the Web UI at http://127.0.0.1:8285/, log in with Steam and check the map and your claims load.
+2. If you have an existing PrismaCore data set, copy it in and check the server boots with it: the `PrismaCore*.xml` / `.txt` files and `ClaimCreator_permissions.xml` go in `_data/dev-server/stable/saves/Saves/`, and the world's databases (`*.db` and `PrismaCoreMap/`) go in `_data/dev-server/stable/saves/Saves/Pregen06k01/ServerCoreDev/`.
+3. Run `./scripts/dev-server.sh stable down`.
 
 ## Bumping the game version
 
