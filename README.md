@@ -2,7 +2,7 @@
 
 ServerCore is a server-side mod for 7 Days to Die dedicated servers. It adds about 100 admin console commands, advanced land claims, region resets, chat control, teleports, vehicle recall and more.
 
-**Documentation:** [gettakaro.github.io/ServerCore-7d2d](https://gettakaro.github.io/ServerCore-7d2d/)
+**Documentation:** [gettakaro.github.io/ServerCore-7d2d](https://gettakaro.github.io/ServerCore-7d2d/) (source in [`docs/`](docs/))
 
 ServerCore is the continuation of **PrismaCore**, the mod Prisma501 built and maintained for over ten years. It started as CPM, later became the CSMM Patrons Mod, and then PrismaCore. Prisma retired from 7D2D modding in September 2026 and handed the mod over to the community. It's now open source under the MIT licence.
 

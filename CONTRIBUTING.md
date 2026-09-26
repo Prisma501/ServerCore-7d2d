@@ -61,7 +61,7 @@ There are no automated in-game tests yet. Before opening a PR:
 
 ## Docs
 
-The documentation site lives in `website/` (Astro and Starlight) and is published to [gettakaro.github.io/ServerCore-7d2d](https://gettakaro.github.io/ServerCore-7d2d/). To preview it you need Node.js 22.12 or later:
+The docs are Markdown files in [`docs/`](docs/). The site that publishes them lives in `website/` (Astro and Starlight), which reads `docs/` through the `website/src/content/docs` symlink, and is published to [gettakaro.github.io/ServerCore-7d2d](https://gettakaro.github.io/ServerCore-7d2d/). To preview it you need Node.js 22.12 or later:
 
 ```sh
 cd website
@@ -69,7 +69,7 @@ npm install
 npm run dev
 ```
 
-If your change affects how ServerCore behaves, update the docs in the same PR. The changelog page on the site is generated from `CHANGELOG.md`, so don't edit it in `website/`.
+If your change affects how ServerCore behaves, update the docs in the same PR. The changelog page on the site is generated from `CHANGELOG.md`, so don't edit `docs/project/changelog.md`.
 
 ## Pull requests
 
