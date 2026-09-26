@@ -45,7 +45,6 @@ namespace PrismaCore.CustomCommands
                     else
                     {
                         PrismaCoreSettings.Instance.BloodmoonSpawner_Overridden_AddMaxAliveServerDuringBloodmoon = nr;
-                        //PrismaCoreSettings.Instance.Save();
                         SdtdConsole.Instance.Output($"BloodmoonSpawner_Overridden_AddMaxAliveServerDuringBloodmoon has been set to {nr} for current server session.");
                     }
                 }

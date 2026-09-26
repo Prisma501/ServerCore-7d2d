@@ -40,7 +40,6 @@ namespace PrismaCore.CustomCommands
 
                     player.Progression.ExpDeficit = 0;
 
-                    //player.bPlayerStatsChanged = true;
                     player.Progression.bProgressionStatsChanged = true;
 
                     ci.SendPackage(NetPackageManager.GetPackage<NetPackagePlayerStats>().Setup(player));

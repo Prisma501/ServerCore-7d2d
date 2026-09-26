@@ -5,7 +5,6 @@ namespace PrismaCore.CustomCommands
 {
     public class WriteLog : ConsoleCmdAbstract
     {
-        //public static List<string> commandsForOutput = new List<string>();
         public static Dictionary<string, bool> commandsForOutput = new Dictionary<string, bool>();
 
         public override string getDescription()

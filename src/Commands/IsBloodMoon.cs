@@ -29,7 +29,6 @@ namespace PrismaCore.CustomCommands
             bool bm =GameUtils.IsBloodMoonTime(GameManager.Instance.World.worldTime, new ValueTuple<int, int>(GameManager.Instance.World.DuskHour, GameManager.Instance.World.DawnHour),bmDay);
 
             SdtdConsole.Instance.Output($"{bm}");
-            //Log.Out($"[PrismaCore] IsBloodMoon: {bm}");
 
         }
     }

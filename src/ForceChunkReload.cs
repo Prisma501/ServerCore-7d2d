@@ -51,8 +51,6 @@ namespace PrismaCore
                     catch { continue; }
                 }
 
-                //byte[] buffer = new byte[256];
-
                 foreach (string steamid in players.Keys)
                 {
                     try
@@ -121,7 +119,6 @@ namespace PrismaCore
                         try
                         {
                             Chunk c;
-                            //byte[] buffer = new byte[256];
                             if (dic.TryGetValue(key, out c))
                             {
                                 ci1.SendPackage(NetPackageManager.GetPackage<NetPackageChunk>().Setup(c, true));

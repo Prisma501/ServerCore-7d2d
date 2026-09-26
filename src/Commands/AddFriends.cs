@@ -31,26 +31,10 @@ namespace PrismaCore.CustomCommands
                 }
 
                 ClientInfo _cInfo = _senderInfo.RemoteClientInfo;
-                //ClientInfo _cInfo = ConsoleHelper.ParseParamIdOrName(_params[0]);
 
                 if (_cInfo != null)
                 {
                     ////player online
-                    //DbPlayer dbplayer = Database.Instance.GetDbPlayer(_cInfo.PlatformId.ToString());
-
-                    //if (dbplayer == null)
-                    //{
-                    //    SdtdConsole.Instance.Output($"ERR: Player {_cInfo.PlatformId} can not be found.");
-                    //    return;
-                    //}
-
-                    //PlatformUserIdentifierAbs steamid = new UserIdentifierEos(dbplayer.EOS_Id.Replace("EOS_", string.Empty));
-
-                    //if (steamid == null)
-                    //{
-                    //    SdtdConsole.Instance.Output($"ERR: Player {_cInfo.PlatformId} can not be found.");
-                    //    return;
-                    //}
 
                     PersistentPlayerData persistentPlayerData = (GameManager.Instance.persistentPlayers != null) ? GameManager.Instance.persistentPlayers.GetPlayerData(_cInfo.CrossplatformId) : null;
                     if (persistentPlayerData == null)
@@ -99,19 +83,9 @@ namespace PrismaCore.CustomCommands
 
                     ///persistentPlayerData.AddPlayerToACL(persistentPlayerData2.PlayerId);
 
-                    //GameManager.Instance.persistentPlayers.Allies.ApplyTransition(steamid, _cInfo.CrossplatformId, true);
-                    //GameManager.Instance.persistentPlayers.Allies.ProcessAllyRequest(steamid, _cInfo.CrossplatformId, true);
                     ConnectionManager.Instance.SendPackage(NetPackageManager.GetPackage<NetPackageAllyResponse>().Setup(steamid, _cInfo.CrossplatformId, AllyStore.AllyStatus.Allies, AllyStore.AllyEvent.IncomingAccepted, AllyStore.AllyEvent.OutgoingAccepted), false, -1, -1, -1, null, 192, false);
                     ConnectionManager.Instance.SendPackage(NetPackageManager.GetPackage<NetPackageAllyResponse>().Setup(_cInfo.CrossplatformId, steamid, AllyStore.AllyStatus.Allies, AllyStore.AllyEvent.IncomingAccepted, AllyStore.AllyEvent.OutgoingAccepted), false, -1, -1, -1, null, 192, false);
                     GameManager.Instance.persistentPlayers.Allies.SetStatus(_cInfo.CrossplatformId, steamid, AllyStore.AllyStatus.Allies);
-
-                    //persistentPlayerData.AddPlayerToACL(steamid);
-                    //persistentPlayerData2.AddPlayerToACL(_cInfo.CrossplatformId);
-
-                    //persistentPlayerData2.Dispatch(persistentPlayerData, EnumPersistentPlayerDataReason.ACL_AcceptedInvite);
-
-                    //_cInfo.SendPackage(NetPackageManager.GetPackage<NetPackagePersistentPlayerState>().Setup(persistentPlayerData, persistentPlayerData2.PlayerId, EnumPersistentPlayerDataReason.ACL_AcceptedInvite));
-                    //ConnectionManager.Instance.SendToServer(NetPackageManager.GetPackage<NetPackagePlayerAcl>().Setup(persistentPlayerData.PlayerData.PrimaryId, persistentPlayerData2.PlayerData.PrimaryId, EnumPersistentPlayerDataReason.ACL_AcceptedInvite));
 
                     SdtdConsole.Instance.Output($"You have added {_params[0]} to your friends list and vice versa.");
                 }

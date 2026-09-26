@@ -24,7 +24,6 @@ namespace PrismaCore.Web.API
 
             foreach (KeyValuePair<Vector3i, PersistentPlayerData> kvp in allLandClaims)
             {
-                //				try {
                 JSONObject owner = new JSONObject();
                 claimOwners.Add(owner);
                 owner.Add("eos_id", new JSONString(kvp.Value.PlayerData.PrimaryId.ToString()));
@@ -42,7 +41,6 @@ namespace PrismaCore.Web.API
 
                 owner.Add("steamid", new JSONString(steamId));
                 owner.Add("claimactive", new JSONBoolean(GameManager.Instance.World.IsLandProtectionValidForPlayer(GameManager.Instance.GetPersistentPlayerList().GetPlayerData(kvp.Value.PlayerData.PrimaryId))));
-                //owner.Add("claimactive", new JSONBoolean(GameManager.Instance.World.IsLandProtectionValidForPlayer(kvp.Value)));
 
                 if (kvp.Value.PlayerName.playerName.ToString().Length > 0)
                 {

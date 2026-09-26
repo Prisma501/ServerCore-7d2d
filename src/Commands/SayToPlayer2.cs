@@ -36,7 +36,6 @@ namespace PrismaCore.CustomCommands
 
             if (!string.IsNullOrEmpty(sender) && receiver != null)
             {
-                //GameManager.Instance.ChatMessageServer(receiver, EChatType.Whisper, -1, message, sender, null);
                 receiver.SendPackage(NetPackageManager.GetPackage<NetPackageChat> ().Setup(EChatType.Whisper, -1, sender + ": " + message, null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
             }
             else

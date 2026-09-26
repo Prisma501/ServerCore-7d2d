@@ -76,7 +76,6 @@ namespace PrismaCore.JSON
 
         public static JSONString Parse(string _json, ref int _offset)
         {
-            //Log.Out ("ParseString enter (" + offset + ")");
             StringBuilder sb = new StringBuilder();
             _offset++;
             while (_offset < _json.Length)
@@ -117,7 +116,6 @@ namespace PrismaCore.JSON
                     case '"':
                         _offset++;
 
-                        //Log.Out ("JSON:Parsed String: " + sb.ToString ());
                         return new JSONString(sb.ToString());
                     default:
                         sb.Append(_json[_offset]);

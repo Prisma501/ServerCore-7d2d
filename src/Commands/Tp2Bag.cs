@@ -36,15 +36,6 @@ namespace PrismaCore.CustomCommands
                     return;
                 }
 
-                //drone dupe
-                //if (PrismaCoreSettings.Instance.DroneDupePrevention_Enabled)
-                //{
-                //    if (DamageHandler.DroneDupeKill(ci))
-                //    {
-                //        return;
-                //    }
-                //}
-
                 if (API.dicDied.ContainsKey(ci.PlatformId.ToString()))
                 {
                     UnityEngine.Vector3 destPos = new UnityEngine.Vector3();

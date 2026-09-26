@@ -43,7 +43,6 @@ namespace PrismaCore
             if (changes.Count != 0)
             {
                 GameManager.Instance.SetBlocksRPC(changes);
-                //Log.Out($"[PrismaCore] Replaced {changes.Count} falling blocks with air!");
             }
         }
 

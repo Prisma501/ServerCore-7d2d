@@ -7,7 +7,6 @@ namespace PrismaCore.CustomCommands
     {
 
         private static Dictionary<int, Vector3i> savedLocation = new Dictionary<int, Vector3i>();
-        //private static readonly string prefabPath = (Application.platform != RuntimePlatform.OSXPlayer) ? (Application.dataPath + "/../Data/Prefabs") : (Application.dataPath + "/../../Data/Prefabs");
 
         public override string getDescription()
         {
@@ -152,9 +151,6 @@ namespace PrismaCore.CustomCommands
                         z1 = z2;
                         z2 = val;
                     }
-                    //Vector3i posStart = new Vector3i(x1, y1, z1);
-                    //Vector3i posEnd = new Vector3i(x2, y2, z2);
-                    //Vector3i vectori2 = new Vector3i((x2 - x1) + 1, y2-y1+1, (z2 - z1) + 1);
 
                     if (!_params.ContainsCaseInsensitive("overwrite"))
                     {
@@ -167,58 +163,6 @@ namespace PrismaCore.CustomCommands
 
                     Prefab pref = new Prefab();
 
-                    //for (int j = World.toChunkXZ(x1); j <= World.toChunkXZ(x2 - 1); j++)
-                    //{
-                    //    for (int k = World.toChunkXZ(z1); k <= World.toChunkXZ(z2 - 1); k++)
-                    //    {
-
-                    //        GameManager instance = GameManager.Instance;
-                    //        World world = ((instance != null) ? instance.World : null);
-                    //        if (world == null)
-                    //        {
-                    //            SdtdConsole.Instance.Output("World has not been loaded!");
-                    //            return;
-                    //        }
-
-                    //        SleeperVolume sleeperVolume;
-                    //        Chunk chunk = (Chunk)world.GetChunkSync(j, 0, k);
-                    //        if (chunk != null)
-                    //        {
-                    //            var sleepers = chunk.GetSleeperVolumes();
-                    //            for (int i = 0; i < sleepers.Count; i++)
-                    //            {
-
-                    //                sleeperVolume = world.GetSleeperVolume(sleepers[i]);
-                    //                if (sleeperVolume != null)
-                    //                {
-                    //                    //Prefab.PrefabSleeperVolume psv = new Prefab.PrefabSleeperVolume();
-                    //                    //psv = Prefab.FindSleeperVolume(new Vector3i(sleeperVolume.Center));
-
-                    //                    DynamicPrefabDecorator dynamicPrefabDecorator = GameManager.Instance.GetDynamicPrefabDecorator();
-                    //                    PrefabInstance prefabFromWorldPosInside;
-
-
-                    //                    if (dynamicPrefabDecorator != null && (prefabFromWorldPosInside = dynamicPrefabDecorator.GetPrefabFromWorldPosInside((int)sleeperVolume.Center.x, (int)sleeperVolume.Center.y, (int)sleeperVolume.Center.z)) != null)
-                    //                    {
-                    //                        //SdtdConsole.Instance.Output($"filename of exported POI: {prefabFromWorldPosInside.filename}");
-                    //                        //pref.SleeperVolumes = prefabFromWorldPosInside.prefab.SleeperVolumes;
-                    //                        foreach (Prefab.PrefabSleeperVolume vol in prefabFromWorldPosInside.prefab.SleeperVolumes)
-                    //                        {
-                    //                            //if(vol.used)
-                    //                            //{
-                    //                            if(!pref.SleeperVolumes.Contains(vol))
-                    //                            {
-                    //                                pref.SleeperVolumes.Add(vol);
-                    //                            }
-
-                    //                            //}
-                    //                        }
-                    //                    }
-                    //                }
-                    //            }
-                    //        }
-                    //    }
-                    //}
 
                     string str = fileName + ".tts";
                     PathAbstractions.AbstractedLocation location = new PathAbstractions.AbstractedLocation(PathAbstractions.EAbstractedLocationType.UserDataPath, fileName, LaunchPrefs.UserDataFolder.Value + "/LocalPrefabs/" + str, null, true);
@@ -226,7 +170,6 @@ namespace PrismaCore.CustomCommands
 
                     pref.copyFromWorld(GameManager.Instance.World, new Vector3i(x1, y1, z1), new Vector3i(x2, y2, z2));
                     pref.bCopyAirBlocks = true;
-                    //pref.addAllChildBlocks();
 
                     if (pref.Save(pref.location, true))
                     {

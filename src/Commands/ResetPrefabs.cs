@@ -125,12 +125,8 @@ namespace PrismaCore.CustomCommands
                                 continue;
                             }
 
-                            //bool containsBed = fab.CheckForAnyPlayerHome(GameManager.Instance.World) != GameUtils.EPlayerHomeType.None;
-
                             bool skipPrefab = false;
 
-                            //if (containsBed)
-                            //{
                             int int2 = GamePrefs.GetInt(EnumUtils.Parse<EnumGamePrefs>("LandClaimSize"));
                             int num2 = int2 / 2;
                             Vector3i BoxMin = fab.boundingBoxPosition;
@@ -178,9 +174,7 @@ namespace PrismaCore.CustomCommands
                                 {
                                     BlockChangeInfo bci = new BlockChangeInfo(vec, new BlockValue(0), true, false);
                                     changes.Add(bci);
-                                    //GameManager.Instance.GetPersistentPlayerList().RemoveLandProtectionBlock(vec);
                                     GameManager.Instance.persistentPlayers.RemoveLandProtectionBlock(vec);
-                                    //SdtdConsole.Instance.ExecuteAsync($"rlp2 {vec.x} {vec.y} {vec.z}", iConsole);
                                 }
 
                                 try
@@ -190,29 +184,6 @@ namespace PrismaCore.CustomCommands
                                 catch { GameManager.Instance.SetBlocksRPC(changes); }
                                 finally { }
                             }
-                            //}
-
-                            //int posXmin = fab.boundingBoxPosition.x;
-                            //int posXmax = fab.boundingBoxPosition.x + fab.boundingBoxSize.x;
-                            //int posZmin = fab.boundingBoxPosition.z;
-                            //int posZmax = fab.boundingBoxPosition.z + fab.boundingBoxSize.z;
-
-                            //Vector2i vector2i = new Vector2i((posXmin <= posXmax) ? posXmin : posXmax, (posZmin <= posZmax) ? posZmin : posZmax);
-                            //Vector2i vector2i2 = new Vector2i((posXmin <= posXmax) ? posXmax : posXmin, (posZmin <= posZmax) ? posZmax : posZmin);
-
-                            //vector2i = World.toChunkXZ(vector2i);
-                            //vector2i2 = World.toChunkXZ(vector2i2);
-
-                            //for (int k = vector2i.x; k <= vector2i2.x; k++)
-                            //{
-                            //    for (int l = vector2i.y; l <= vector2i2.y; l++)
-                            //    {
-                            //        //Log.Out($"Fab:{fab.name} ChunkX:{k} ChunkZ:{l} BoundingXMin:{fab.boundingBoxPosition.x} BoundingXMax:{fab.boundingBoxPosition.x + fab.boundingBoxSize.x} BoundingZMin:{fab.boundingBoxPosition.z} BoundingZMax:{fab.boundingBoxPosition.z + fab.boundingBoxSize.z}");
-                            //        long ckey = WorldChunkCache.MakeChunkKey(k, l);
-
-                            //        prefabChunks.Add(ckey);
-                            //    }
-                            //}
 
                             prefabChunks = fab.GetOccupiedChunks();
 
@@ -251,38 +222,19 @@ namespace PrismaCore.CustomCommands
 
                     if (chunkProviderGenerateWorld != null)
                     {
-                        //for (int k = posXmin; k <= posXmax; k++)
-                        //{
-                        //    for (int l = posZmin; l <= posZmax; l++)
-                        //    {
-                        //        if((k % 16) == 0 && (l % 16) == 0)
-                        //        {
-                        //            Log.Out($"GOT HIM!!!!! {fab.name} ChunkX:{l} ChunkZ:{k} BoundingXMin:{fab.boundingBoxPosition.x} BoundingXMax:{fab.boundingBoxPosition.x + fab.boundingBoxSize.x} BoundingZMin:{fab.boundingBoxPosition.z} BoundingZMax:{fab.boundingBoxPosition.z + fab.boundingBoxSize.z}");
-                        //        }
-                        //        prefabChunks.Add(WorldChunkCache.MakeChunkKey(k, l));
-                        //    }
-                        //}
-
-                        //GameManager.Instance.ResetWindowsAndLocksByChunks(allChunks);
                         LockManager.Instance.ForceUnlockByChunk(allChunks);
                         chunkProviderGenerateWorld.RemoveChunks(allChunks);
                         foreach (long key in allChunks)
                         {
-                            //if (!done.Contains(key))
-                            //{
                             try
                             {
                                 if (!chunkProviderGenerateWorld.GenerateSingleChunk(chunkCache, key, true))
                                 {
                                     SdtdConsole.Instance.Output(string.Format("Resetting prebabchunk failed at position {0}/{1}", WorldChunkCache.extractX(key) << 4, WorldChunkCache.extractZ(key) << 4));
                                 }
-                                //done.Add(key);
                             }
                             catch { continue; }
-                            //}
                         }
-
-                        //Log.Out($"[PrismaCore] Prefab {fab.name} has been reset to RWG default state @ (x, z) ({(int)Math.Floor(pcenter.x)}, {(int)Math.Floor(pcenter.y)})");
                     }
                     else
                     {
@@ -305,10 +257,6 @@ namespace PrismaCore.CustomCommands
                     }
 
                     chunkProviderGenerateWorld.SaveAll();
-                    //chunkCache.Clear();
-                    //chunkProviderGenerateWorld.ClearCaches();
-
-                    //GameManager.Instance.SaveWorld();
 
                     if (tradersOnly)
                     {

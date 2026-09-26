@@ -81,8 +81,6 @@ namespace PrismaCore.CustomCommands
                     }
                 }
 
-                //undoObj.Prefab.SleeperVolumesStart = new List<Vector3i>();
-                //undoObj.Prefab.SleeperVolumes = new List<Prefab.PrefabSleeperVolume>();
                 undoObj.Prefab.CopyIntoLocal(GameManager.Instance.World.ChunkCache, new Vector3i(undoObj.Position.x, undoObj.Position.y, undoObj.Position.z), true, true, FastTags<TagGroup.Global>.none);
 
                 Thread.Sleep(50);
@@ -100,7 +98,6 @@ namespace PrismaCore.CustomCommands
                             BlockValue block = GameManager.Instance.World.GetBlock(undoObj.Position.x + j, undoObj.Position.y + m, undoObj.Position.z + k);
                             if (block.type != BlockValue.Air.type)
                             {
-                                //GameManager.Instance.World.SetStability(undoObj.Position.x + j, undoObj.Position.y + m, undoObj.Position.z + k, 14);
                                 Vector3i _position = new Vector3i(undoObj.Position.x + j, undoObj.Position.y + m, undoObj.Position.z + k);
                                 stabCalc.BlockPlacedAt(_position, false);
 
@@ -112,27 +109,18 @@ namespace PrismaCore.CustomCommands
                 stabCalc.Cleanup();
                 stabCalc = null;
 
-                //remove sleepervolumes from affected chucnks
-                //foreach (Chunk cnk in dic.Values)
-                //{
-                //    var sleepers = cnk.GetSleeperVolumes();
-                //    sleepers.Clear();
-                //}
-
                 //remove spawned sleepers
                 int x1 = undoObj.Position.x;
                 int z1 = undoObj.Position.z;
                 int x2 = undoObj.Position.x + undoObj.Prefab.size.x;
                 int z2 = undoObj.Position.z + undoObj.Prefab.size.z;
 
-                //Thread.Sleep(3000);
                 RemoveSpawnedSleepers(x1, z1, x2, z2);
 
                 //remove from dynamicPrefabDecorator if id > -1
                 if (undoObj.PrefabInstanceId != -1)
                 {
                     DynamicPrefabDecorator dpd = GameManager.Instance.GetDynamicPrefabDecorator();
-                    //PrefabInstance pi = dpd.GetPrefabAtPosition(new Vector3(undoObj.Position.x, undoObj.Position.y, undoObj.Position.z));
                     List<PrefabInstance> allPrefabs = new List<PrefabInstance>();
                     dpd.GetWorldPrefabs(allPrefabs);
 
@@ -141,15 +129,10 @@ namespace PrismaCore.CustomCommands
                         PrefabInstance fab = allPrefabs[i];
                         if (fab != null)
                         {
-                            //SdtdConsole.Instance.Output($"bundoInstanceId={undoObj.PrefabInstanceId} || prefabinstanceId={fab.id}");
-
                             if (undoObj.PrefabInstanceId == fab.id)
                             {
                                 dpd.RemoveWorldPrefab(fab);
                                 dpd.poiPrefabs.Remove(fab);
-
-                                //dpd.GetDynamicPrefabs().Remove(fab);
-                                //dpd.GetPOIPrefabs().Remove(fab);
 
                                 PathAbstractions.AbstractedLocation location = PathAbstractions.WorldsSearchPaths.GetLocation(GameManager.Instance.World.ChunkCache.Name, null, null);
                                 dpd.Save(location.FullPath);
@@ -244,8 +227,6 @@ namespace PrismaCore.CustomCommands
                         if (hostilePos.x > x1 && hostilePos.x < x2 && hostilePos.z > z1 && hostilePos.z < z2)
                         {
                             hostiles.Add(entityAlive);
-                            //GameManager.Instance.World.RemoveEntity(entityAlive.entityId, EnumRemoveEntityReason.Despawned);
-                            //entityAlive.DamageEntity(new DamageSource(EnumDamageSource.Internal, EnumDamageTypes.None), 99999, false, 1f);
                         }
                     }
                 }
@@ -258,21 +239,6 @@ namespace PrismaCore.CustomCommands
                     }
                 }
 
-                //for (int index = 0; index < GameManager.Instance.World.Entities.list.Count; ++index)
-                //{
-                //    EntityAlive entityAlive = GameManager.Instance.World.Entities.list[index] as EntityAlive;
-                //    if (entityAlive != null && entityAlive.IsAlive() && EntityClass.list[entityAlive.entityClass].bIsEnemyEntity)
-                //    {
-
-                //        Vector3i hostilePos = new Vector3i(entityAlive.GetPosition());
-                //        if (Math.Abs(pos2.x - hostilePos.x) < 25 && Math.Abs(pos2.y - hostilePos.y) < 25 && Math.Abs(pos2.z - hostilePos.z) < 25)
-                //        {
-                //            //ci.SendPackage(NetPackageManager.GetPackage<NetPackageGameMessage> ().Setup(EnumGameMessages.Chat, "EntityName about to be killed: " + entityAlive.EntityName, "Lara", false, "", false));
-                //            entityAlive.DamageEntity(new DamageSource(EnumDamageSource.Internal, EnumDamageTypes.None), 99999, false, 1f);
-                //        }
-
-                //    }
-                //}
             }
             catch (Exception e) { Log.Error(e.ToString()); }
         }

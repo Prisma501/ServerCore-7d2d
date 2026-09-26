@@ -65,7 +65,6 @@ namespace PrismaCore.CustomCommands
                             EntityBedrollPositionList bed = ep1.SpawnPoints;
                             if (bed.Count == 0)
                             {
-                                //SdtdConsole.Instance.Output ("ERR: The player " + ep1.EntityName + " does not have any bed");
                                 continue;
                             }
                             else

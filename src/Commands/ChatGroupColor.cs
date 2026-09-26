@@ -36,7 +36,6 @@ namespace PrismaCore.CustomCommands
                 {
                     if (_params[0].ToLower() == "listgroups")
                     {
-                        //Dictionary<string, string> groups = PersistentContainerNonMapSpecific.Instance.Chatgroups.ListChatGroups;
                         List<DbGroupColor> groups = Database.Instance.ListGroupColors();
 
                         SdtdConsole.Instance.Output("List of groupcolors:");
@@ -72,10 +71,6 @@ namespace PrismaCore.CustomCommands
                             SdtdConsole.Instance.Output("Members of group " + groupName + ":");
                             foreach (DbPlayer pl in allPlayers)
                             {
-                                //SdtdConsole.Instance.Output($"PlayerId:   {pl.Id}");
-                                //SdtdConsole.Instance.Output($"Groupcolor:   {pl.MemberOfGroup}");
-                                //continue;
-
                                 if (pl.MemberOfGroup.ToLower() == groupName.ToLower())
                                 {
                                     try

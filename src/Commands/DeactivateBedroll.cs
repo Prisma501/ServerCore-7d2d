@@ -36,12 +36,6 @@ namespace PrismaCore.CustomCommands
 
                     if (ci == null)
                     {
-                        //if (_params[0].Trim().Length != 23)
-                        //{
-                        //    SdtdConsole.Instance.Output(string.Format("ERR: Player is offline. You MUST use steamID: Invalid SteamId {0}", _params[0].Trim()));
-                        //    return;
-                        //}
-
                         DbPlayer dbplayer = null;
 
                         if (_params[0].Trim().ToLower().StartsWith("steam_"))
@@ -137,41 +131,8 @@ namespace PrismaCore.CustomCommands
                                 SdtdConsole.Instance.Output("Bed(roll) at (" + bedrollPos.ToString() + ") deactivated");
                             }
 
-                            //ClientInfo clientinfo = ConsoleHelper.ParseParamIdOrName(keyValuePair.Value.PlayerId);
-                            //if (clientinfo != null)
-                            //{
-                            //    EntityPlayer ep;
-
-                            //    try
-                            //    {
-                            //        ep = GameManager.Instance.World.Players.dict[clientinfo.entityId];
-                            //    }
-                            //    catch
-                            //    {
-                            //        SdtdConsole.Instance.Output("ERR: Player has to be online!");
-                            //        return;
-                            //    }
-
-                            //    if (ep == null)
-                            //    {
-                            //        SdtdConsole.Instance.Output("ERR: Player has to be online!");
-                            //        return;
-                            //    }
-
-                            //    keyValuePair.Value.ClearBedroll();
-                            //    GameManager.Instance.GetPersistentPlayerList().SpawnPointRemoved(bedrollPos);
-                            //    SdtdConsole.Instance.Output("Bedroll has been deactivated!");
-                            //}
-                            //else
-                            //{
-                            //    SdtdConsole.Instance.Output("ERR: Player has to be online!");
-                            //}
                         }
                     }
-                    //else
-                    //{
-                    //    SdtdConsole.Instance.Output("Player not found!");
-                    //}
                 }
             }
             catch (Exception e)

@@ -728,7 +728,6 @@ namespace PrismaCore
                         if (AdminLvL > PrismaCoreSettings.Instance.DamageDetection_ExcludeAdminLvl)
                         {
                             DamageHandler.LogDamageDetection(offenderClientInfo0.playerName, offenderClientInfo0.PlatformId.ToString(), _dmResponse.Strength);
-                            //Log.Out($"[PrismaCore]damageDetection(Entity): Player {offenderClientInfo0.playerName} ({offenderClientInfo0.playerId}) triggered damage detection! Damage done: {_dmResponse.Strength}");
 
                             string command = PrismaCoreSettings.Instance.DamageDetection_DetectedCommand;
                             if (!string.IsNullOrEmpty(command) && !command.EqualsCaseInsensitive("none"))
@@ -908,8 +907,6 @@ namespace PrismaCore
                     return true;
                 }
 
-                //Log.Out("PrismaCore: UpdateSpawn hook fired !!!!!");
-
                 if (PrismaCoreSettings.Instance.DisableSleepers_Enabled)
                 {
                     return false;
@@ -986,7 +983,6 @@ namespace PrismaCore
                     return;
                 }
 
-                //RegionReset.vehicles = ___vehiclesActive;
                 RegionReset.vehicleStubs = ___vehiclesUnloaded;
             }
             catch { }
@@ -1066,7 +1062,6 @@ namespace PrismaCore
                     return;
                 }
 
-                //RegionReset.vehicles = ___vehiclesActive;
                 RegionReset.droneStubs = ___dronesUnloaded;
             }
             catch { }
@@ -1125,7 +1120,6 @@ namespace PrismaCore
                     {
                         foreach (EntityAlive ea in hostiles.Cast<EntityAlive>())
                         {
-                            //if (!ea.LocalizedEntityName.ToUpper().Contains("TRADER"))
                             if (ea.GetType().ToString() == "EntityTrader")
                             {
                                 continue;
@@ -1167,7 +1161,6 @@ namespace PrismaCore
                     {
 
                         miInitParty.Invoke(__instance, null);
-                        //this.InitParty();
                     }
                     for (int i = ___zombies.Count - 1; i >= 0; i--)
                     {
@@ -1176,11 +1169,6 @@ namespace PrismaCore
                         if (managedZombie.updateDelay <= 0f)
                         {
                             managedZombie.updateDelay = 1.8f;
-
-                            //if (!this.SeekTarget(managedZombie))
-                            //{
-                            //    this.zombies.RemoveAt(i);
-                            //}
 
                             var parameters = new object[] { managedZombie };
 
@@ -1198,7 +1186,6 @@ namespace PrismaCore
                         {
                             __result = true;
                             return false;
-                            //return true;
                         }
 
                         if(AIDirector.CanSpawn(1.9f))
@@ -1210,7 +1197,6 @@ namespace PrismaCore
                                 {
                                     ___groupIndex = num;
                                     ___spawnBaseDir += 120;
-                                    //this.CalcBestDir(this.spawnBasePos);
                                     var parameters = new object[] { ___spawnBasePos };
                                     miCalcBestDir.Invoke(__instance, parameters);
                                 }
@@ -1230,7 +1216,6 @@ namespace PrismaCore
 
                                     if (___partySpawner.maxAlive <= 0 || ___zombies.Count < spawns * count)
                                     {
-                                        //for (int j = Utils.FastMin(count, 3); j > 0; j--)
                                         for (int j = count; j > 0; j--)
                                         {
                                             if (___nextPlayer >= count)
@@ -1262,10 +1247,8 @@ namespace PrismaCore
                                 }
                                 else
                                 {
-                                    //if (___partySpawner.maxAlive <= 0 || ___zombies.Count < Mathf.Min(___partySpawner.maxAlive, GameStats.GetInt(EnumGameStats.BloodMoonEnemyCount) * count))
                                     if (___partySpawner.maxAlive <= 0 || ___zombies.Count < PrismaCoreSettings.Instance.BloodmoonSpawner_Overridden_BMEnemyCountPerPlayer * count)
                                     {
-                                        //for (int j = Utils.FastMin(count, 3); j > 0; j--)
                                         for (int j = count; j > 0; j--)
                                         {
                                             if (___nextPlayer >= count)
@@ -1300,8 +1283,6 @@ namespace PrismaCore
                     }
                     __result = result;
                     return false;
-
-                    //return result;
                 }
             }
             catch { }

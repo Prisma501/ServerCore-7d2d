@@ -290,13 +290,6 @@ namespace PrismaCore.CustomCommands
             DateTime fromDateTime;
             DateTime toDateTime;
 
-            //ClientInfo clientinfo = ConsoleHelper.ParseParamIdOrName(_params[1]);
-            //if (clientinfo == null)
-            //{
-            //    SdtdConsole.Instance.Output("Playername or entity id not found.");
-            //    return;
-            //}
-
             if (_params[1].Length != 23)
             {
                 SdtdConsole.Instance.Output(string.Format("ERR: The parameter for steamid is not a valid steamid."));

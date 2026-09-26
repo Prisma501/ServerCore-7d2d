@@ -46,12 +46,8 @@ namespace PrismaCore.CustomCommands
 
             PlatformUserIdentifierAbs _steamid = ci.CrossplatformId;
             bool friends = false;
-            //PersistentPlayerData data = GameManager.Instance.persistentPlayers.GetPlayerData(_steamid);
             foreach (PlatformUserIdentifierAbs platformUserIdentifierAbs in GameManager.Instance.persistentPlayers.Allies.EnumerateAllies(ci.CrossplatformId))
             {
-                //PersistentPlayerData playerData = GameManager.Instance.persistentPlayers.GetPlayerData(platformUserIdentifierAbs);
-                //if (playerData != null)
-                //{
                     friends = true;
                     string steamId = Database.Instance.GetSteamIdByEOS(platformUserIdentifierAbs.ToString());
 
@@ -163,7 +159,6 @@ namespace PrismaCore.CustomCommands
                             }
                         }
                     }
-                //}
             }
             
             if (!friends)

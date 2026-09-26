@@ -52,11 +52,6 @@ namespace PrismaCore.CustomCommands
                 }
             }
 
-            //if (problemsTree > 0)
-            //{
-            //    Log.Out($"[PrismaCore] Repaired {problemsTree} bugged trees.");
-
-            //}
         }
 
         private int RepairBlockTree(BlockValue blockValue, Chunk chunk, Vector3i posInChunk, List<string> _params)
@@ -67,8 +62,6 @@ namespace PrismaCore.CustomCommands
                 return 0;
 
             blockValue.damage = chunk.GetDamage(posInChunk.x, posInChunk.y, posInChunk.z);
-
-            //Log.Out($"Tree found at {chunk.ToWorldPos(posInChunk).ToString()} IsCollideMelee: {blockValue.Block.IsCollideMelee.ToString()}");
 
             if (blockValue.damage < block.MaxDamage)
                 return 0;

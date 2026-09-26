@@ -7,15 +7,6 @@ namespace PrismaCore.Web.API
     {
         public override void HandleRequest(HttpListenerRequest _req, HttpListenerResponse _resp, WebConnection _user, int _permissionLevel)
         {
-            //bool allowed = WebConnection.CanCreateClaims(permissionLevel);
-
-            //if (!allowed)
-            //{
-            //    resp.StatusCode = (int)HttpStatusCode.Forbidden;
-            //    Web.SetResponseTextContent(resp, "You are not allowed to use this api or not logged in.");
-            //    return;
-            //}
-
 
             if (string.IsNullOrEmpty(_req.QueryString["command"]))
             {

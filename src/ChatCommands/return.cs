@@ -14,15 +14,6 @@ namespace PrismaCore
                 int AdminLvL = GameManager.Instance.adminTools.Users.GetUserPermissionLevel(_cInfo);
                 if (AdminLvL <= PrismaCoreSettings.Instance.ChatCommandPermissions_tb)
                 {
-                    //drone dupe
-                    //if (PrismaCoreSettings.Instance.DroneDupePrevention_Enabled)
-                    //{
-                    //    if (DamageHandler.DroneDupeKill(_cInfo))
-                    //    {
-                    //        return true;
-                    //    }
-                    //}
-
                     //flyto player
                     List<DbPlayer> players = Database.Instance.GetAllDbPlayers();
                     foreach (DbPlayer p in players)
@@ -38,7 +29,6 @@ namespace PrismaCore
                             {
                                 if (p.Online)
                                 {
-                                    //ClientInfo clientinfo = ConsoleHelper.ParseParamIdOrName(p.Name);
                                     cInfoMovePlayer = ConsoleHelper.ParseParamIdOrName(p.Name);
 
                                     if (Move.dic.ContainsKey(cInfoMovePlayer.PlatformId.ToString()))

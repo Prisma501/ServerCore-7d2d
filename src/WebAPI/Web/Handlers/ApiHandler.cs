@@ -65,7 +65,6 @@ namespace PrismaCore.Web.Handlers
                 _resp.StatusCode = (int)HttpStatusCode.Forbidden;
                 if (_user != null)
                 {
-                    //Log.Out ("ApiHandler: user '{0}' not allowed to execute '{1}'", user.SteamID, apiName);
                 }
 
                 return;

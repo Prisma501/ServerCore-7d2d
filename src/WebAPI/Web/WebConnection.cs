@@ -47,12 +47,10 @@ namespace PrismaCore.Web
 
         public override void SendLine(string _text)
         {
-            //			outputLines.Add (_text);
         }
 
         public override void SendLines(List<string> _output)
         {
-            //			outputLines.AddRange (_output);
         }
         public override void SendLog(string _formattedMsg, string _plainMsg, string _trace, LogType _type, DateTime _timestamp, long _uptime)
         {

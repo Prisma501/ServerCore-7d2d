@@ -36,7 +36,6 @@ namespace PrismaCore.CustomCommands
 
         public IEnumerator execute(List<string> _params, CommandSenderInfo _senderInfo)
         {
-            //try {
             if (_params.Count != 1 && _params.Count != 3)
             {
                 SdtdConsole.Instance.Output("ERR: Wrong number of arguments, expected 1 or 3, found " + _params.Count + ".");
@@ -187,7 +186,6 @@ namespace PrismaCore.CustomCommands
                 ChunkProviderGenerateWorld chunkProviderGenerateWorld = world.ChunkCache.ChunkProvider as ChunkProviderGenerateWorld;
                 if (chunkProviderGenerateWorld != null)
                 {
-                    //yield return GameManager.Instance.ResetWindowsAndLocksByChunks(hashSetLong);
                     ;
                     LockManager.Instance.ForceUnlockByChunk(hashSetLong);
                     chunkProviderGenerateWorld.RemoveChunks(hashSetLong);
@@ -216,10 +214,7 @@ namespace PrismaCore.CustomCommands
                         }
                     }
 
-                    //GameManager.Instance.SaveWorld();
                     chunkProviderGenerateWorld.SaveAll();
-                    //chunkCache.Clear();
-                    //chunkProviderGenerateWorld.ClearCaches();
 
                     SdtdConsole.Instance.Output(string.Format("Chunks from {0}/{1} to {2}/{3} have been reset (chunk coordinates {4} to {5}).", new object[]
                     {
@@ -238,9 +233,6 @@ namespace PrismaCore.CustomCommands
                     SdtdConsole.Instance.Output("Chunks could not be reset! Chunkprovider for generated world not available.");
                 }
             }
-            //} catch (Exception e) {
-            //	Log.Out ("Error in ResetChunks.Run: " + e);
-            //}
         }
     }
 }

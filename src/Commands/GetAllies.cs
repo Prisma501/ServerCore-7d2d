@@ -41,22 +41,11 @@ namespace PrismaCore.CustomCommands
                 }
                 else
                 {
-                    //EntityPlayer ep = GameManager.Instance.World.Players.dict[clientInfo.entityId];
-                    //List<EntityPlayer> list = new List<EntityPlayer>();
-                    //if (ep.Party != null)
-                    //{
-
-                    //}
-
-                    //PersistentPlayerData data = GameManager.Instance.persistentPlayers.GetPlayerData(clientInfo.CrossplatformId);
                     string allies = string.Empty;
                     ClientInfo cInfo;
 
                     foreach (PlatformUserIdentifierAbs platformUserIdentifierAbs in GameManager.Instance.persistentPlayers.Allies.EnumerateAllies(clientInfo.CrossplatformId))
                     {
-                        //PersistentPlayerData playerData = GameManager.Instance.persistentPlayers.GetPlayerData(platformUserIdentifierAbs);
-                        //if (playerData != null)
-                        //{
                             if (platformUserIdentifierAbs != null)
                             {
                                 cInfo = ConsoleHelper.ParseParamIdOrName(platformUserIdentifierAbs.CombinedString, true, false);
@@ -69,7 +58,6 @@ namespace PrismaCore.CustomCommands
                                     allies += $"offline({platformUserIdentifierAbs.CombinedString}),";
                                 }
                             }
-                        //}
                     }
 
                     if (allies.EndsWith(","))

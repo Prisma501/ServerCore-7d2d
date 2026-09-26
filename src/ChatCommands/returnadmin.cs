@@ -9,15 +9,6 @@
                 int AdminLvL = GameManager.Instance.adminTools.Users.GetUserPermissionLevel(_cInfo);
                 if (AdminLvL <= PrismaCoreSettings.Instance.ChatCommandPermissions_rt)
                 {
-                    //drone dupe
-                    //if (PrismaCoreSettings.Instance.DroneDupePrevention_Enabled)
-                    //{
-                    //    if (DamageHandler.DroneDupeKill(_cInfo))
-                    //    {
-                    //        return true;
-                    //    }
-                    //}
-
                     if (Flyto.adminReturns.ContainsKey(_cInfo.PlatformId.ToString()))
                     {
                         UnityEngine.Vector3 destPos = new UnityEngine.Vector3();

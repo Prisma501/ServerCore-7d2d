@@ -14,15 +14,6 @@ namespace PrismaCore
                 int AdminLvL = GameManager.Instance.adminTools.Users.GetUserPermissionLevel(_cInfo);
                 if (AdminLvL <= PrismaCoreSettings.Instance.ChatCommandPermissions_ft)
                 {
-                    //drone dupe
-                    //if (PrismaCoreSettings.Instance.DroneDupePrevention_Enabled)
-                    //{
-                    //    if (DamageHandler.DroneDupeKill(_cInfo))
-                    //    {
-                    //        return true;
-                    //    }
-                    //}
-
                     if (parameter.IndexOf(" ") >= 0 && !parameter.StartsWith("\"") && !parameter.EndsWith("\""))
                     {
                         //flyto coords
@@ -105,7 +96,6 @@ namespace PrismaCore
                                 {
                                     if (p.Online)
                                     {
-                                        //ClientInfo clientinfo = ConsoleHelper.ParseParamIdOrName(p.Name);
                                         EntityPlayer targetPlayer = null;
 
                                         targetPlayer = GameManager.Instance.World.Players.dict[p.EntityId];
@@ -170,7 +160,6 @@ namespace PrismaCore
                                 {
                                     if (p.Online)
                                     {
-                                        //ClientInfo clientinfo = ConsoleHelper.ParseParamIdOrName(p.Name);
                                         EntityPlayer targetPlayer = null;
 
                                         targetPlayer = GameManager.Instance.World.Players.dict[p.EntityId];

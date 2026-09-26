@@ -22,7 +22,6 @@ namespace PrismaCore
                         {
                             myTarget = myTarget.Replace("\"", string.Empty);
 
-                            //Log.Out("Quoted name found in /seen. Unquoted name: " + myTarget);
                             string PMmsg = "";
                             if (p.Name.ToUpper().Equals(myTarget.ToUpper()))
                             {

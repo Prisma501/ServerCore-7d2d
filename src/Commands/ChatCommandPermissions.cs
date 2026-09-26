@@ -81,9 +81,6 @@ namespace PrismaCore.CustomCommands
                     case "ls":
                         PrismaCoreSettings.Instance.ChatCommandPermissions_ls = level;
                         break;
-                    //case "rtc":
-                    //    PrismaCoreSettings.Instance.ChatCommandPermissions_rtc = level;
-                    //    break;
                     case "day7":
                         PrismaCoreSettings.Instance.ChatCommandPermissions_day7 = level;
                         break;
@@ -111,7 +108,6 @@ namespace PrismaCore.CustomCommands
                         SdtdConsole.Instance.Output("setwp: " + PrismaCoreSettings.Instance.ChatCommandPermissions_setwp);
                         SdtdConsole.Instance.Output("delwp: " + PrismaCoreSettings.Instance.ChatCommandPermissions_delwp);
                         SdtdConsole.Instance.Output("bubble: " + PrismaCoreSettings.Instance.ChatCommandPermissions_bubble);
-                        //SdtdConsole.Instance.Output("rtc: " + PrismaCoreSettings.Instance.ChatCommandPermissions_rtc);
                         SdtdConsole.Instance.Output("day7: " + PrismaCoreSettings.Instance.ChatCommandPermissions_day7);
                         SdtdConsole.Instance.Output("hostiles: " + PrismaCoreSettings.Instance.ChatCommandPermissions_hostiles);
                         SdtdConsole.Instance.Output("bed: " + PrismaCoreSettings.Instance.ChatCommandPermissions_bed);

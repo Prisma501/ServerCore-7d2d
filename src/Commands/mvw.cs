@@ -108,15 +108,6 @@ namespace PrismaCore.CustomCommands
                             z = wp.Z
                         };
 
-                        //drone dupe
-                        //if (PrismaCoreSettings.Instance.DroneDupePrevention_Enabled)
-                        //{
-                        //    if (DamageHandler.DroneDupeKill(ci))
-                        //    {
-                        //        return;
-                        //    }
-                        //}
-
                         NetPackageTeleportPlayer pkg = NetPackageManager.GetPackage<NetPackageTeleportPlayer>().Setup(destPos);
                         ci.SendPackage(pkg);
 

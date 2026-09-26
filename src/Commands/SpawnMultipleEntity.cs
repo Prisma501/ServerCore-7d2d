@@ -35,9 +35,6 @@ namespace PrismaCore.CustomCommands
             int interationVal = 1;
             foreach (KeyValuePair<int, EntityClass> kvp in EntityClass.list.Dict)
             {
-                //            if (!kvp.Value.bAllowUserInstantiate) {
-                //	continue;
-                //}
                 SdtdConsole.Instance.Output(" " + interationVal + " - " + kvp.Value.entityClassName);
                 ;
                 interationVal++;
@@ -137,9 +134,6 @@ namespace PrismaCore.CustomCommands
 
                     foreach (KeyValuePair<int, EntityClass> kvp in EntityClass.list.Dict)
                     {
-                        //                  if (!kvp.Value.bAllowUserInstantiate) {
-                        //	continue;
-                        //}
                         if (interationNum == type)
                         {
                             int realX, realY, realZ;

@@ -9,19 +9,9 @@
                 int AdminLvL = GameManager.Instance.adminTools.Users.GetUserPermissionLevel(_cInfo);
                 if (AdminLvL <= PrismaCoreSettings.Instance.ChatCommandPermissions_ftw)
                 {
-                    //drone dupe
-                    //if (PrismaCoreSettings.Instance.DroneDupePrevention_Enabled)
-                    //{
-                    //    if (DamageHandler.DroneDupeKill(_cInfo))
-                    //    {
-                    //        return true;
-                    //    }
-                    //}
-
                     DbWaypoint wp = Database.Instance.GetDbWaypoint(parameter);
                     if (wp == null)
                     {
-                        //SdtdConsole.Instance.Output($"ERR: Waypoint with name {toWaypoint} does not exist!");
                         return false;
                     }
 

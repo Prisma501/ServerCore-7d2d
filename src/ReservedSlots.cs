@@ -129,7 +129,6 @@ namespace PrismaCore
             {
                 DbPlayer player = Database.Instance.GetDbPlayer(ci.PlatformId.ToString());
 
-                //DateTime dt = new DateTime(player.TotalPlayTime);
                 TimeSpan t = TimeSpan.FromSeconds(player.TotalPlaytime);
 
                 string playtime = string.Format("{0:D2}:{1:D2}:{2:D2}",
@@ -222,13 +221,11 @@ namespace PrismaCore
             int _playerCount = ConnectionManager.Instance.ClientCount();
 
             //admin, non-donor, donor with time, donor with expired slot, GEO ip check, completely new players
-            //say to all -> GameManager.Instance.GameMessageServer(null, EnumGameMessages.Chat, string.Format("{0}[-]", kvp.Key), "Server", false, "", false);
 
             if (dicWelcomeStatus.ContainsKey(_cInfo.PlatformId.ToString())) dicWelcomeStatus.Remove(_cInfo.PlatformId.ToString());
 
             if (GameManager.Instance.adminTools.Users.HasEntry(_cInfo))
             {
-                //dicWelcomeStatus.Add(_cInfo.playerId, "admin");
                 return;
             }
 
@@ -276,11 +273,9 @@ namespace PrismaCore
                     kickMsg = kickMsg.Replace("{playerName}", _cInfo.playerName);
                     kickMsg = kickMsg.Replace("{maxPlayers}", maxplayers);
                     kickMsg = kickMsg.Replace("{maxMinusOne}", maxminusone.ToString());
-                    //"Sorry to be rude " + _cInfo.playerName + ", but there are no spaces left. Maximum players on server is " + maxplayers + ". Remaining slots are reserved for donors and admins. Please try again when there are " + maxminusone.ToString() + " or less players connected.";
                     SdtdConsole.Instance.ExecuteSync(string.Format("kick {0} \"{1}\"", _cInfo.PlatformId, kickMsg), _cInfo);
 
                 }
-                //else dicWelcomeStatus.Add(_cInfo.playerId, "nondonor");
             }
         }
 

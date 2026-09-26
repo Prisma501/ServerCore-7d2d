@@ -90,10 +90,8 @@ namespace PrismaCore.CustomCommands
                                 if (qualitya < 1 || qualitya > 6)
                                 {
                                     SdtdConsole.Instance.Output("WARNING: Specified quality exceeds vanilla values (between 1 and 6). This only should be the case if you have mods installed that have altered the vanilla quality system. Using this value on a vanilla game can lead to unexpected behaviour!!!");
-                                    //return;
                                 }
 
-                                //iva.Quality = qualitya;
                                 iva = new ItemValue(iva.type, qualitya, qualitya, false, null, 1f);
 
                                 int useTimesa = int.MinValue;
@@ -110,24 +108,13 @@ namespace PrismaCore.CustomCommands
                                     return;
                                 }
 
-                                //iva.Quality = qualitya;
                                 if (iva.MaxUseTimes != 0)
                                 {
                                     iva.UseTimes = iva.UseTimes = ((iva.MaxUseTimes * useTimesa) / 100);
                                 }
 
 
-                                // Specific code for weapons with parts and attachmetns
-                                //if (iva.HasModSlots)
-                                //{
-                                //    iva.Modifications = new ItemValue[qualitya - 1];
-
-                                //}
-
                             }
-                            //ItemStack invFielda = new ItemStack(iva, na);
-
-                            //GameManager.Instance.ItemDropServer(invFielda, player.Value.GetPosition(), Vector3.zero, -1, 50);
                         }
 
                         var entityItema = (EntityItem)EntityFactory.CreateEntity(new EntityCreationData
@@ -199,10 +186,8 @@ namespace PrismaCore.CustomCommands
                         if (quality < 1 || quality > 6)
                         {
                             SdtdConsole.Instance.Output("WARNING: Specified quality exceeds vanilla values (between 1 and 6). This only should be the case if you have mods installed that have altered the vanilla quality system. Using this value on a vanilla game can lead to unexpected behaviour!!!");
-                            //return;
                         }
 
-                        //iv.Quality = quality;
                         iv = new ItemValue(iv.type, quality, quality, false, null, 1f);
 
                         int useTimes = int.MinValue;
@@ -219,24 +204,13 @@ namespace PrismaCore.CustomCommands
                             return;
                         }
 
-                        //iv.Quality = quality;
                         if (iv.MaxUseTimes != 0)
                         {
                             iv.UseTimes = iv.UseTimes = ((iv.MaxUseTimes * useTimes) / 100);
                         }
 
-                        //Specific code for weapons with parts and attachmetns
-                        //if (iv.HasModSlots)
-                        //{
-                        //    iv.Modifications = new ItemValue[quality - 1];
-
-                        //         }
                     }
-                    //EntityPlayer p = GameManager.Instance.World.Players.dict [ci.entityId];
 
-                    //ItemStack invField = new ItemStack (iv, n);
-
-                    //GameManager.Instance.ItemDropServer (invField, p.GetPosition (), Vector3.zero, -1, 50);
                 }
 
                 var entityItem = (EntityItem)EntityFactory.CreateEntity(new EntityCreationData

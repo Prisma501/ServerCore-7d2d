@@ -236,7 +236,6 @@ namespace PrismaCore.CustomCommands
             }
             catch (Exception e)
             {
-                //Log.Out("Error in RemoveLandProtection2.removeById: " + e);
             }
         }
 

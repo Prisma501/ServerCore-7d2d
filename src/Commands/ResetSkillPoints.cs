@@ -53,7 +53,6 @@ namespace PrismaCore.CustomCommands
 
                     player.Progression.SkillPoints = lvl;
 
-                    //player.bPlayerStatsChanged = true;
                     player.Progression.bProgressionStatsChanged = true;
 
                     ci.SendPackage(NetPackageManager.GetPackage<NetPackagePlayerStats>().Setup(player));

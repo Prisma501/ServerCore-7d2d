@@ -57,9 +57,6 @@ namespace PrismaCore
                         }
                     }
 
-                    //List<EntityEnemy> enemies = new List<EntityEnemy>();
-                    //AllocsFixes.LiveData.Hostiles.Instance.Get(enemies);
-
                     int enemycount = 0;
 
                     try

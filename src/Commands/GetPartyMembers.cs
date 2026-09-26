@@ -63,7 +63,6 @@ namespace PrismaCore.CustomCommands
                         partyMembers = partyMembers.TrimEnd(',');
                     }
                     SdtdConsole.Instance.Output($"{partyMembers}");
-                    //Log.Out($"[PrismaCore] {EP.PlayerDisplayName}({cInfo.PlatformId})");
                 }
             }
             else if (_params.Count == 0)

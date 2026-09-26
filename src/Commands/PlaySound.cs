@@ -37,8 +37,6 @@ namespace PrismaCore.CustomCommands
         {
             try
             {
-                //World w = GameManager.Instance.World;
-                //ClientInfo ci = _senderInfo.RemoteClientInfo;
                 string sound = string.Empty;
                 int x = 0, y = 0, z = 0;
 

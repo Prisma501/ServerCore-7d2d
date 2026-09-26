@@ -17,11 +17,8 @@ namespace PrismaCore.Web.API
             JSONArray drones = new JSONArray();
             result.Add("Drones", drones);
 
-            //lock (result)
-            //{
             try
             {
-                //LoadDrones();
                 List<EntityDrone> drons = new List<EntityDrone>(RegionReset.drones);
                 List<EntityCreationData> stubs = new List<EntityCreationData>(RegionReset.droneStubs);
 
@@ -31,8 +28,6 @@ namespace PrismaCore.Web.API
                     if (ecd != null)
                     {
                         Vector3 dronpos = ecd.pos;
-
-                        //EntityClass.list.TryGetValue(ecd.entityClass, out EntityClass entClass);
 
                         JSONObject drone = new JSONObject();
                         drones.Add(drone);
@@ -44,7 +39,6 @@ namespace PrismaCore.Web.API
                             owner = "unknown";
                         }
 
-                        //vehicle.Add("name", new JSONString(entClass.classname.Name + " (Id: " + ecd.id + ")"));
                         drone.Add("name", new JSONString($"(Unloaded){EntityClass.GetEntityClassName(ecd.entityClass).Replace("drone", string.Empty)} (Id: {ecd.id})<BR>Owner: {owner}"));
                         drone.Add("posX", new JSONNumber(Utils.Fastfloor(dronpos.x)));
                         drone.Add("posY", new JSONNumber(Utils.Fastfloor(dronpos.y)));
@@ -90,7 +84,6 @@ namespace PrismaCore.Web.API
 
             }
             catch { }
-            //}
         }
     }
 }

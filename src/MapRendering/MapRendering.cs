@@ -105,8 +105,6 @@ namespace PrismaCore.MapRendering
                                     }
 
                                     Instance.dirtyChunks[cPos2] = realColors;
-
-                                    //Log.Out ("Add Dirty: " + cPos2);
                                 }
                             }
                         }
@@ -283,8 +281,6 @@ namespace PrismaCore.MapRendering
             Vector2i chunkPos = chunksToRender[0];
             chunksRendered.Add(chunkPos);
 
-            //Log.Out ("Start Dirty: " + chunkPos);
-
             Vector2i block, blockOffset;
             getBlockNumber(chunkPos, out block, out blockOffset, Constants.MAP_BLOCK_TO_CHUNK_DIV,
                 Constants.MAP_CHUNK_SIZE);
@@ -301,7 +297,6 @@ namespace PrismaCore.MapRendering
                     Constants.MAP_CHUNK_SIZE);
                 if (v_block.Equals(block))
                 {
-                    //Log.Out ("Dirty: " + v + " render: true");
                     chunksRendered.Add(v);
                     if (dirtyChunks[v].Length != Constants.MAP_CHUNK_SIZE * Constants.MAP_CHUNK_SIZE)
                     {

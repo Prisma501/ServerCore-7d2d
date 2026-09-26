@@ -265,7 +265,6 @@ namespace PrismaCore
 
                                                 if (!activeClaim.Whitelist.Contains(steamID))
                                                 {
-                                                    //SdtdConsole.Instance.Output(playerName + " is not in jail.");
                                                     continue;
                                                 }
                                                 else
@@ -813,7 +812,6 @@ namespace PrismaCore
                                                                     }
                                                                     else
                                                                     {
-                                                                        //GameManager.Instance.ChatMessageServer(ci, EChatType.Whisper, -1, notiMsg, PrismaCoreStrings.Instance.ServerChatName, null);
                                                                         ci.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(PrismaCoreStrings.Instance.ServerChatName, notiMsg), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
                                                                     }
 
@@ -954,7 +952,6 @@ namespace PrismaCore
                                                                     {
                                                                         if (_isOnVehicle)
                                                                         {
-                                                                            //int bikeID = player.Value.AttachedToEntity.entityId;
                                                                             if (BuffManager.Buffs.ContainsKey("prismacore_tooltip_onvehiclewarning"))
                                                                             {
                                                                                 EntityPlayer ep = GameManager.Instance.World.Players.dict[ci.entityId];
@@ -1010,7 +1007,6 @@ namespace PrismaCore
                                                                     {
                                                                         if (_isOnVehicle)
                                                                         {
-                                                                            //int bikeID = player.Value.AttachedToEntity.entityId;
                                                                             if (BuffManager.Buffs.ContainsKey("prismacore_tooltip_onvehiclewarning"))
                                                                             {
                                                                                 EntityPlayer ep = GameManager.Instance.World.Players.dict[ci.entityId];
@@ -1031,7 +1027,6 @@ namespace PrismaCore
                                                                 {
                                                                     if (_isOnVehicle)
                                                                     {
-                                                                        //int bikeID = player.Value.AttachedToEntity.entityId;
                                                                         if (BuffManager.Buffs.ContainsKey("prismacore_tooltip_onvehiclewarning"))
                                                                         {
                                                                             EntityPlayer ep = GameManager.Instance.World.Players.dict[ci.entityId];
@@ -1424,7 +1419,6 @@ namespace PrismaCore
                 }
                 catch
                 {
-                    //Log.Out("STILL NEEDING ISNULLOREMPTY CHECK ON CLAIM.TYPE");
                     continue;
                 }
             }
@@ -1699,7 +1693,6 @@ namespace PrismaCore
                 }
                 else
                 {
-                    //GameManager.Instance.ChatMessageServer(ci, EChatType.Whisper, -1, msg, PrismaCoreStrings.Instance.ServerChatName, null);
                     ci.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(PrismaCoreStrings.Instance.ServerChatName, msg), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
                 }
 

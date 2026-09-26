@@ -43,8 +43,6 @@ namespace PrismaCore.Web
 
         public void SendLines(List<string> _output)
         {
-            //			MicroStopwatch msw = new MicroStopwatch ();
-
             StringBuilder sb = new StringBuilder();
             foreach (string line in _output)
             {
@@ -109,7 +107,6 @@ namespace PrismaCore.Web
 
         public void SendLine(string _text)
         {
-            //throw new NotImplementedException ();
         }
 
         public void SendLog(string _formattedMessage, string _plainMessage, string _trace, LogType _type, DateTime _timestamp, long _uptime)
@@ -119,7 +116,6 @@ namespace PrismaCore.Web
 
         public void EnableLogLevel(LogType _type, bool _enable)
         {
-            //throw new NotImplementedException ();
         }
 
         public string GetDescription()

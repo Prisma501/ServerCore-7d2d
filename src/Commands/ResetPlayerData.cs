@@ -32,12 +32,6 @@ namespace PrismaCore.CustomCommands
 
                 if (ci == null)
                 {
-                    //if (_params[0].Trim().Length != 23 && _params[0].Trim().Length != 44)
-                    //{
-                    //    SdtdConsole.Instance.Output(string.Format("ERR: Player is offline. You MUST use steamID/XblId: Invalid SteamId/XblId {0}", _params[0].Trim()));
-                    //    return;
-                    //}
-
                     DbPlayer dbplayer = null;
 
                     if (_params[0].Trim().ToLower().StartsWith("steam_"))

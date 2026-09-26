@@ -1061,7 +1061,6 @@ namespace PrismaCore
 
     public class DbWaypoint
     {
-        //public int Id { get; set; }
         public string Id { get; set; }
         public int X { get; set; }
         public int Y { get; set; }

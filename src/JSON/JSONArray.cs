@@ -61,7 +61,6 @@ namespace PrismaCore.JSON
 
         public static JSONArray Parse(string _json, ref int _offset)
         {
-            //Log.Out ("ParseArray enter (" + offset + ")");
             JSONArray arr = new JSONArray();
 
             bool nextElemAllowed = true;
@@ -88,7 +87,6 @@ namespace PrismaCore.JSON
                     case ']':
                         _offset++;
 
-                        //Log.Out ("JSON:Parsed Array: " + arr.ToString ());
                         return arr;
                     default:
                         arr.Add(Parser.ParseInternal(_json, ref _offset));

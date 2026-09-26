@@ -51,11 +51,6 @@ namespace PrismaCore.CustomCommands
                         SdtdConsole.Instance.Output(string.Format("ERR: Can not add platformID. You MUST use steamID/XblId: Invalid SteamId/XblId {0}", _params[1].Trim()));
                         return;
                     }
-                    //if (ReservedSlots.Dict.ContainsKey(_params[1]))
-                    //{
-                    //    SdtdConsole.Instance.Output(string.Format("ERR: Can not add SteamId. {0} is already in the DonorSlots list.", _params[1]));
-                    //    return;
-                    //}
                     int _daysToExpire;
                     string steamId = string.Empty;
 

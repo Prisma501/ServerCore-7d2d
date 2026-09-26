@@ -90,7 +90,6 @@ namespace PrismaCore.CustomCommands
             }
             catch (Exception e)
             {
-                //SdtdConsole.Instance.Output("Error getting current player's position");
                 Log.Out("Error in GrabLCB.Run: " + e);
             }
         }

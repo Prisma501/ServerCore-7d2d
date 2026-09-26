@@ -17,11 +17,8 @@ namespace PrismaCore.Web.API
             JSONArray vehicles = new JSONArray();
             result.Add("Vehicles", vehicles);
 
-            //lock (result)
-            //{
             try
             {
-                //LoadVehicles();
                 List<EntityVehicle> vehics = new List<EntityVehicle>(RegionReset.vehicles);
                 List<EntityCreationData> stubs = new List<EntityCreationData>(RegionReset.vehicleStubs);
 
@@ -31,8 +28,6 @@ namespace PrismaCore.Web.API
                     if (ecd != null)
                     {
                         Vector3 vehpos = ecd.pos;
-
-                        //EntityClass.list.TryGetValue(ecd.entityClass, out EntityClass entClass);
 
                         JSONObject vehicle = new JSONObject();
                         vehicles.Add(vehicle);
@@ -44,7 +39,6 @@ namespace PrismaCore.Web.API
                             owner = "unknown";
                         }
 
-                        //vehicle.Add("name", new JSONString(entClass.classname.Name + " (Id: " + ecd.id + ")"));
                         vehicle.Add("name", new JSONString($"(Unloaded){EntityClass.GetEntityClassName(ecd.entityClass).Replace("vehicle", string.Empty)} (Id: {ecd.id})<BR>Owner: {owner}"));
                         vehicle.Add("posX", new JSONNumber(Utils.Fastfloor(vehpos.x)));
                         vehicle.Add("posY", new JSONNumber(Utils.Fastfloor(vehpos.y)));
@@ -89,7 +83,6 @@ namespace PrismaCore.Web.API
 
             }
             catch { }
-            //}
         }
     }
 }

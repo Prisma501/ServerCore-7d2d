@@ -155,8 +155,6 @@ namespace PrismaCore.CustomCommands
                         int.TryParse(_params[5], out y2);
                         int.TryParse(_params[7], out z2);
 
-                        //int.TryParse(_params[8], out rot);
-
                         blockName = _params[1].ToLower();
                         blockNameToBeReplace = _params[0].ToLower();
                     }
@@ -243,7 +241,6 @@ namespace PrismaCore.CustomCommands
                             SdtdConsole.Instance.Output(GetHelp());
                             return;
                         }
-                        //int.TryParse(_params[5], out rot);
                     }
 
 
@@ -335,8 +332,6 @@ namespace PrismaCore.CustomCommands
                     Vector3i vectori2 = new Vector3i((x2 - x1) + 1, (y2 - y1) + 1, (z2 - z1) + 1);
                     Prefab pref = new Prefab(vectori2);
                     pref.bCopyAirBlocks = true;
-                    //pref.SleeperVolumesStart = new List<Vector3i>();
-                    //pref.SleeperVolumes = new List<Prefab.PrefabSleeperVolume>();
 
 
                     Dictionary<long, Chunk> dic = new Dictionary<long, Chunk>();
@@ -386,8 +381,6 @@ namespace PrismaCore.CustomCommands
                         PrefabUndo.setUndo("server_", undo, new Vector3i(x1, y1, z1), -1);
                     }
 
-                    //pref.SleeperVolumesStart = new List<Vector3i>();
-                    //pref.SleeperVolumes = new List<Prefab.PrefabSleeperVolume>();
                     pref.CopyIntoLocal(GameManager.Instance.World.ChunkCache, new Vector3i(x1, y1, z1), true, true, FastTags<TagGroup.Global>.none);
 
                     Thread.Sleep(50);

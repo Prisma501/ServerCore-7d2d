@@ -42,7 +42,6 @@ namespace PrismaCore
 
         private static void RunWhoLocationThread()
         {
-            //World w;
             ClientInfo ci;
 
             while (IsLocationRunning)

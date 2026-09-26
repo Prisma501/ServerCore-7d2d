@@ -23,18 +23,14 @@ namespace PrismaCore.JSON
 
         public static JSONBoolean Parse(string _json, ref int _offset)
         {
-            //Log.Out ("ParseBool enter (" + offset + ")");
-
             if (_json.Substring(_offset, 4).Equals("true"))
             {
-                //Log.Out ("JSON:Parsed Bool: true");
                 _offset += 4;
                 return new JSONBoolean(true);
             }
 
             if (_json.Substring(_offset, 5).Equals("false"))
             {
-                //Log.Out ("JSON:Parsed Bool: false");
                 _offset += 5;
                 return new JSONBoolean(false);
             }

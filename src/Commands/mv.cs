@@ -118,8 +118,6 @@ namespace PrismaCore.CustomCommands
                                 {
                                     PlatformUserIdentifierAbs userId = new UserIdentifierEos(offlinePlayerTarget.EOS_Id.Replace("EOS_", string.Empty));
 
-                                    //PlatformUserIdentifierAbs.TryFromCombinedString(offlinePlayerTarget.Id, out PlatformUserIdentifierAbs userId);
-                                    
                                     if (!IsFriend(ci.CrossplatformId, userId))
                                     {
                                         SdtdConsole.Instance.Output("ERR: Targetplayer is no in-game friend. Only TP to friends allowed.");
@@ -186,15 +184,6 @@ namespace PrismaCore.CustomCommands
                             destPos.y = offlinePlayerTarget.LastLocation.Y;
                             destPos.z = offlinePlayerTarget.LastLocation.Z;
 
-                            //drone dupe
-                            //if (PrismaCoreSettings.Instance.DroneDupePrevention_Enabled)
-                            //{
-                            //    if (DamageHandler.DroneDupeKill(ci))
-                            //    {
-                            //        return;
-                            //    }
-                            //}
-
                             NetPackageTeleportPlayer pkg = NetPackageManager.GetPackage<NetPackageTeleportPlayer>().Setup(destPos);
                             ci.SendPackage(pkg);
 
@@ -209,15 +198,6 @@ namespace PrismaCore.CustomCommands
                         {
                             destPos = targetPlayer.GetPosition();
                             originPos = movePlayer.GetPosition();
-
-                            //drone dupe
-                            //if (PrismaCoreSettings.Instance.DroneDupePrevention_Enabled)
-                            //{
-                            //    if (DamageHandler.DroneDupeKill(ci))
-                            //    {
-                            //        return;
-                            //    }
-                            //}
 
                             NetPackageTeleportPlayer pkg = NetPackageManager.GetPackage<NetPackageTeleportPlayer>().Setup(destPos);
                             ci.SendPackage(pkg);
@@ -295,15 +275,6 @@ namespace PrismaCore.CustomCommands
                             {
                                 //player online
 
-                                //drone dupe
-                                //if (PrismaCoreSettings.Instance.DroneDupePrevention_Enabled)
-                                //{
-                                //    if (DamageHandler.DroneDupeKill(ci))
-                                //    {
-                                //        return;
-                                //    }
-                                //}
-
                                 NetPackageTeleportPlayer pkg = NetPackageManager.GetPackage<NetPackageTeleportPlayer>().Setup(destPos);
                                 ci.SendPackage(pkg);
 
@@ -348,23 +319,6 @@ namespace PrismaCore.CustomCommands
             return GameManager.Instance.persistentPlayers.Allies.IsAlly(steamId1, steamId2);
 
 
-            //PersistentPlayerData data = GameManager.Instance.persistentPlayers.GetPlayerData(steamId1);
-
-            //if (data != null && data.ACL != null)
-            //{
-            //    foreach (PlatformUserIdentifierAbs friend in data.ACL)
-            //    {
-            //        if (friend != null)
-            //        {
-            //            if (friend.ToString().Equals(steamId2.ToString()))
-            //            {
-            //                return true;
-            //            }
-            //        }
-            //    }
-            //}
-
-            //return false;
         }
     }
 }

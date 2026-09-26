@@ -73,13 +73,6 @@ namespace PrismaCore.CustomCommands
                         _params.RemoveAt(_params.Count - 1);
                     }
 
-                    //SdtdConsole.Instance.Output($"Parameters after strip: {_params.Count}");
-                    //for (int j = 0; j < _params.Count; j++)
-                    //{
-                    //    SdtdConsole.Instance.Output($"Parameters after strip: {_params[j]}");
-                    //}
-                    //return;
-
                     if (_params.Count == 5)
                     {
                         int.TryParse(_params[1], out x);
@@ -93,19 +86,7 @@ namespace PrismaCore.CustomCommands
                             return;
                         }
                     }
-                    //if (_params.Count == 4)
-                    //{
-                    //    int.TryParse(_params[1], out x);
-                    //    int.TryParse(_params[2], out y);
-                    //    int.TryParse(_params[3], out z);
-                    //    rot = 0;
 
-                    //    if (x == int.MinValue || y == int.MinValue || z == int.MinValue)
-                    //    {
-                    //        SdtdConsole.Instance.Output("ERR: At least one of the given coordinates is not a valid integer");
-                    //        return;
-                    //    }
-                    //}
                     else if (_params.Count == 2 || _params.Count == 3)
                     {
                         if (_senderInfo.RemoteClientInfo == null)
@@ -160,7 +141,6 @@ namespace PrismaCore.CustomCommands
 
                     if (!Prefab.PrefabExists(_params[0]))
                     {
-                        //SdtdConsole.Instance.Output("Prefab doesnt exist!");
                         PathAbstractions.AbstractedLocation fabLocation = new PathAbstractions.AbstractedLocation(PathAbstractions.EAbstractedLocationType.UserDataPath, _params[0], LaunchPrefs.UserDataFolder.Value + "/LocalPrefabs/", null, _params[0], ".tts", true);
                         if (!pref.Load(fabLocation))
                         {
@@ -170,7 +150,6 @@ namespace PrismaCore.CustomCommands
                     }
                     else
                     {
-                        //SdtdConsole.Instance.Output("Prefab does exist!");
                         if (!pref.Load(_params[0]))
                         {
                             SdtdConsole.Instance.Output("ERR: Unable to load prefab " + _params[0]);
@@ -179,13 +158,11 @@ namespace PrismaCore.CustomCommands
                     }
 
                     pref.bCopyAirBlocks = true;
-                    //pref.addAllChildBlocks();
                     y = y + pref.yOffset;
                     pref.RotateY(false, rot);
 
                     Prefab undo = new Prefab(new Vector3i(pref.size.x, pref.size.y, pref.size.z));
                     undo.bCopyAirBlocks = true;
-                    //undo.addAllChildBlocks();
                     undo.copyFromWorld(GameManager.Instance.World, new Vector3i(x, y, z), new Vector3i(x + pref.size.x, y + pref.size.y, z + pref.size.z));
 
                     pref.CopyIntoLocal(GameManager.Instance.World.ChunkCache, new Vector3i(x, y, z), true, true, FastTags<TagGroup.Global>.none);
@@ -224,8 +201,6 @@ namespace PrismaCore.CustomCommands
 
                     world.m_ChunkManager.ResendChunksToClients(dic);
 
-                    //ForceChunkReload.exec(dic);
-
                     StabilityCalculator stabCalc = new StabilityCalculator();
                     stabCalc.Init(GameManager.Instance.World);
 
@@ -238,7 +213,6 @@ namespace PrismaCore.CustomCommands
                                 BlockValue block = GameManager.Instance.World.GetBlock(x + j, y + m, z + k);
                                 if (block.type != BlockValue.Air.type)
                                 {
-                                    //GameManager.Instance.World.SetStability(x + j, y + m, z + k, 14);
                                     Vector3i _position = new Vector3i(x + j, y + m, z + k);
                                     stabCalc.BlockPlacedAt(_position, false);
                                 }
@@ -248,7 +222,6 @@ namespace PrismaCore.CustomCommands
                     stabCalc.Cleanup();
                     stabCalc = null;
 
-                    //if (_params.ContainsCaseInsensitive("addtorwg"))
                     if (addtorwg)
                     {
                         DynamicPrefabDecorator dpd = GameManager.Instance.GetDynamicPrefabDecorator();
@@ -260,9 +233,6 @@ namespace PrismaCore.CustomCommands
                         dpd.AddWorldPrefab(pi, true);
                         dpd.poiPrefabs.Add(pi);
                         
-                        //dpd.GetDynamicPrefabs().Add(pi);
-                        //dpd.GetPOIPrefabs().Add(pi);
-
                         PathAbstractions.AbstractedLocation location = PathAbstractions.WorldsSearchPaths.GetLocation(GameManager.Instance.World.ChunkCache.Name, null, null);
                         dpd.Save(location.FullPath);
 
@@ -286,20 +256,6 @@ namespace PrismaCore.CustomCommands
                             PrefabUndo.setUndo("server_", undo, new Vector3i(x, y, z), -1);
                         }
                     }
-
-                    //if(_params.ContainsCaseInsensitive("nosleepers"))
-                    //if (nosleepers)
-                    //{
-                    //    DynamicPrefabDecorator dpd = GameManager.Instance.GetDynamicPrefabDecorator();
-                    //    PrefabInstance prefInstance = new PrefabInstance(dpd.GetNextId(), pref.location, new Vector3i(x, y, z), (byte)pref.GetLocalRotation(), pref, 0);
-
-                    //    List<SleeperVolume> slVolumes = prefInstance.sleeperVolumes;
-                    //    foreach (SleeperVolume slVolume in slVolumes)
-                    //    {
-                    //        prefInstance.sleeperVolumes.Remove(slVolume);
-                    //    }
-                    //    //pref.SleeperVolumeList.List = new List<Prefab.PrefabSleeperVolume>();
-                    //}
 
                     SdtdConsole.Instance.Output("Prefab " + _params[0] + " loaded at " + x + " " + y + " " + z);
                 }

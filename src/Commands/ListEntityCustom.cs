@@ -124,11 +124,6 @@ namespace PrismaCore.CustomCommands
                                 EntityZombie e = (EntityZombie)entity;
                                 name = e.LocalizedEntityName;
                             }
-                            //else if (entity.GetType().ToString() == "EntityZombieCrawl")
-                            //{
-                            //    EntityZombieCrawl e = (EntityZombieCrawl)entity;
-                            //    name = e.EntityName;
-                            //}
                             else if (entity.GetType().ToString() == "EntityZombieCop")
                             {
                                 EntityZombieCop e = (EntityZombieCop)entity;
@@ -164,11 +159,6 @@ namespace PrismaCore.CustomCommands
                                 EntityAnimalStag e = (EntityAnimalStag)entity;
                                 name = e.LocalizedEntityName;
                             }
-                            //else if (entity.GetType().ToString() == "EntityAnimalBear")
-                            //{
-                            //    EntityAnimalBear e = (EntityAnimalBear)entity;
-                            //    name = e.EntityName;
-                            //}
                             else if (entity.GetType().ToString() == "EntityMinibike")
                             {
                                 EntityMinibike e = (EntityMinibike)entity;

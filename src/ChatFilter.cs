@@ -14,8 +14,6 @@ namespace PrismaCore
                 {
 
                     string message = _message.Trim().ToLower();
-                    //string party = " (Party)";
-                    //string friends = " (Friends)";
 
 
                     string chatName;
@@ -388,14 +386,10 @@ namespace PrismaCore
 
                                 if (_type == EChatType.Friends)
                                 {
-                                    //GameManager.Instance.ChatMessageServer(null, EChatType.Friends, -1, Utils.CreateGameMessage(groupColor + chatName + friends + "[-]", _message), null, EMessageSender.None);
-                                    //return false;
                                     return ModEvents.EModEventResult.StopHandlersRunVanilla;
                                 }
                                 if (_type == EChatType.Party)
                                 {
-                                    //GameManager.Instance.ChatMessageServer(null, EChatType.Party, -1, Utils.CreateGameMessage(groupColor + chatName + party + "[-]", _message), null, EMessageSender.None);
-                                    //return false;
                                     return ModEvents.EModEventResult.StopHandlersRunVanilla;
                                 }
 
@@ -412,14 +406,10 @@ namespace PrismaCore
                         {
                             if (_type == EChatType.Friends)
                             {
-                                //GameManager.Instance.ChatMessageServer(null, EChatType.Friends, -1, Utils.CreateGameMessage(chatName + friends, _message), null, EMessageSender.None);
-                                //return false;
                                 return ModEvents.EModEventResult.StopHandlersRunVanilla;
                             }
                             if (_type == EChatType.Party)
                             {
-                                //GameManager.Instance.ChatMessageServer(null, EChatType.Party, -1, Utils.CreateGameMessage(chatName + party, _message), null, EMessageSender.None);
-                                //return false;
                                 return ModEvents.EModEventResult.StopHandlersRunVanilla;
                             }
 
@@ -432,7 +422,6 @@ namespace PrismaCore
                 }
                 else
                 {
-                    //Log.Error ("ChatFilter: Argument _cInfo null on message: {0}", _message);
                 }
             }
 

@@ -77,7 +77,6 @@ namespace PrismaCore.JSON
 
         public static JSONObject Parse(string _json, ref int _offset)
         {
-            //Log.Out ("ParseObject enter (" + offset + ")");
             JSONObject obj = new JSONObject();
 
             bool nextElemAllowed = true;
@@ -126,7 +125,6 @@ namespace PrismaCore.JSON
                     case '}':
                         _offset++;
 
-                        //Log.Out ("JSON:Parsed Object: " + obj.ToString ());
                         return obj;
                     default:
                         break;

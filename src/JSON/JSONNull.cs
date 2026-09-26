@@ -11,14 +11,11 @@ namespace PrismaCore.JSON
 
         public static JSONNull Parse(string _json, ref int _offset)
         {
-            //Log.Out ("ParseNull enter (" + offset + ")");
-
             if (!_json.Substring(_offset, 4).Equals("null"))
             {
                 throw new MalformedJSONException("No valid null value found");
             }
 
-            //Log.Out ("JSON:Parsed Null");
             _offset += 4;
             return new JSONNull();
         }

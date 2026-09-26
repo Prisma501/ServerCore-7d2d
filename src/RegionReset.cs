@@ -28,12 +28,9 @@ namespace PrismaCore
         public static string AllPoiExceptionFile = $"{RegionPath}/AllPoi_Exceptions.txt";
         public static string BannedItemsFile = $"{API.GamePath}/PrismaCoreBannedItems.txt";
 
-        //public static List<BlockChangeInfo> antiBlocks = new List<BlockChangeInfo>();
         private static readonly string modPath = (Application.platform != RuntimePlatform.OSXPlayer) ? (Application.dataPath + "/../Mods") : (Application.dataPath + "/../../Mods");
         public static bool resetVehicles = false;
         public static bool resetDrones = false;
-        //public static bool resetRegions = false;
-        //public static bool resetUnclaimed = false;
         public volatile static List<EntityVehicle> vehicles = new List<EntityVehicle>();
         public volatile static List<EntityCreationData> vehicleStubs = new List<EntityCreationData>();
         public volatile static List<EntityDrone> drones = new List<EntityDrone>();
@@ -421,9 +418,6 @@ namespace PrismaCore
             //check if any claims in lstClaims else skip resetregion and lcbfree
             if (lstClaims != null && lstClaims.Count != 0)
             {
-                //ResetRegion
-                //bool blockRemoved = false;
-
                 int LCBsize = GamePrefs.GetInt(EnumUtils.Parse<EnumGamePrefs>("LandClaimSize"));
                 decimal d = (LCBsize - 1) / 2;
                 int halfLCB = Convert.ToInt32(Math.Floor(d));
@@ -438,7 +432,6 @@ namespace PrismaCore
                         {
                             if (_blockPos.x != 0 && _blockPos.z != 0)
                             {
-                                //clientinfo = ConsoleHelper.ParseParamIdOrName(playerId.ToString());
                                 if (clientinfo != null)
                                 {
                                     GiveItem(clientinfo, "keystoneBlock", 1);
@@ -461,8 +454,6 @@ namespace PrismaCore
                                 changes.Add(bciAnti);
                                 GameManager.Instance.GetPersistentPlayerList().RemoveLandProtectionBlock(_blockPos);
 
-                                //Thread.Sleep(1000);
-
                                 try
                                 {
                                     GameManager.Instance.SetBlocksRPC(changes);
@@ -483,7 +474,6 @@ namespace PrismaCore
                             //border inside resetregion
                             if (_blockPos.x != 0 && _blockPos.z != 0)
                             {
-                                //clientinfo = ConsoleHelper.ParseParamIdOrName(playerId.ToString());
                                 if (clientinfo != null)
                                 {
                                     GiveItem(clientinfo, "keystoneBlock", 1);
@@ -506,8 +496,6 @@ namespace PrismaCore
                                 changes.Add(bciAnti);
                                 GameManager.Instance.GetPersistentPlayerList().RemoveLandProtectionBlock(_blockPos);
 
-                                //Thread.Sleep(1000);
-
                                 try
                                 {
                                     GameManager.Instance.SetBlocksRPC(changes);
@@ -528,7 +516,6 @@ namespace PrismaCore
                             //border inside resetregion
                             if (_blockPos.x != 0 && _blockPos.z != 0)
                             {
-                                //clientinfo = ConsoleHelper.ParseParamIdOrName(playerId.ToString());
                                 if (clientinfo != null)
                                 {
                                     GiveItem(clientinfo, "keystoneBlock", 1);
@@ -571,7 +558,6 @@ namespace PrismaCore
                             //NE
                             if (_blockPos.x != 0 && _blockPos.z != 0)
                             {
-                                //clientinfo = ConsoleHelper.ParseParamIdOrName(playerId.ToString());
                                 if (clientinfo != null)
                                 {
                                     GiveItem(clientinfo, "keystoneBlock", 1);
@@ -614,7 +600,6 @@ namespace PrismaCore
                             //NW
                             if (_blockPos.x != 0 && _blockPos.z != 0)
                             {
-                                //clientinfo = ConsoleHelper.ParseParamIdOrName(playerId.ToString());
                                 if (clientinfo != null)
                                 {
                                     GiveItem(clientinfo, "keystoneBlock", 1);
@@ -657,7 +642,6 @@ namespace PrismaCore
                             //SW
                             if (_blockPos.x != 0 && _blockPos.z != 0)
                             {
-                                //clientinfo = ConsoleHelper.ParseParamIdOrName(playerId.ToString());
                                 if (clientinfo != null)
                                 {
                                     GiveItem(clientinfo, "keystoneBlock", 1);
@@ -700,7 +684,6 @@ namespace PrismaCore
                             //SE
                             if (_blockPos.x != 0 && _blockPos.z != 0)
                             {
-                                //clientinfo = ConsoleHelper.ParseParamIdOrName(playerId.ToString());
                                 if (clientinfo != null)
                                 {
                                     GiveItem(clientinfo, "keystoneBlock", 1);
@@ -750,10 +733,6 @@ namespace PrismaCore
                     {
                         if (_blockPos.x >= activeClaim.W_bound && _blockPos.x <= activeClaim.E_bound && _blockPos.z >= activeClaim.S_bound && _blockPos.z <= activeClaim.N_bound)
                         {
-                            //check for whitelist and permission level
-                            //clientinfo = ConsoleHelper.ParseParamIdOrName(playerId.ToString());
-                            //int AdminLvL = GameManager.Instance.adminTools.Users.GetUserPermissionLevel(clientinfo);
-
                             if (AdminLvL <= activeClaim.AccessLevel || activeClaim.Whitelist.Contains(clientinfo.PlatformId.ToString()) || activeClaim.Id.Contains(clientinfo.PlatformId.ToString()))
                             {
                                 continue;
@@ -762,7 +741,6 @@ namespace PrismaCore
                             {
                                 if (_blockPos.x != 0 && _blockPos.z != 0)
                                 {
-                                    //clientinfo = ConsoleHelper.ParseParamIdOrName(playerId.ToString());
                                     if (clientinfo != null)
                                     {
                                         //give back to player
@@ -823,7 +801,6 @@ namespace PrismaCore
                         {
                             if (lstAllPoiExceptions.ContainsCaseInsensitive(fab.name) || lstAllPoiExceptions.ContainsCaseInsensitive(fab.location.Name))
                             {
-                                //Log.Out($"[PrismaCore] Prefab {fab.name} has been skipped from quest poi protection by exclusion!");
                                 continue;
                             }
 
@@ -840,7 +817,6 @@ namespace PrismaCore
                             {
                                 if (_blockPos.x != 0 && _blockPos.z != 0)
                                 {
-                                    //clientinfo = ConsoleHelper.ParseParamIdOrName(playerId.ToString());
                                     if (clientinfo != null)
                                     {
                                         if (BuffManager.Buffs.ContainsKey("prismacore_tooltip_allpoiprotectionlcb"))
@@ -902,7 +878,6 @@ namespace PrismaCore
                             {
                                 if (lstQuestPoiExceptions.ContainsCaseInsensitive(fab.name) || lstQuestPoiExceptions.ContainsCaseInsensitive(fab.location.Name))
                                 {
-                                    //Log.Out($"[PrismaCore] Prefab {fab.name} has been skipped from quest poi protection by exclusion!");
                                     continue;
                                 }
 
@@ -919,7 +894,6 @@ namespace PrismaCore
                                 {
                                     if (_blockPos.x != 0 && _blockPos.z != 0)
                                     {
-                                        //clientinfo = ConsoleHelper.ParseParamIdOrName(playerId.ToString());
                                         if (clientinfo != null)
                                         {
                                             if (BuffManager.Buffs.ContainsKey("prismacore_tooltip_questpoiprotectionlcb"))
@@ -981,7 +955,6 @@ namespace PrismaCore
                 {
                     //problock and landclaim check
                     bool removed = false;
-                    //BlockValue bv = GameManager.Instance.World.GetBlock(bc.pos);
 
                     foreach (DbClaim activeClaim in lstClaims)
                     {
@@ -991,10 +964,6 @@ namespace PrismaCore
                         {
                             if (bc.blockValueRef.BlockPosition.x >= activeClaim.W_bound && bc.blockValueRef.BlockPosition.x <= activeClaim.E_bound && bc.blockValueRef.BlockPosition.z >= activeClaim.S_bound && bc.blockValueRef.BlockPosition.z <= activeClaim.N_bound)
                             {
-                                //check for whitelist and permission level
-                                //clientinfo = ConsoleHelper.ParseParamIdOrName(playerId.ToString());
-                                //int AdminLvL = GameManager.Instance.adminTools.Users.GetUserPermissionLevel(clientinfo);
-
                                 if (AdminLvL <= activeClaim.AccessLevel || activeClaim.Whitelist.Contains(clientinfo.PlatformId.ToString()) || activeClaim.Id.Contains(clientinfo.PlatformId.ToString()))
                                 {
                                     continue;
@@ -1005,7 +974,6 @@ namespace PrismaCore
                                     {
                                         if (bc.blockValue.Block != null && !activeClaim.Type.Trim().Contains(bc.blockValue.Block.GetBlockName()))
                                         {
-                                            //clientinfo = ConsoleHelper.ParseParamIdOrName(playerId.ToString());
                                             if (clientinfo != null)
                                             {
                                                 //give back to
@@ -1018,7 +986,6 @@ namespace PrismaCore
                                                 {
                                                     string proBlocks = activeClaim.Type.Trim().Split(':')[1];
                                                     string msg = PrismaCoreStrings.Instance.AdvClaims_ProBlock.Replace("{proBlocks}", proBlocks);
-                                                    //GameManager.Instance.ChatMessageServer(clientinfo, EChatType.Whisper, -1, msg, PrismaCoreStrings.Instance.ServerChatName, null);
                                                     clientinfo.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(PrismaCoreStrings.Instance.ServerChatName, msg), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
                                                 }
 
@@ -1059,7 +1026,6 @@ namespace PrismaCore
                                 {
                                     if (bc.blockValueRef.BlockPosition.x != 0 && bc.blockValueRef.BlockPosition.z != 0)
                                     {
-                                        //clientinfo = ConsoleHelper.ParseParamIdOrName(playerId.ToString());
                                         if (clientinfo != null)
                                         {
                                             //give back to player
@@ -1133,7 +1099,6 @@ namespace PrismaCore
                                             {
                                                 if (bc.blockValue.Block != null && activeClaim.Type.Trim().Contains(bc.blockValue.Block.GetBlockName()))
                                                 {
-                                                    //clientinfo = ConsoleHelper.ParseParamIdOrName(playerId.ToString());
                                                     if (clientinfo != null)
                                                     {
                                                         if (BuffManager.Buffs.ContainsKey($"prismacore_tooltip_{activeClaim.Id}"))
@@ -1201,7 +1166,6 @@ namespace PrismaCore
                                     {
                                         if (lstAllPoiExceptions.ContainsCaseInsensitive(fab.name) || lstAllPoiExceptions.ContainsCaseInsensitive(fab.location.Name))
                                         {
-                                            //Log.Out($"[PrismaCore] Prefab {fab.name} has been skipped from quest poi protection by exclusion!");
                                             continue;
                                         }
 
@@ -1212,13 +1176,11 @@ namespace PrismaCore
                                         Vector3i expand = new Vector3i(deadsize, deadsize, deadsize);
                                         Vector3i BoxMinNew = BoxMin - expand;
                                         Vector3i BoxMaxNew = BoxMax + expand;
-                                        //double bedrollexpireTime = (double)GameStats.GetInt(EnumGameStats.BedrollExpiryTime) * 24.0;
 
                                         if (bc.blockValueRef.BlockPosition.x >= BoxMinNew.x && bc.blockValueRef.BlockPosition.x < BoxMaxNew.x && bc.blockValueRef.BlockPosition.y >= BoxMinNew.y && bc.blockValueRef.BlockPosition.y < BoxMaxNew.y && bc.blockValueRef.BlockPosition.z >= BoxMinNew.z && bc.blockValueRef.BlockPosition.z < BoxMaxNew.z)
                                         {
                                             if (bc.blockValueRef.BlockPosition.x != 0 && bc.blockValueRef.BlockPosition.z != 0)
                                             {
-                                                //clientinfo = ConsoleHelper.ParseParamIdOrName(playerId.ToString());
                                                 if (clientinfo != null)
                                                 {
                                                     if (BuffManager.Buffs.ContainsKey("prismacore_tooltip_allpoiprotectionbed"))
@@ -1278,7 +1240,6 @@ namespace PrismaCore
                                         {
                                             if (lstQuestPoiExceptions.ContainsCaseInsensitive(fab.name) || lstQuestPoiExceptions.ContainsCaseInsensitive(fab.location.Name))
                                             {
-                                                //Log.Out($"[PrismaCore] Prefab {fab.name} has been skipped from quest poi protection by exclusion!");
                                                 continue;
                                             }
 
@@ -1289,13 +1250,11 @@ namespace PrismaCore
                                             Vector3i expand = new Vector3i(deadsize, deadsize, deadsize);
                                             Vector3i BoxMinNew = BoxMin - expand;
                                             Vector3i BoxMaxNew = BoxMax + expand;
-                                            //double bedrollexpireTime = (double)GameStats.GetInt(EnumGameStats.BedrollExpiryTime) * 24.0;
 
                                             if (bc.blockValueRef.BlockPosition.x >= BoxMinNew.x && bc.blockValueRef.BlockPosition.x < BoxMaxNew.x && bc.blockValueRef.BlockPosition.y >= BoxMinNew.y && bc.blockValueRef.BlockPosition.y < BoxMaxNew.y && bc.blockValueRef.BlockPosition.z >= BoxMinNew.z && bc.blockValueRef.BlockPosition.z < BoxMaxNew.z)
                                             {
                                                 if (bc.blockValueRef.BlockPosition.x != 0 && bc.blockValueRef.BlockPosition.z != 0)
                                                 {
-                                                    //clientinfo = ConsoleHelper.ParseParamIdOrName(playerId.ToString());
                                                     if (clientinfo != null)
                                                     {
                                                         if (BuffManager.Buffs.ContainsKey("prismacore_tooltip_questpoiprotectionbed"))
@@ -1351,10 +1310,6 @@ namespace PrismaCore
                                 {
                                     if (bc.blockValueRef.BlockPosition.x >= activeClaim.W_bound && bc.blockValueRef.BlockPosition.x <= activeClaim.E_bound && bc.blockValueRef.BlockPosition.z >= activeClaim.S_bound && bc.blockValueRef.BlockPosition.z <= activeClaim.N_bound)
                                     {
-                                        //check for whitelist and permission level
-                                        //clientinfo = ConsoleHelper.ParseParamIdOrName(playerId.ToString());
-                                        //int AdminLvL = GameManager.Instance.adminTools.Users.GetUserPermissionLevel(clientinfo);
-
                                         if (AdminLvL <= activeClaim.AccessLevel || activeClaim.Whitelist.Contains(clientinfo.PlatformId.ToString()) || activeClaim.Id.Contains(clientinfo.PlatformId.ToString()))
                                         {
                                             continue;
@@ -1365,7 +1320,6 @@ namespace PrismaCore
                                             {
                                                 if (bc.blockValue.Block != null && activeClaim.Type.Trim().Contains(bc.blockValue.Block.GetBlockName()))
                                                 {
-                                                    //clientinfo = ConsoleHelper.ParseParamIdOrName(playerId.ToString());
                                                     if (clientinfo != null)
                                                     {
                                                         if (BuffManager.Buffs.ContainsKey($"prismacore_tooltip_{activeClaim.Id}"))
@@ -1377,7 +1331,6 @@ namespace PrismaCore
                                                         {
                                                             string msg = PrismaCoreStrings.Instance.AdvClaims_AntiBlock.Replace("{blockName}", bc.blockValue.Block.GetBlockName());
                                                             clientinfo.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(PrismaCoreStrings.Instance.ServerChatName, msg), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
-                                                            //clientinfo.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, msg, PrismaCoreStrings.Instance.ServerChatName, false, null));
                                                         }
 
                                                         GiveItem(clientinfo, bc.blockValue.Block.GetBlockName(), 1);
@@ -1505,7 +1458,6 @@ namespace PrismaCore
                     }
                     if (hashSetLong.Count > 0)
                     {
-                        //SdtdConsole.Instance.Output($"[PrismaCore]Regenerating {hashSetLong.Count} synced chunks for region {regionX},{regionZ}");
                         foreach (long num3 in hashSetLong)
                         {
                             if (!chunkProviderGenerateWorld.GenerateSingleChunk(chunkCache, num3, true))
@@ -1583,7 +1535,6 @@ namespace PrismaCore
                             }
                             if (hashSetLong.Count > 0)
                             {
-                                //SdtdConsole.Instance.Output($"[PrismaCore]Regenerating {hashSetLong.Count} synced chunks for region {regionX},{regionZ}");
                                 foreach (long num3 in hashSetLong)
                                 {
                                     if (!chunkProviderGenerateWorld.GenerateSingleChunk(chunkCache, num3, true))

@@ -45,7 +45,6 @@ namespace PrismaCore.CustomCommands
                     else
                     {
                         PrismaCoreSettings.Instance.BloodmoonSpawner_Overridden_AdjustBMEnemyCountPerPlayerToNrOnlinePlayers = blocked;
-                        //PrismaCoreSettings.Instance.Save();
                         SdtdConsole.Instance.Output($"BloodmoonSpawner_Overridden_AdjustBMEnemyCountPerPlayerToNrOnlinePlayers has been set to {blocked} for current server session.");
                     }
                 }

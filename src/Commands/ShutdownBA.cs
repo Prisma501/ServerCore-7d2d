@@ -58,12 +58,6 @@ namespace PrismaCore.CustomCommands
                         {
                             thCountdown.Abort();
                             countdRunning = false;
-                            //if(File.Exists(string.Format("{0}/reset", API.RegionPath)))
-                            //{
-                            //    File.Delete(string.Format("{0}/reset", API.RegionPath));
-                            //}
-                            //RegionReset.resetRegions = false;
-                            //RegionReset.resetUnclaimed = false;
                             RegionReset.resetVehicles = false;
                             RegionReset.resetDrones = false;
                             SdtdConsole.Instance.Output("[PrismaCore] shutdownba was manually interrupted.");
@@ -150,173 +144,6 @@ namespace PrismaCore.CustomCommands
                         return;
                     }
 
-                    //if (_params.ContainsCaseInsensitive("reset"))
-                    //{
-                    //    if (countdRunning)
-                    //    {
-                    //        SdtdConsole.Instance.Output(string.Format("ERR: Server is already stopping in {0} minutes", minutes));
-                    //        return;
-                    //    }
-                    //    else
-                    //    {
-                    //        if (!int.TryParse(_params[0], out minutes))
-                    //        {
-                    //            SdtdConsole.Instance.Output(string.Format("ERR: Invalid number of minutes specified: {0}", minutes));
-                    //            return;
-                    //        }
-                    //        else
-                    //        {
-                    //            //using (File.Create(string.Format("{0}/reset", API.RegionPath))) { }
-                    //            //RegionReset.resetRegions = true;
-                    //            SdtdConsole.Instance.Output("[PrismaCore] Regions marked for reset are going to be reset at shutdown!!!");
-                    //            //Start();
-                    //        }
-                    //    }
-                    //}
-                    //else if (_params[1].EqualsCaseInsensitive("resetprefabs"))
-                    //{
-                    //    if (countdRunning)
-                    //    {
-                    //        SdtdConsole.Instance.Output(string.Format("ERR: Server is already stopping in {0} minutes", minutes));
-                    //    }
-                    //    else
-                    //    {
-                    //        if (!int.TryParse(_params[0], out minutes))
-                    //        {
-                    //            SdtdConsole.Instance.Output(string.Format("ERR: Invalid number of minutes specified: {0}", minutes));
-                    //        }
-                    //        else
-                    //        {
-                    //            using (File.Create(string.Format("{0}/resetprefabs", API.RegionPath))) { }
-                    //            SdtdConsole.Instance.Output("[PrismaCore] RWG Prefabs are going to reset at shutdown!!!");
-                    //            Start();
-                    //        }
-                    //    }
-                    //}
-
-                    //if (_params.ContainsCaseInsensitive("resetunclaimed"))
-                    //{
-                    //    if (countdRunning)
-                    //    {
-                    //        SdtdConsole.Instance.Output(string.Format("ERR: Server is already stopping in {0} minutes", minutes));
-                    //        return;
-                    //    }
-                    //    else
-                    //    {
-                    //        if (!int.TryParse(_params[0], out minutes))
-                    //        {
-                    //            SdtdConsole.Instance.Output(string.Format("ERR: Invalid number of minutes specified: {0}", minutes));
-                    //            return;
-                    //        }
-                    //        else
-                    //        {
-                    //            Dictionary<Vector3i, PersistentPlayerData> allBlocks = GameManager.Instance.GetPersistentPlayerList().m_lpBlockMap;
-                    //            RegionReset.lstRegionsClaimed.Clear();
-
-                    //            int LCBsize = GamePrefs.GetInt(EnumUtils.Parse<EnumGamePrefs>("LandClaimSize"));
-                    //            decimal d = (LCBsize - 1) / 2;
-                    //            int halfLCB = Convert.ToInt32(Math.Floor(d));
-
-                    //            if (allBlocks != null)
-                    //            {
-                    //                foreach (KeyValuePair<Vector3i, PersistentPlayerData> kvp in allBlocks)
-                    //                {
-                    //                    //exclude based on center LCB
-                    //                    Vector3i pos = kvp.Key;
-                    //                    string regionClaimed = GetRegion(pos);
-                    //                    if (!RegionReset.lstRegionsClaimed.Contains(regionClaimed))
-                    //                    {
-                    //                        RegionReset.lstRegionsClaimed.Add(regionClaimed);
-                    //                    }
-
-                    //                    //exclude based on LCB corners
-                    //                    int W = pos.x - halfLCB;
-                    //                    int E = pos.x + halfLCB;
-                    //                    int N = pos.z + halfLCB;
-                    //                    int S = pos.z - halfLCB;
-
-                    //                    //get region files for SW, NW, SE, NE and check
-                    //                    Vector3i SW = new Vector3i(W, -1, S);
-                    //                    Vector3i NW = new Vector3i(W, -1, N);
-                    //                    Vector3i SE = new Vector3i(E, -1, S);
-                    //                    Vector3i NE = new Vector3i(E, -1, N);
-
-                    //                    regionClaimed = string.Empty;
-                    //                    regionClaimed = GetRegion(SW);
-                    //                    if (!RegionReset.lstRegionsClaimed.Contains(regionClaimed))
-                    //                    {
-                    //                        RegionReset.lstRegionsClaimed.Add(regionClaimed);
-                    //                    }
-
-                    //                    regionClaimed = string.Empty;
-                    //                    regionClaimed = GetRegion(NW);
-                    //                    if (!RegionReset.lstRegionsClaimed.Contains(regionClaimed))
-                    //                    {
-                    //                        RegionReset.lstRegionsClaimed.Add(regionClaimed);
-                    //                    }
-
-                    //                    regionClaimed = string.Empty;
-                    //                    regionClaimed = GetRegion(SE);
-                    //                    if (!RegionReset.lstRegionsClaimed.Contains(regionClaimed))
-                    //                    {
-                    //                        RegionReset.lstRegionsClaimed.Add(regionClaimed);
-                    //                    }
-
-                    //                    regionClaimed = string.Empty;
-                    //                    regionClaimed = GetRegion(NE);
-                    //                    if (!RegionReset.lstRegionsClaimed.Contains(regionClaimed))
-                    //                    {
-                    //                        RegionReset.lstRegionsClaimed.Add(regionClaimed);
-                    //                    }
-                    //                }
-                    //            }
-
-                    //            //enumerate normal claims and exclude too
-                    //            List<DbClaim> lstClaims = Database.Instance.GetAllDbClaims();
-                    //            foreach (var activeClaim in lstClaims)
-                    //            {
-                    //                if (activeClaim == null) continue;
-
-                    //                if (activeClaim.Type == "")
-                    //                {
-                    //                    Vector3i advClaimPos1 = new Vector3i(activeClaim.W_bound, -1, activeClaim.S_bound);
-                    //                    string regionClaimed1 = GetRegion(advClaimPos1);
-                    //                    if (!RegionReset.lstRegionsClaimed.Contains(regionClaimed1))
-                    //                    {
-                    //                        RegionReset.lstRegionsClaimed.Add(regionClaimed1);
-                    //                    }
-
-                    //                    Vector3i advClaimPos2 = new Vector3i(activeClaim.W_bound, -1, activeClaim.N_bound);
-                    //                    string regionClaimed2 = GetRegion(advClaimPos2);
-                    //                    if (!RegionReset.lstRegionsClaimed.Contains(regionClaimed2))
-                    //                    {
-                    //                        RegionReset.lstRegionsClaimed.Add(regionClaimed2);
-                    //                    }
-
-                    //                    Vector3i advClaimPos3 = new Vector3i(activeClaim.E_bound, -1, activeClaim.S_bound);
-                    //                    string regionClaimed3 = GetRegion(advClaimPos3);
-                    //                    if (!RegionReset.lstRegionsClaimed.Contains(regionClaimed3))
-                    //                    {
-                    //                        RegionReset.lstRegionsClaimed.Add(regionClaimed3);
-                    //                    }
-
-                    //                    Vector3i advClaimPos4 = new Vector3i(activeClaim.E_bound, -1, activeClaim.N_bound);
-                    //                    string regionClaimed4 = GetRegion(advClaimPos4);
-                    //                    if (!RegionReset.lstRegionsClaimed.Contains(regionClaimed4))
-                    //                    {
-                    //                        RegionReset.lstRegionsClaimed.Add(regionClaimed4);
-                    //                    }
-                    //                }
-                    //            }
-
-                    //            //using (File.Create(string.Format("{0}/resetunclaimed", API.RegionPath))) { }
-                    //            //RegionReset.resetUnclaimed = true;
-                    //            SdtdConsole.Instance.Output("[PrismaCore] Regions that have NO claimblocks/Normal Adv. Claims on are going to be reset at shutdown!!!");
-                    //            //Start();
-                    //        }
-                    //    }
-                    //}
-
                     if (_params.ContainsCaseInsensitive("resetvehicles"))
                     {
                         if (countdRunning)
@@ -335,7 +162,6 @@ namespace PrismaCore.CustomCommands
                             {
                                 RegionReset.resetVehicles = true;
                                 SdtdConsole.Instance.Output("[PrismaCore] ALL vehicles on map will be deleted on shutdown!");
-                                //Start();
                             }
                         }
                     }
@@ -358,7 +184,6 @@ namespace PrismaCore.CustomCommands
                             {
                                 RegionReset.resetDrones = true;
                                 SdtdConsole.Instance.Output("[PrismaCore] ALL drones on map will be deleted on shutdown!");
-                                //Start();
                             }
                         }
                     }
@@ -393,7 +218,6 @@ namespace PrismaCore.CustomCommands
         {
             thCountdown = new Thread(new ThreadStart(Countdown));
             thCountdown.IsBackground = true;
-            //thCountdown.Priority= System.Threading.ThreadPriority.BelowNormal;
             thCountdown.Start();
         }
 
@@ -450,22 +274,6 @@ namespace PrismaCore.CustomCommands
                 GameManager.Instance.ChatMessageServer(null, EChatType.Global, -1, Utils.CreateGameMessage(PrismaCoreStrings.Instance.ServerChatName, string.Format("{0}", t)), null, EMessageSender.None);
                 Thread.Sleep(60000);
             }
-            //CmdClaimCommandResult iConsole = new CmdClaimCommandResult();
-
-            //SdtdConsole.Instance.ExecuteSync("saveworld", null);
-
-            //SdtdConsole.Instance.ExecuteSync($"kickall \"{PrismaCoreStrings.Instance.ShutdownBA_KickMessage}\"", null);
-
-            //int fs = 0;
-            //while (ConnectionManager.Instance.ClientCount() > 0)
-            //{
-            //    Thread.Sleep(1000);
-            //    fs += 1;
-            //    if(fs == 5)
-            //    {
-            //        break;
-            //    }
-            //}
 
             SdtdConsole.Instance.ExecuteSync("shutdown", null);
 

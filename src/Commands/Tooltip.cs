@@ -30,7 +30,6 @@ namespace PrismaCore.CustomCommands
                 return;
             }
 
-            //int.TryParse(_params[0], out int id);
             if (_params[0].ToLower() == "all")
             {
                 World w = GameManager.Instance.World;

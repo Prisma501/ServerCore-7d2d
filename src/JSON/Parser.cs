@@ -12,7 +12,6 @@ namespace PrismaCore.JSON
         {
             SkipWhitespace(_json, ref _offset);
 
-            //Log.Out ("ParseInternal (" + offset + "): Decide on: '" + json [offset] + "'");
             switch (_json[_offset])
             {
                 case '[':
@@ -33,7 +32,6 @@ namespace PrismaCore.JSON
 
         public static void SkipWhitespace(string _json, ref int _offset)
         {
-            //Log.Out ("SkipWhitespace (" + offset + "): '" + json [offset] + "'");
             while (_offset < _json.Length)
             {
                 switch (_json[_offset])

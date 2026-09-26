@@ -37,9 +37,6 @@ namespace PrismaCore.CustomCommands
                     return;
                 }
 
-                //PlatformUserIdentifierAbs userId = API.GetUserIdAbs(_params[0]);
-                //string steamid = userId.ToString();
-
                 string steamid = string.Empty;
                 ClientInfo ci = ConsoleHelper.ParseParamIdOrName(_params[0]);
                 if (ci == null)
@@ -58,12 +55,6 @@ namespace PrismaCore.CustomCommands
                 {
                     steamid = ci.PlatformId.ToString();
                 }
-
-                //if (steamid == null)
-                //{
-                //    SdtdConsole.Instance.Output("ERR: Playername or entity/steamid id not found.");
-                //    return;
-                //}
 
                 string chatName = _params[2];
                 if (!chatName.Equals("0") && !chatName.Equals("1"))

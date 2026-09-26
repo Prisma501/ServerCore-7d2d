@@ -29,7 +29,6 @@ namespace PrismaCore
                     int x = (int)Math.Floor(player.GetPosition().x);
                     int y = (int)Math.Floor(player.GetPosition().y);
                     int z = (int)Math.Floor(player.GetPosition().z);
-                    //string steamID = _cInfo.playerId;
 
                     if (parameter.ToLower().Equals("near"))
                     {
@@ -51,7 +50,6 @@ namespace PrismaCore
                             {
                                 playerFound = true;
                                 _cInfo.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, Utils.CreateGameMessage(PrismaCoreStrings.Instance.ServerChatName, color + clientinfo.playerName + "[-]"), null, EMessageSender.None, GeneratedTextManager.BbCodeSupportMode.Supported));
-                                //_cInfo.SendPackage(NetPackageManager.GetPackage<NetPackageChat>().Setup(EChatType.Whisper, -1, color + clientinfo.playerName + "[-]", "*", false, null));
                             }
 
                         }

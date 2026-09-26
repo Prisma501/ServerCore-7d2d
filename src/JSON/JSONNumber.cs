@@ -29,7 +29,6 @@ namespace PrismaCore.JSON
 
         public static JSONNumber Parse(string _json, ref int _offset)
         {
-            //Log.Out ("ParseNumber enter (" + offset + ")");
             StringBuilder sbNum = new StringBuilder();
             StringBuilder sbExp = null;
             bool hasDec = false;
@@ -138,7 +137,6 @@ namespace PrismaCore.JSON
                         number = number * Math.Pow(10, exp);
                     }
 
-                    //Log.Out ("JSON:Parsed Number: " + number.ToString ());
                     return new JSONNumber(number);
                 }
 

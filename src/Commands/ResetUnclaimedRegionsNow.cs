@@ -155,22 +155,6 @@ namespace PrismaCore.CustomCommands
 
                 yield break;
 
-                //using (File.Create(string.Format("{0}/resetunclaimed", API.RegionPath))) { }
-                //RegionReset.resetUnclaimed = true;
-                //SdtdConsole.Instance.Output("Regions that have NO claimblocks/Normal Adv. Claims on are going to be reset at shutdown!!!");
-
-                //SdtdConsole.Instance.ExecuteSync("saveworld", (ClientInfo)null);
-
-                //foreach (KeyValuePair<int, EntityPlayer> player in w.Players.dict)
-                //{
-                //    ClientInfo clientInfo = ConnectionManager.Instance.Clients.ForEntityId(player.Key);
-                //    Log.Out(string.Format("Kicking Player {0}: Server is rebooting...", clientInfo.playerName));
-                //    ClientInfo cInfo = clientInfo;
-                //    GameUtils.KickPlayerForClientInfo(cInfo, new GameUtils.KickPlayerData(GameUtils.EKickReason.ManualKick, 0, default(DateTime), "Server is rebooting..."));
-                //}
-                //Thread.Sleep(5000);
-
-                //SdtdConsole.Instance.ExecuteSync("shutdown", (ClientInfo)null);
             }
             catch (Exception e)
             {

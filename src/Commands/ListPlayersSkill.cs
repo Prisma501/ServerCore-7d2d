@@ -58,7 +58,6 @@ namespace PrismaCore.CustomCommands
                         ClientInfo ci = ConnectionManager.Instance.Clients.ForEntityId(player.entityId);
                         if (ci == null)
                         {
-                            //SdtdConsole.Instance.Output("ERR: Playername or entity id not found.");
                             continue;
                         }
                         printPlayerSkill(player, ci);
@@ -74,25 +73,9 @@ namespace PrismaCore.CustomCommands
 
         private void printPlayerSkill(EntityPlayer player, ClientInfo ci)
         {
-            //Dictionary<string, int> attrs = new Dictionary<string, int>();
-            //Dictionary<string, int> skills = new Dictionary<string, int>();
-            //Dictionary<string, int> perks = new Dictionary<string, int>();
-
             SdtdConsole.Instance.Output($"Attributes/Skills/Perks for player (Name : Level):  {ci.playerName}");
             foreach (KeyValuePair<int, ProgressionValue> c in player.Progression.GetDict())
             {
-                //if (c.Value.ProgressionClass.IsAttribute)
-                //{
-                //    attrs.Add(c.Value.ProgressionClass.NameTag.ToString(), c.Value.Level);
-                //}
-                //if (c.Value.ProgressionClass.IsSkill)
-                //{
-                //    skills.Add(c.Value.ProgressionClass.NameTag.ToString(), c.Value.Level);
-                //}
-                //if (c.Value.ProgressionClass.IsPerk)
-                //{
-                //    perks.Add(c.Value.ProgressionClass.NameTag.ToString(), c.Value.Level);
-                //}
                 SdtdConsole.Instance.Output($"{c.Value.Name} : {c.Value.Level}");
 
             }

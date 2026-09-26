@@ -86,7 +86,6 @@ namespace PrismaCore.CustomCommands
                             {
                                 location.Remove(ci.entityId);
                             }
-                            //location.Add(ci.entityId, new Vector3i((int)Math.Floor(ep.GetPosition().x), (int)Math.Floor(ep.GetPosition().y), (int)Math.Floor(ep.GetPosition().z)));
                             location.Add(ci.entityId, new Vector3i(ep.GetBlockPosition().x, ep.GetBlockPosition().y, ep.GetBlockPosition().z));
                             SdtdConsole.Instance.Output("Stored position: " + ep.GetBlockPosition().x + " " + ep.GetBlockPosition().y + " " + ep.GetBlockPosition().z);
                             return;
@@ -166,10 +165,6 @@ namespace PrismaCore.CustomCommands
                         y1 = storedPos.y;
                         z1 = storedPos.z;
 
-                        //x2 = (int)Math.Floor(ep.GetPosition().x);
-                        //y2 = (int)Math.Floor(ep.GetPosition().y);
-                        //z2 = (int)Math.Floor(ep.GetPosition().z);
-
                         x2 = ep.GetBlockPosition().x;
                         y2 = ep.GetBlockPosition().y;
                         z2 = ep.GetBlockPosition().z;
@@ -191,8 +186,6 @@ namespace PrismaCore.CustomCommands
                         int.TryParse(_params[2], out x2);
                         int.TryParse(_params[4], out y2);
                         int.TryParse(_params[6], out z2);
-
-                        //int.TryParse(_params[7], out rot);
 
                         blockName = _params[0].ToLower();
                     }
@@ -220,9 +213,6 @@ namespace PrismaCore.CustomCommands
                                 return;
 
                             }
-                            //x1 = (int)Math.Floor(ep.GetPosition().x);
-                            //y1 = (int)Math.Floor(ep.GetPosition().y);
-                            //z1 = (int)Math.Floor(ep.GetPosition().z);
 
                             x1 = ep.GetBlockPosition().x;
                             y1 = ep.GetBlockPosition().y;
@@ -284,7 +274,6 @@ namespace PrismaCore.CustomCommands
                             SdtdConsole.Instance.Output(GetHelp());
                             return;
                         }
-                        //int.TryParse(_params[4], out rot);
                     }
 
 
@@ -354,7 +343,6 @@ namespace PrismaCore.CustomCommands
                     }
 
                     Vector3i vectori2 = new Vector3i((x2 - x1) + 1, (y2 - y1) + 1, (z2 - z1) + 1);
-                    //Vector3i vectori2 = new Vector3i(Math.Abs(x1 - x2) + 1, Math.Abs(y1 - y2) + 1, Math.Abs(z1 - z2) + 1);
                     Prefab pref = new Prefab(vectori2);
                     pref.bCopyAirBlocks = true;
 
@@ -397,18 +385,6 @@ namespace PrismaCore.CustomCommands
                         PrefabUndo.setUndo("server_", undo, new Vector3i(x1, y1, z1), -1);
                     }
 
-                    //pref.SleeperVolumesStart = new List<Vector3i>();
-
-                    //DynamicPrefabDecorator dpd = GameManager.Instance.GetDynamicPrefabDecorator();
-                    //PrefabInstance prefInstance = new PrefabInstance(dpd.GetNextId(), pref.location, new Vector3i(x1, y1, z1), (byte)pref.GetLocalRotation(), pref, 0);
-
-                    //List<SleeperVolume> slVolumes = prefInstance.sleeperVolumes;
-                    //foreach (SleeperVolume slVolume in slVolumes)
-                    //{
-                    //    prefInstance.sleeperVolumes.Remove(slVolume);
-                    //}
-                                    
-                    //pref.SleeperVolumes = new List<Prefab.PrefabSleeperVolume>();
                     pref.CopyIntoLocal(GameManager.Instance.World.ChunkCache, new Vector3i(x1, y1, z1), true, true, FastTags<TagGroup.Global>.none);
 
                     Thread.Sleep(50);
@@ -426,7 +402,6 @@ namespace PrismaCore.CustomCommands
                                 BlockValue block = GameManager.Instance.World.GetBlock(x1 + j, y1 + m, z1 + k);
                                 if (block.type != BlockValue.Air.type)
                                 {
-                                    //GameManager.Instance.World.SetStability(x1 + j, y1 + m, z1 + k, 14);
                                     Vector3i _position = new Vector3i(x1 + j, y1 + m, z1 + k);
                                     stabCalc.BlockPlacedAt(_position, false);
                                 }

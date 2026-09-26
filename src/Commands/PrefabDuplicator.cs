@@ -149,7 +149,6 @@ namespace PrismaCore.CustomCommands
 
                         Vector3i storedPos1;
                         location1.TryGetValue(ci.entityId, out storedPos1);
-                        //location1.Remove(ci.entityId);
 
                         x1 = storedPos1.x;
                         y1 = storedPos1.y;
@@ -157,7 +156,6 @@ namespace PrismaCore.CustomCommands
 
                         Vector3i storedPos2;
                         location2.TryGetValue(ci.entityId, out storedPos2);
-                        //location2.Remove(ci.entityId);
 
                         x2 = storedPos2.x;
                         y2 = storedPos2.y;
@@ -206,7 +204,6 @@ namespace PrismaCore.CustomCommands
 
                     Vector3i storedPos1;
                     location1.TryGetValue(ci.entityId, out storedPos1);
-                    //location1.Remove(ci.entityId);
 
                     x1 = storedPos1.x;
                     y1 = storedPos1.y;
@@ -214,7 +211,6 @@ namespace PrismaCore.CustomCommands
 
                     Vector3i storedPos2;
                     location2.TryGetValue(ci.entityId, out storedPos2);
-                    //location2.Remove(ci.entityId);
 
                     x2 = storedPos2.x;
                     y2 = storedPos2.y;
@@ -279,11 +275,9 @@ namespace PrismaCore.CustomCommands
                     return;
                 }
 
-                //Vector3i vectori2 = new Vector3i((x2 - x1) + 1, y2 - y1 + 1, (z2 - z1) + 1);
                 Prefab pref = new Prefab();
                 pref.copyFromWorld(GameManager.Instance.World, new Vector3i(x1, y1, z1), new Vector3i(x2, y2, z2));
                 pref.bCopyAirBlocks = true;
-                //pref.addAllChildBlocks();
 
                 SdtdConsole.Instance.Output("Area duplicated from " + x1 + " " + y1 + " " + z1 + " to " + x2 + " " + y2 + " " + z2);
 
@@ -315,7 +309,6 @@ namespace PrismaCore.CustomCommands
 
                 Prefab undo = new Prefab(new Vector3i(pref.size.x, pref.size.y, pref.size.z));
                 undo.bCopyAirBlocks = true;
-                //undo.addAllChildBlocks();
 
                 undo.copyFromWorld(GameManager.Instance.World, new Vector3i(x, y, z), new Vector3i(x + pref.size.x, y + pref.size.y, z + pref.size.z));
                 if (_senderInfo.RemoteClientInfo != null)
@@ -336,7 +329,6 @@ namespace PrismaCore.CustomCommands
                     prefInstance.sleeperVolumes.Remove(slVolume);
                 }
 
-                //pref.SleeperVolumes = new List<Prefab.PrefabSleeperVolume>();
                 pref.CopyIntoLocal(GameManager.Instance.World.ChunkCache, new Vector3i(x, y, z), true, true, FastTags<TagGroup.Global>.none);
 
                 Thread.Sleep(50);
@@ -354,8 +346,6 @@ namespace PrismaCore.CustomCommands
                             BlockValue block = GameManager.Instance.World.GetBlock(x + j, y + m, z + k);
                             if (block.type != BlockValue.Air.type)
                             {
-                                //GameManager.Instance.World.SetStability(x + j, y + m, z + k, 14);
-
                                 Vector3i _position = new Vector3i(x + j, y + m, z + k);
                                 stabCalc.BlockPlacedAt(_position, false);
                             }

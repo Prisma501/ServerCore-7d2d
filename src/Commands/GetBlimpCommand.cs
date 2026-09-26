@@ -46,10 +46,8 @@ namespace PrismaCore.CustomCommands
                         {
                             try
                             {
-                                //SdtdConsole.Instance.Output("Lost MiniBike command sent by player: " + _cInfo.playerName + " id: " + _cInfo.playerId);
                                 Vector3 position = default(Vector3);
                                 List<Entity> list = GameManager.Instance.World.Entities.list;
-                                //_cInfo.SendPackage(NetPackageManager.GetPackage<NetPackageGameMessage> ().Setup(EnumGameMessages.Chat, "Looking for your Minibike", "", false, "", false));
                                 bool flag = false;
                                 for (int i = 0; i < list.Count; i++)
                                 {
@@ -62,14 +60,11 @@ namespace PrismaCore.CustomCommands
 
                                         if (entityBlimp.IsOwner(playerDataFromEntityID.PlayerData.PrimaryId))
                                         {
-                                            //_cInfo.SendPackage(NetPackageManager.GetPackage<NetPackageGameMessage> ().Setup(EnumGameMessages.Chat, "Found Your MiniBike!", "", false, "", false));
                                             position = GameManager.Instance.World.Players.dict[clientInfo.entityId].GetPosition();
                                             position.x += 1f;
                                             position.z += 1f;
                                             entityBlimp.SetPosition(position);
                                             SdtdConsole.Instance.Output("Blimp(jetpack) " + entityBlimp.entityId.ToString() + " teleported.");
-                                            //_cInfo.SendPackage(NetPackageManager.GetPackage<NetPackageGameMessage> ().Setup(EnumGameMessages.Chat, "MiniBike Teleported", "", false, "", false));
-                                            //entityBlimp.UseHorn();
                                             flag = true;
                                             break;
                                         }
@@ -78,7 +73,6 @@ namespace PrismaCore.CustomCommands
                                 }
                                 if (!flag)
                                 {
-                                    //_cInfo.SendPackage(NetPackageManager.GetPackage<NetPackageGameMessage> ().Setup(EnumGameMessages.Chat, "Could not find your Minibike", "", false, "", false));
                                     SdtdConsole.Instance.Output("Blimp(jetpack) Could not be found.");
                                 }
                             }

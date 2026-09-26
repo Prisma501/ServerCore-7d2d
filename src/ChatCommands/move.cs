@@ -15,15 +15,6 @@ namespace PrismaCore
 
                 if (AdminLvL <= PrismaCoreSettings.Instance.ChatCommandPermissions_mv)
                 {
-                    //drone dupe
-                    //if (PrismaCoreSettings.Instance.DroneDupePrevention_Enabled)
-                    //{
-                    //    if (DamageHandler.DroneDupeKill(_cInfo))
-                    //    {
-                    //        return true;
-                    //    }
-                    //}
-
                     string[] arrParameter = parameter.Split(' ');
                     string movingPlayer = "";
                     string toPlayer = "";

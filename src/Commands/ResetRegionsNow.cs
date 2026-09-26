@@ -56,22 +56,6 @@ namespace PrismaCore.CustomCommands
 
                 yield break;
 
-                //RegionReset.resetRegions = true;
-                //SdtdConsole.Instance.Output("[PrismaCore] Regions marked for reset are going to be reset at shutdown!!!");
-
-                //SdtdConsole.Instance.ExecuteSync("saveworld", (ClientInfo)null);
-
-                //World w = GameManager.Instance.World;
-
-                //foreach (KeyValuePair<int, EntityPlayer> player in w.Players.dict)
-                //{
-                //    ClientInfo clientInfo = ConnectionManager.Instance.Clients.ForEntityId(player.Key);
-                //    Log.Out(string.Format("Kicking Player {0}: Server is rebooting...", clientInfo.playerName));
-                //    ClientInfo cInfo = clientInfo;
-                //    GameUtils.KickPlayerForClientInfo(cInfo, new GameUtils.KickPlayerData(GameUtils.EKickReason.ManualKick, 0, default(DateTime), "Server is rebooting..."));
-                //}
-
-                //SdtdConsole.Instance.ExecuteSync("shutdown", (ClientInfo)null);
             }
             catch (Exception e)
             {

@@ -25,7 +25,6 @@ namespace PrismaCore.Web.API
                 JSONObject p = new JSONObject();
                 p.Add("steamid", new JSONString(ci.PlatformId.ToString()));
                 p.Add("name", new JSONString(current.Value.EntityName));
-                //p.Add ("online", new JSONBoolean (true));
                 p.Add("position", pos);
 
                 players.Add(p);

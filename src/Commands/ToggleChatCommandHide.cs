@@ -45,7 +45,6 @@ namespace PrismaCore.CustomCommands
 
                 if (_params.Count == 0)
                 {
-                    //PrismaCoreSettings.Instance.HideChatCommandPrefixes_Prefixes = "";
                     PrismaCoreSettings.Instance.HideChatCommandPrefixes_Enabled = false;
                     PrismaCoreSettings.Instance.Save();
                     SdtdConsole.Instance.Output("Chat command hiding disabled");

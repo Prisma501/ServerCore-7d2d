@@ -375,8 +375,6 @@ namespace PrismaCore.CustomCommands
                         if (hostilePos.x > x1 && hostilePos.x < x2 && hostilePos.z > z1 && hostilePos.z < z2)
                         {
                             hostiles.Add(entityAlive);
-                            //GameManager.Instance.World.RemoveEntity(entityAlive.entityId, EnumRemoveEntityReason.Despawned);
-                            //entityAlive.DamageEntity(new DamageSource(EnumDamageSource.Internal, EnumDamageTypes.None), 99999, false, 1f);
                         }
                     }
                 }
@@ -389,21 +387,6 @@ namespace PrismaCore.CustomCommands
                     }
                 }
 
-                //for (int index = 0; index < GameManager.Instance.World.Entities.list.Count; ++index)
-                //{
-                //    EntityAlive entityAlive = GameManager.Instance.World.Entities.list[index] as EntityAlive;
-                //    if (entityAlive != null && entityAlive.IsAlive() && EntityClass.list[entityAlive.entityClass].bIsEnemyEntity)
-                //    {
-
-                //        Vector3i hostilePos = new Vector3i(entityAlive.GetPosition());
-                //        if (Math.Abs(pos2.x - hostilePos.x) < 25 && Math.Abs(pos2.y - hostilePos.y) < 25 && Math.Abs(pos2.z - hostilePos.z) < 25)
-                //        {
-                //            //ci.SendPackage(NetPackageManager.GetPackage<NetPackageGameMessage> ().Setup(EnumGameMessages.Chat, "EntityName about to be killed: " + entityAlive.EntityName, "Lara", false, "", false));
-                //            entityAlive.DamageEntity(new DamageSource(EnumDamageSource.Internal, EnumDamageTypes.None), 99999, false, 1f);
-                //        }
-
-                //    }
-                //}
             }
             catch (Exception e) { Log.Error(e.ToString()); }
         }

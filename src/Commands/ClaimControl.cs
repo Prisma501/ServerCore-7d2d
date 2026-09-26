@@ -50,11 +50,9 @@ namespace PrismaCore.CustomCommands
                 {
                     case "add":
                         ExecuteAdd(_params);
-                        //CreateJsonForClaimTypes();
                         break;
                     case "remove":
                         ExecuteRemove(_params);
-                        //CreateJsonForClaimTypes();
                         break;
                     case "list":
                         ExecuteList();
@@ -67,11 +65,9 @@ namespace PrismaCore.CustomCommands
                         break;
                     case "p2":
                         ExecuteAddP2(_params, _senderInfo);
-                        //CreateJsonForClaimTypes();
                         break;
                     case "radius":
                         ExecuteAddRadius(_params);
-                        //CreateJsonForClaimTypes();
                         break;
                     default:
                         SdtdConsole.Instance.Output("ERR: Invalid sub command \"" + _params[0] + "\".");

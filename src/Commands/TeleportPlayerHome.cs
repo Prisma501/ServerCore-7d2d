@@ -48,15 +48,6 @@ namespace PrismaCore.CustomCommands
                         destPos.y = pos.y + 2;
                         destPos.z = pos.z;
 
-                        //drone dupe
-                        //if (PrismaCoreSettings.Instance.DroneDupePrevention_Enabled)
-                        //{
-                        //	if (DamageHandler.DroneDupeKill(ci1))
-                        //	{
-                        //		return;
-                        //	}
-                        //}
-
                         NetPackageTeleportPlayer pkg = NetPackageManager.GetPackage<NetPackageTeleportPlayer>().Setup(destPos);
                         ci1.SendPackage(pkg);
 

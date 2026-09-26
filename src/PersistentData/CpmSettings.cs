@@ -17,13 +17,6 @@ namespace PrismaCore
         public const string SaveFileName = "PrismaCoreSettings.xml";
         
         #region Persistent values to be saved
-        //garbagecollector
-        //public int CollectGarbage_Seconds = 0;
-        //public int HeartBeat_Interval_Seconds = 3;
-        //public bool LootboxTeleportDupePrevention_Enabled = true;
-
-        //corruptRegion handler
-        //public bool RemoveCorruptRegionsOnRestart = false;
 
         //Adv. Reversed Claim
         public int AdvClaims_Reversed_TpHeight = -1;
@@ -39,7 +32,6 @@ namespace PrismaCore
 
         //BloodmoonSpawner
         public bool BloodmoonSpawner_DespawnAllOnStart = false;
-        //public bool BloodmoonSpawner_DisableVehicleVultures = false;
         public bool BloodmoonSpawner_OverrideVanillaSpawner = false;
         public bool BloodmoonSpawner_Overridden_AdjustBMEnemyCountPerPlayerToNrOnlinePlayers = true;
         public int BloodmoonSpawner_Overridden_BMEnemyCountPerPlayer = 2;
@@ -64,7 +56,6 @@ namespace PrismaCore
         public int ChatCommandPermissions_tb = 0;
         public int ChatCommandPermissions_rt = 0;
         public int ChatCommandPermissions_get = 0;
-        //public int ChatCommandPermissions_rtc = 0;
         public int ChatCommandPermissions_bag = 1000;
         public int ChatCommandPermissions_ls = 1000;
         public int ChatCommandPermissions_day7 = 1000;
@@ -87,11 +78,6 @@ namespace PrismaCore
         public bool DisableSleeperRespawn_Enabled = false;
         public bool DisableSleepers_Enabled = false;
         public bool DisableSleepers_BloodmoonOnly_Enabled = false;
-        //public int DisableSleepers_BloodmoonOnly_FromHour = 20;
-        //public int DisableSleepers_BloodmoonOnly_ToHour = 5;
-
-        //Drone dupe prevention
-        //public bool DroneDupePrevention_Enabled = false;
 
         //GMSG joined, left, killed, died
         public bool GMSG_PlayerJoined_Enabled = true;
@@ -185,7 +171,6 @@ namespace PrismaCore
                         var serializer = new XmlSerializer(this.GetType());
                         serializer.Serialize(writer, this);
                         writer.Flush();
-                        //Log.Out($"[PrismaCore] PrismaCore strings saved in {SaveFileName}.");
                     }
                 }
                 catch (Exception ex)

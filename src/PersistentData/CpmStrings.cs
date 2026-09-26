@@ -50,19 +50,7 @@ namespace PrismaCore
         public string Acf_WhitelistSuccess = "[F7FE2E]{playerName} has been whitelisted for your claim(s).[-]";
         public string Acf_Error = "[FFA07A]Something went wrong! Could not add player to claim whitelist.[-]";
 
-        //public string Ati_PlayerNotFound = "[FFA07A]OMG! WTF? Who? Who do you want to trade with? Sorry but that player is unknown to me![-]";
-        //public string Ati_NoIncomingTrade = "[FFA07A]Eeeh..wait a minute. There is no trade initiated from this chest to you. You just like approving stuff randomly??[-]";
-        //public string Ati_NoItemsReleased = "[FFA07A]Eeeh..wait a minute.You approved a trade but you didnt release items for trading! Use /rti <name> to release the items in your tradingchest to a player.[-]";
-        //public string Ati_TradeCanceledSender = "[FFA07A]Looks like the other player canceled the trade. :-( You better do it too. Just use /cti[-]";
-        //public string Ati_TradeCanceledReceiver = "[FFA07A]OMG! WTF? Did you cancel the trade?! Well, the other player did just approve, for nothing![-]";
-        //public string Ati_TradeApprovedSender = "[F7FE2E]You approved the trade. Please wait until {playerName} approves the trade too.[-]";
-        //public string Ati_TradeApprovedReceiver = "[F7FE2E]Your trade offer was approved by {playerName}, but it seems you havent approved the trade yet. Use /ati <name> to accept the offer![-]";
-        //public string Ati_TradeSuccess = "[F7FE2E]You succesfully traded items with {playerName}[-]";
-        //public string Ati_Error = "[FFA07A]Something went wrong! Could not approve the items for trading.[-]";
-
-        //public string Bag_PositionNotSynced = "[F7FE2E]Your last dropped backpack position has not synced to server yet! Try again in a few seconds.[-]";
         public string Bag_PositionNotFound = "[F7FE2E]Your last dropped backpack position cannot be found.[-]";
-        //public string Bag_NoDeathOrTPdAllready = "[F7FE2E]You have no recorded death in this gamesession or you tp-ed to bag already.[-]";
         public string Bag_Error = "[FFA07A]Something went wrong! I was not able to tp you to your backpack.[-]";
 
         public string Bed_NoBed = "[F7FE2E]No active bed can be found![-]";
@@ -74,10 +62,6 @@ namespace PrismaCore
         public string Raf_RemoveSucces = "[F7FE2E]Player {playerName} has been removed from the whitelist of claim {claimName}[-]";
         public string Aaf_Error = "[FFA07A]Something went wrong! I was not able to add your friends to claim whitelist.[-]";
         public string Raf_Error = "[FFA07A]Something went wrong! I was not able to remove your friends from claim whitelist.[-]";
-
-        //public string Cti_NoActiveTrade = "[FFA07A]OMG! WTF? Cancel the trade?! What trade exactly?![-]";
-        //public string Cti_AllItemsReturned = "[F7FE2E]All your items have been put back in trading chest.[-]";
-        //public string Cti_Error = "[FFA07A]Something went wrong! Could not get the items back from virtual chest.[-]";
 
         public string Day7_BloodmoonWarningB4Four = "[40FF00]Bloodmoon is [FF0000]TONIGHT at 22:00[-] !!![-]";
         public string Day7_BloodmoonWarningAfterFour = "[40FF00]Bloodmoon is [FF0000]TONIGHT[-] !!![-]";
@@ -137,10 +121,6 @@ namespace PrismaCore
         public string Lcf_EmptyWhitelist = "[F7FE2E]You have no whitelisted friends for your claim.[-]";
         public string Lcf_Error = "[FFA07A]Something went wrong! Could not list claim whitelist.[-]";
 
-        //public string Lti_NoItems = "[F7FE2E]Absolutely nothing in virtual tradingchest![-]";
-        //public string Lti_NoTradingchest = "[FFA07A]OMG! WTF? List items from what tradingchest?? You need to register one! Doh![-]";
-        //public string Lti_Error = "[FFA07A]Something went wrong! Could not list the items released for trading.[-]";
-
         public string Listwp_NoWaypoints = "[F7FE2E]There are no waypoints available.[-]";
         public string Listwp_ListTitle = "[F7FE2E]Available waypoints:[-]";
         public string Listwp_Error = "[FFA07A]Something went wrong! I was not able get the waypoints.[-]";
@@ -154,22 +134,6 @@ namespace PrismaCore
         public string Mvw_PlayerOffline = "[F7FE2E]Player is offline and will be teleported to waypoint on next spawn.[-]";
         public string Mvw_Success = "[F7FE2E]Succesfully moved {movingPlayer} to waypoint {waypointName}.[-]";
         public string Mvw_Error = "[FFA07A]Something went wrong! I was not able to move the player to waypoint.[-]";
-
-        //public string Rtc_NotEmpty = "[FFA07A]WTF?! OMG!! I told you the chest had to be empty!!! Oh..i didnt?! Well, it has to be empty.[-]";
-        //public string Rtc_NotOwner = "[FFA07A]WTF?! OMG!! What are you thinking?! This chest is not yours, nor do you have access![-]";
-        //public string Rtc_FirstChest = "[F7FE2E]The storage chest you are standing on has been registered as Trading Chest.[-]";
-        //public string Rtc_OverwrittenChest = "[F7FE2E]The storage chest you are standing on has been registered as Trading Chest (Previous chest has been overwritten).[-]";
-        //public string Rtc_Error = "[FFA07A]Something went wrong! Could not register the chest as trading chest.[-]";
-
-        //public string Rti_PlayerNotFound = "[FFA07A]OMG! WTF? Who? Who do you want to trade with? Sorry but that player is unknown to me![-]";
-        //public string Rti_SelfTrade = "[FFA07A]OMG! WTF? Trading with yourself?! For what?! Not gonna happen.[-]";
-        //public string Rti_NoTargetChest = "[FFA07A]OMG! WTF? The player you are releasing trade items to, has no tradingchest!! OMG!![-]";
-        //public string Rti_AllreadyReleased = "[FFA07A]OMG! WTF? How many time you want to release trading items?! There are already released items. Trade or cancel first!! OMG![-]";
-        //public string Rti_NoItems = "[FFA07A]OMG! WTF? There are no items in your chest! Who were you gonna fool?![-]";
-        //public string Rti_SuccessSender = "[F7FE2E]You succesfully released following trading items to {playerName} for trading.[-]";
-        //public string Rti_SuccessReceiver = "[F7FE2E]A trade has been initiated from {playerName}.[-]";
-        //public string Rti_NoChest = "[F7FE2E]OMG! WTF? To what tradingchest?? You need to register one! Doh![-]";
-        //public string Rti_Error = "[FFA07A]Something went wrong! Could not release the items for trading.[-]";
 
         public string Rcf_NoAdvancedClaim = "[F7FE2E]You have no advanced claim![-]";
         public string Rcf_PlayerNotFound = "[F7FE2E]The player cannot be found![-]";
@@ -232,7 +196,6 @@ namespace PrismaCore
         //ShutdownBA
         public string ShutdownBA_CountdownMessage = "[00FF00]Server will restart in [FF0000]{Minutes} MINUTES[-]";
         public string ShutdownBA_RestartDelayedMessage = "[00FF00]Server restart delayed until after bloodmoon at {DelayUntil}[-]";
-        //public string ShutdownBA_KickMessage = "Server is rebooting...";
 
         #endregion
 
@@ -249,7 +212,6 @@ namespace PrismaCore
                         var serializer = new XmlSerializer(this.GetType());
                         serializer.Serialize(writer, this);
                         writer.Flush();
-                        //Log.Out($"[PrismaCore] PrismaCore strings saved in {SaveFileName}.");
                     }
                 }
                 catch (Exception ex)

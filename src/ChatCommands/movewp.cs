@@ -13,15 +13,6 @@ namespace PrismaCore
 
                 if (AdminLvL <= PrismaCoreSettings.Instance.ChatCommandPermissions_mvw)
                 {
-                    //drone dupe
-                    //if (PrismaCoreSettings.Instance.DroneDupePrevention_Enabled)
-                    //{
-                    //    if (DamageHandler.DroneDupeKill(_cInfo))
-                    //    {
-                    //        return true;
-                    //    }
-                    //}
-
                     string[] arrParameter = parameter.Split(' ');
                     string movingPlayer = "";
                     string toWaypoint = "";
@@ -52,7 +43,6 @@ namespace PrismaCore
                                         DbWaypoint wp = Database.Instance.GetDbWaypoint(toWaypoint);
                                         if (wp == null)
                                         {
-                                            //SdtdConsole.Instance.Output($"ERR: Waypoint with name {toWaypoint} does not exist!");
                                             return false;
                                         }
 
@@ -94,7 +84,6 @@ namespace PrismaCore
                                         DbWaypoint wp = Database.Instance.GetDbWaypoint(toWaypoint);
                                         if (wp == null)
                                         {
-                                            //SdtdConsole.Instance.Output($"ERR: Waypoint with name {toWaypoint} does not exist!");
                                             return false;
                                         }
 
@@ -122,7 +111,6 @@ namespace PrismaCore
                                         DbWaypoint wp = Database.Instance.GetDbWaypoint(toWaypoint);
                                         if (wp == null)
                                         {
-                                            //SdtdConsole.Instance.Output($"ERR: Waypoint with name {toWaypoint} does not exist!");
                                             return false;
                                         }
 
@@ -164,7 +152,6 @@ namespace PrismaCore
                                         DbWaypoint wp = Database.Instance.GetDbWaypoint(toWaypoint);
                                         if (wp == null)
                                         {
-                                            //SdtdConsole.Instance.Output($"ERR: Waypoint with name {toWaypoint} does not exist!");
                                             return false;
                                         }
 

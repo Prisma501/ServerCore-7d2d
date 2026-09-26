@@ -10,15 +10,6 @@
 
                 if (AdminLvL <= PrismaCoreSettings.Instance.ChatCommandPermissions_bed)
                 {
-                    //drone dupe
-                    //if(PrismaCoreSettings.Instance.DroneDupePrevention_Enabled)
-                    //{
-                    //    if (DamageHandler.DroneDupeKill(_cInfo))
-                    //    {
-                    //        return true;
-                    //    }
-                    //}
-
                     EntityPlayer ep1 = GameManager.Instance.World.Players.dict[_cInfo.entityId];
                     UnityEngine.Vector3 destPos = new UnityEngine.Vector3();
 

@@ -45,7 +45,6 @@ namespace PrismaCore.CustomCommands
                     else
                     {
                         PrismaCoreSettings.Instance.BloodmoonSpawner_OverrideVanillaSpawner = blocked;
-                        //PrismaCoreSettings.Instance.Save();
                         SdtdConsole.Instance.Output($"BloodmoonSpawner_OverrideVanillaSpawner has been set to {blocked} for current server session.");
                     }
                 }

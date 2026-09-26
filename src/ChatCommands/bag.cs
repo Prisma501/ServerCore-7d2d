@@ -10,15 +10,6 @@
 
                 if (AdminLvL <= PrismaCoreSettings.Instance.ChatCommandPermissions_bag)
                 {
-                    //drone dupe
-                    //if (PrismaCoreSettings.Instance.DroneDupePrevention_Enabled)
-                    //{
-                    //    if (DamageHandler.DroneDupeKill(_cInfo))
-                    //    {
-                    //        return true;
-                    //    }
-                    //}
-
                     if (API.dicDied.ContainsKey(_cInfo.PlatformId.ToString()))
                     {
                         UnityEngine.Vector3 destPos = new UnityEngine.Vector3();
@@ -48,7 +39,6 @@
             }
             catch
             {
-                // _cInfo.SendPackage(NetPackageManager.GetPackage<NetPackageGameMessage> ().Setup(EnumGameMessages.Chat, e.ToString(), PrismaCoreStrings.Instance.ServerChatName, false, "", false));
                 return false;
             }
             return true;

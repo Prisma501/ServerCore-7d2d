@@ -110,7 +110,6 @@ namespace PrismaCore.Web
 
                 connectionHandler = new ConnectionHandler();
 
-                //_listener.Prefixes.Add (string.Format ("http://*:{0}/", webPort + 3));
                 _listener.Prefixes.Add(string.Format("http://*:{0}/", PrismaCoreSettings.Instance.WebUI_Port));
                 _listener.Start();
 
@@ -177,7 +176,6 @@ namespace PrismaCore.Web
             Interlocked.Increment(ref handlingCount);
             Interlocked.Increment(ref currentHandlers);
 
-            //				MicroStopwatch msw = new MicroStopwatch ();
 #if ENABLE_PROFILER
 			Profiler.BeginThreadProfiling ("AllocsMods", "WebRequest");
 			HttpListenerContext ctx = _listener.EndGetContext (_result);
@@ -204,14 +202,11 @@ namespace PrismaCore.Web
 #endif
 
 
-                //Log.Out ("Login status: conn!=null: {0}, permissionlevel: {1}", conn != null, permissionLevel);
-
 
                 if (conn != null)
                 {
                     Cookie cookie = new Cookie("sidprismacore", conn.SessionID, "/");
                     cookie.Expired = false;
-                    //cookie.Expires = new DateTime (2020, 1, 1);
                     cookie.HttpOnly = true;
                     cookie.Secure = false;
                     response.AppendCookie(cookie);
@@ -240,7 +235,6 @@ namespace PrismaCore.Web
                                 response.StatusCode = (int)HttpStatusCode.Forbidden;
                                 if (conn != null)
                                 {
-                                    //Log.Out ("Web.HandleRequest: user '{0}' not allowed to access '{1}'", conn.SteamID, kvp.Value.ModuleName);
                                 }
                             }
                             else

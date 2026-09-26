@@ -132,7 +132,6 @@ namespace PrismaCore
                 Log.Out("[PrismaCore] Created new empty AllPoi_Exceptions.txt in " + RegionReset.RegionPath);
             }
 
-            //Log.Out("[PrismaCore] Loading PrismaCore Strings...");
             PrismaCoreStrings.Load();
             PrismaCoreSettings.Load();
 
@@ -444,7 +443,6 @@ namespace PrismaCore
             PersistentPlayerData playerDataFromEntityID = GameManager.Instance.GetPersistentPlayerList().GetPlayerDataFromEntityID(pdClientInfo.entityId);
 
             GameUtils.KickPlayerForClientInfo(pdClientInfo, new GameUtils.KickPlayerData(GameUtils.EKickReason.ManualKick, 0, default(DateTime), msg));
-            //SdtdConsole.Instance.ExecuteSync($"kick {_cInfo.entityId} \"{msg}\"", _cInfo);
             Thread.Sleep(7000);
             string fileMAP = $"{GameIO.GetSaveGameDir()}/Player/{playerDataFromEntityID.PlayerData.PrimaryId}.map";
             string fileTTP = $"{GameIO.GetSaveGameDir()}/Player/{playerDataFromEntityID.PlayerData.PrimaryId}.ttp";

@@ -150,7 +150,6 @@ namespace PrismaCore.CustomCommands
                         if (chunkProviderGenerateWorld != null)
                         {
                             Log.Out($"[PrismaCore] Started reset of Adv. Claim Reset: {activeClaim.Id}");
-                            //GameManager.Instance.ResetWindowsAndLocksByChunks(hashSetLong);
                             LockManager.Instance.ForceUnlockByChunk(hashSetLong);
                             chunkProviderGenerateWorld.RemoveChunks(hashSetLong);
                             foreach (long key in hashSetLong)
@@ -180,8 +179,6 @@ namespace PrismaCore.CustomCommands
                             }
 
                             chunkProviderGenerateWorld.SaveAll();
-                            //chunkCache.Clear();
-                            //chunkProviderGenerateWorld.ClearCaches();
 
                             //reset all sleepervolumes inside the resetclaim
                             int sleeperVolumeCount = world.sleeperVolumes.Count;
@@ -191,7 +188,6 @@ namespace PrismaCore.CustomCommands
                                 if (sleeperVolume != null)
                                 {
                                     Vector3 center = sleeperVolume.Center;
-                                    //Log.Out($"sleepervolume center is at {center}");
                                     if (center.x >= claimMin.x && center.x <= claimMax.x && center.z >= claimMin.y && center.z <= claimMax.y)
                                     {
                                         sleeperVolume.DespawnAndReset(world);
@@ -199,11 +195,7 @@ namespace PrismaCore.CustomCommands
                                 }
                             }
 
-                            //GameManager.Instance.SaveWorld();
-
                             Log.Out($"[PrismaCore] Reset of Adv. Claim Reset: {activeClaim.Id} done.");
-                            //GC.Collect();
-                            //GC.WaitForPendingFinalizers();
                         }
                         else
                         {
@@ -278,7 +270,6 @@ namespace PrismaCore.CustomCommands
                     }
                     else
                     {
-                        //Log.Out($"Chunk at position {WorldChunkCache.extractX(ck) << 4}/{WorldChunkCache.extractZ(ck) << 4} skipped because claimed!");
                     }
                 }
             }
@@ -307,7 +298,6 @@ namespace PrismaCore.CustomCommands
                     {
                         tmpHash.Add(lng);
                     }
-                    //GameManager.Instance.ResetWindowsAndLocksByChunks(hashSetLong);
                     LockManager.Instance.ForceUnlockByChunk(tmpHash);
                     chunkProviderGenerateWorld.RemoveChunks(tmpHash);
                     foreach (long key in tmpHash)
@@ -342,11 +332,7 @@ namespace PrismaCore.CustomCommands
                     chunkProviderGenerateWorld.ClearCaches();
                     progress += 1;
 
-                    //GameManager.Instance.SaveWorld();
-
                     Log.Out($"[PrismaCore] Chunks of map partition {progress}/16 have been reset to RWG default.");
-                    //GC.Collect();
-                    //GC.WaitForPendingFinalizers();
                 }
             }
 
