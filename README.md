@@ -2,10 +2,11 @@
 
 ServerCore is a server-side mod for 7 Days to Die dedicated servers. It adds about 100 admin console commands, advanced land claims, region resets, chat control, teleports, vehicle recall and more.
 
+**Documentation:** [gettakaro.github.io/ServerCore-7d2d](https://gettakaro.github.io/ServerCore-7d2d/)
+
 ServerCore is the continuation of **PrismaCore**, the mod Prisma501 built and maintained for over ten years. It started as CPM, later became the CSMM Patrons Mod, and then PrismaCore. Prisma retired from 7D2D modding in September 2026 and handed the mod over to the community. It's now open source under the MIT licence.
 
-> [!IMPORTANT]
-> **Status: source handover in progress.** The source code hasn't been imported yet. The first release, **ServerCore 3.0.0**, will be PrismaCore 2.5 running on game version 3.3. Until then, keep using PrismaCore 2.5 on game 3.2. Follow progress in [Issues](https://github.com/gettakaro/ServerCore-7d2d/issues) and on the [Takaro Discord](https://aka.takaro.io/discord).
+ServerCore 3.0.0 is PrismaCore 2.5 brought to game version 3.3.
 
 ## Who maintains this
 
@@ -21,22 +22,15 @@ PrismaCore was closed source for its whole life. We think a mod this many server
 
 Thank you, Prisma, for ten years of work and for letting the community carry it on.
 
-## Compatibility promise
+## Compatibility with PrismaCore
 
-ServerCore is a drop-in replacement for PrismaCore 2.5. We renamed the product, not the interface. In 3.x, these stay exactly as they were:
-
-- **Console commands**: every name and alias, including the `pc-` prefixed forms
-- **Command output**: success and error text, word for word, typos included. Server managers and community modules parse it.
-- **Log lines**: including the `[PrismaCore]` prefixed lines that CSMM, Takaro and community modules read
-- **Data and config files**: `PrismaCoreSettings.xml`, `PrismaCoreStrings.xml` and the `PrismaCore*.db` databases keep their names and formats, so your claims, waypoints and settings carry over.
-
-If we ever change any of these, it happens in a new major version, with a deprecation period and a migration note.
+ServerCore 3.0.0 is a drop-in replacement for PrismaCore 2.5. Console commands (including the `pc-` forms), command output, log lines and data files like `PrismaCoreSettings.xml` work as before, so your settings, claims and server manager integrations carry over. See the [compatibility page](https://gettakaro.github.io/ServerCore-7d2d/project/compatibility/) for details.
 
 ## Supported game versions
 
 | ServerCore | PrismaCore | Game version |
 |---|---|---|
-| 3.0.0 (planned) | – | 3.3 |
+| 3.0.0 | – | 3.3 |
 | – | 2.5 (last PrismaCore release) | 3.2.0 b10 |
 
 ## Installation
@@ -47,7 +41,7 @@ If we ever change any of these, it happens in a new major version, with a deprec
 4. Extract it so you have `Mods/ServerCore/` in your server's install directory.
 5. Start the server.
 
-Moving from PrismaCore? See the [migration guide](docs/MIGRATING-FROM-PRISMACORE.md).
+Moving from PrismaCore? See the [migration guide](https://gettakaro.github.io/ServerCore-7d2d/start-here/migrating-from-prismacore/).
 
 ## Features
 

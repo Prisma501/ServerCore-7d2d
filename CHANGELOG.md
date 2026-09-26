@@ -11,7 +11,11 @@ All notable changes to ServerCore are documented here. The format is based on [K
 ### Added
 
 - Support for game version 3.3.
+- Documentation site at [gettakaro.github.io/ServerCore-7d2d](https://gettakaro.github.io/ServerCore-7d2d/).
 
 ## [2.5] - PrismaCore
 
 The last release of PrismaCore by Prisma501, for game version 3.2.0 b10. This is the baseline ServerCore continues from.
+
+[Unreleased]: https://github.com/gettakaro/ServerCore-7d2d/commits/main
+[2.5]: https://gettakaro.github.io/ServerCore-7d2d/project/changelog/#prismacore-version-history
