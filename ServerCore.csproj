@@ -17,6 +17,7 @@
     <AllowedReferenceRelatedFileExtensions>none</AllowedReferenceRelatedFileExtensions>
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
     <GameReferences>_data/7dtd-binaries</GameReferences>
+    <WebUi>_data/web-ui/dist</WebUi>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)' == 'Release'">
@@ -27,7 +28,14 @@
   <ItemGroup>
     <Compile Include="src/**/*.cs" />
     <None Include="ModInfo.xml" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="mod-assets/*.cer" Link="%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="$(WebUi)/**" Link="ClaimCreator/%(RecursiveDir)%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
+
+  <Target Name="RequireFetchedInputs" BeforeTargets="BeforeBuild">
+    <Error Condition="!Exists('$(GameReferences)/Assembly-CSharp.dll')" Text="Game references are missing: run scripts/fetch-game-refs.sh" />
+    <Error Condition="!Exists('$(WebUi)/index.html')" Text="The Web UI is missing: run scripts/fetch-web-ui.sh" />
+  </Target>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies.net48" Version="1.0.3" PrivateAssets="all" />
