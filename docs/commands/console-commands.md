@@ -49,6 +49,8 @@ If PFB is set to any value above zero, it will vanish falling blocks; the numeri
 
 The Server Chat Name feature allows you to customize the 'Name' of the server when it sends chat messages via ServerCore. Typically, this would be the same value as the 'an announcer' command above.
 
+On a fresh install the default name is "Lara", a nod to Prisma501, the author of PrismaCore. Use `scn <name>` to change it.
+
 scn Botname
 
 ## Reference
