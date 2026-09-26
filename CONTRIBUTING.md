@@ -64,7 +64,7 @@ There are no automated in-game tests yet. Before opening a PR:
 ./scripts/dev-server.sh stable test      # builds, deploys, boots and runs the smoke checks
 ```
 
-`test --from <folder or zip>` tests a build you already have, such as a CI artifact, instead of building. `test` stops the server when the smoke checks are done. Run `up` to start it again, `logs` to follow the log and `down` to stop it. Telnet only listens inside the container, and the Web UI is on http://127.0.0.1:8285/. Replace `stable` with `experimental` for the head of Steam's `latest_experimental` branch (Web UI on port 8295), and use `experimental build-refs` to compile against it. Run one server at a time. The servers and their saves live in `_data/dev-server/`.
+`test --from <folder or zip>` tests a build you already have, such as a CI artifact, instead of building. `test` stops the server when the smoke checks are done. Run `up` to start it again, `logs` to follow the log and `down` to stop it. Telnet only listens inside the container, and the Web UI is on http://127.0.0.1:8285/. Replace `stable` with `experimental` for Steam's `latest_experimental` branch (Web UI on port 8295): the build pinned in `game-version.json` on the `experimental` branch, and the head of `latest_experimental` elsewhere. Use `experimental build-refs` to compile against it. `stable` refuses to run when the pin in `game-version.json` isn't for the `public` branch. Run one server at a time. The servers and their saves live in `_data/dev-server/`.
 
 ## Docs
 
@@ -98,7 +98,7 @@ Stable game versions are built on `main`, the experimental game version on the `
 
 ## Releases
 
-Maintainers release by pushing a `vX.Y.Z` tag, or `vX.Y.Z-exp.N` on `experimental` for a pre-release. CI builds the mod, stamps the version into `ModInfo.xml`, zips `Mods/ServerCore/` and publishes a GitHub release with the changelog notes. [RELEASING.md](RELEASING.md) has the checklist and the smoke test. We use [semantic versioning](https://semver.org): patch for fixes, minor for new features, major for anything that breaks the compatibility rule.
+Maintainers release by pushing a `vX.Y.Z` tag, or `vX.Y.Z-exp.N` on `experimental` for a pre-release. CI builds the mod, stamps the version into `ModInfo.xml`, zips `Mods/ServerCore/` and publishes a GitHub release with the changelog notes. `scripts/release.sh` runs the release steps, and [RELEASING.md](RELEASING.md) describes them and the smoke test. We use [semantic versioning](https://semver.org): patch for fixes, minor for new features, major for anything that breaks the compatibility rule.
 
 ## Code of conduct
 
