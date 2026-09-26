@@ -5,7 +5,7 @@ description: How to mark 7 Days To Die region files for reset so ServerCore can 
 
 ## Intro
 
-![Animated map of a world with biomes, zoomed in on a section of region tiles](../../../assets/reset-regions/8028300.webp)
+![Animated map of a world with biomes, zoomed in on a section of region tiles](../assets/reset-regions/8028300.webp)
 
 In 7 Days To Die, the world is broken up into 'regions', which are 500x500 square areas of the map. 7 Days stores all the changes that happen to that part of the world in a single file, called a region file. Reset Regions are a feature of ServerCore that allows administrators to mark one or more of these region files to be erased (reset) during a special kind of reboot, deleting everything within the specified region(s) and restoring the area back to the way it was at the start of the seed. This process restores buildings and resources back to their original state and removes all modifications, structures, and bases built by players.
 
@@ -13,7 +13,7 @@ After the reboot, a region that has been reset will look exactly like it did on 
 
 Additionally, land claim blocks can't be placed in a reset region, and any that exist when a reset region is marked will immediately be deleted. If a player attempts to place a land claim block in an established reset region, it will return the claim block to them and inform them that they can't build in the area.
 
-![Region file grid overlaid on a forested stretch of the map, with two named region tiles, r.0.1.7rg and r.0.0.7rg, outlined](../../../assets/reset-regions/9797644.webp)
+![Region file grid overlaid on a forested stretch of the map, with two named region tiles, r.0.1.7rg and r.0.0.7rg, outlined](../assets/reset-regions/9797644.webp)
 
 To see what the regions look like on your map, use the [Alloc's Live Map](https://docs.csmm.app/en/csmm/allocs) utility, and enable the Region File checkbox in the upper right corner. It should resemble the grid shown in the screenshot above.
 
@@ -33,7 +33,7 @@ The first command will show the player's current region based on his/her positio
 
 ### Toggling Your Current Region For Reset
 
-![Animation of the region grid over a forest and lake, with regions being toggled for reset](../../../assets/reset-regions/9797645.webp)
+![Animation of the region grid over a forest and lake, with regions being toggled for reset](../assets/reset-regions/9797645.webp)
 
 The simplest way to toggle a region for reset is to simply run the _mrr_ command in your console while you are online and in-game. When you run _mrr add_, ServerCore will immediately mark the region the player is standing on for reset, If you run _mrr remove_, it will remove the mark on the region the player is standing on.
 
@@ -41,7 +41,7 @@ This command only works while you are in-game (and as a Level 0 Admin), as it re
 
 ### Adding/Removing A Single Region By Name
 
-![Forested region grid with two named region tiles, r.0.1.7rg and r.0.0.7rg, outlined in white](../../../assets/reset-regions/9797643.webp)
+![Forested region grid with two named region tiles, r.0.1.7rg and r.0.0.7rg, outlined in white](../assets/reset-regions/9797643.webp)
 
 Using the Alloc's Live map linked above, you can see the region grid. Within each region square is a name, shown in the screenshot to the right. To add or remove this region file from the list, you would run one of the two following command:
 
@@ -55,7 +55,7 @@ This is a simple and easy way to add one or two regions to the list without extr
 
 ### Adding/Removing Multiple Regions Via Coordinates
 
-![Satellite map view with a green rectangle marking a base, its west, east, north, and south boundary coordinates labeled 482E/580E and 3084N/3000N](../../../assets/reset-regions/8028246.webp)
+![Satellite map view with a green rectangle marking a base, its west, east, north, and south boundary coordinates labeled 482E/580E and 3084N/3000N](../assets/reset-regions/8028246.webp)
 
 The mrr command accepts two-coordinate X/Z notation as an input as well. To use this command, you specify the west-most, east-most, north-most, and south-most coordinate that make up the rectangle you want to mark for reset. In the screenshot to the right, the W/E/N/S coordinates have been marked. The syntax for this version of the command is as follows:
 
@@ -69,7 +69,7 @@ mrr add 482 580 3084 3000
 It's important to remember that you aren't just entering a coordinate that has a W or E in it, you're entering the coordinate from the rectangle that is the furthest in that direction. For example, even though the coordinate is 482 East, 482E is more West than 580E, so 482E is the 'west' boundary, and this is why you use it as the West coordinate. Similarly, 3084N is more North than 3000N, even though both coordinates are North.
 :::
 
-![Satellite map view with a green rectangle around a base, boundary coordinates labeled 150W/225E and 50N/300S](../../../assets/reset-regions/9797651.webp)
+![Satellite map view with a green rectangle around a base, boundary coordinates labeled 150W/225E and 50N/300S](../assets/reset-regions/9797651.webp)
 
 **Note:** Also remember that West and South coordinates are negative values. If your left coordinate was 100W, you would enter it as -100. See the example below.
 
@@ -77,7 +77,7 @@ In this next picture, you have coordinates that are across both the North/South 
 
 mrr add -150 225 50 -300
 
-![Animation of red rectangles of different sizes drawn over the region grid, each covering parts of regions r.-2.2.7rg, r.0.2.7rg, r.-2.0.7rg and r.0.0.7rg](../../../assets/reset-regions/9797652.webp)
+![Animation of red rectangles of different sizes drawn over the region grid, each covering parts of regions r.-2.2.7rg, r.0.2.7rg, r.-2.0.7rg and r.0.0.7rg](../assets/reset-regions/9797652.webp)
 
 When marking regions for reset, it's important to understand that no matter how much of a region you cover with the reset command, it will wipe _the entire region file_. In the animation above, all three different red rectangles are represented by the three commands below:
 
@@ -99,7 +99,7 @@ resetregions
 
 ### Wipe every region on that map that is not marked as 'claimed'
 
-![Region grid with an orange square marking a land claim block's protection radius over regions r.-2.2.7rg and r.-2.0.7rg, and a green rectangle marking an advanced claim spanning r.-2.0.7rg and r.0.0.7rg](../../../assets/reset-regions/9797657.webp)
+![Region grid with an orange square marking a land claim block's protection radius over regions r.-2.2.7rg and r.-2.0.7rg, and a green rectangle marking an advanced claim spanning r.-2.0.7rg and r.0.0.7rg](../assets/reset-regions/9797657.webp)
 
 The commands for this option are very similar to the regular reset region commands, but understanding what they apply to is much more complicated. In short, these commands will wipe every region on the map that is not 'claimed' in some way. There are two criteria that are checked to determine if a region is claimed or not. If any of them are true, the region will not be reset:
 
@@ -112,7 +112,7 @@ Unclaimed regions are reset immediately. No reboot is needed for the operation.
 
 ## Using Reset Regions Effectively
 
-![Full island map with numerous city zones outlined in red, marking them for reset](../../../assets/reset-regions/reset-regions-overview.webp)
+![Full island map with numerous city zones outlined in red, marking them for reset](../assets/reset-regions/reset-regions-overview.webp)
 
 The most common use of reset regions is to either wipe a specific area back to day 1 to remove large, impactful changes that can't be repaired otherwise, or to refresh the area in order to allow it to be looted again. A common example of this is where Admins mark some or all of the cities on a map as a reset region; not only does this prevent players from claiming large loot-friendly PoIs, but it also gives the server a way to refresh destroyed loot containers and other limited resources, like cars. In the screenshot to the right, all of the region tiles that contain major city zones have been marked for reset.
 

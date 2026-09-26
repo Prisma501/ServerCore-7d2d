@@ -17,6 +17,7 @@ export default defineConfig({
 			description: 'Documentation for ServerCore, the open-source server mod for 7 Days to Die.',
 			social: [{ icon: 'github', label: 'GitHub', href: repo }],
 			editLink: { baseUrl: `${repo}/edit/main/website/` },
+			routeMiddleware: './src/routeData.ts',
 			plugins: [starlightLinksValidator()],
 			sidebar: [
 				{
