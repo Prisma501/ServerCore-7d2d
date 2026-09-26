@@ -64,7 +64,7 @@ There are no automated in-game tests yet. Before opening a PR:
 ./scripts/dev-server.sh stable test      # builds, deploys, boots and runs the smoke checks
 ```
 
-`test --from <folder or zip>` tests a build you already have, such as a CI artifact, instead of building. `test` stops the server when the smoke checks are done. Run `up` to start it again, `logs` to follow the log and `down` to stop it. Telnet only listens inside the container, and the Web UI is on http://127.0.0.1:8285/. Replace `stable` with `experimental` for the head of Steam's `latest_experimental` branch (Web UI on port 8295), and use `experimental build-refs` to compile against it. Run one server at a time. The servers and their saves live in `_data/dev-server/`.
+`test --from <folder or zip>` tests a build you already have, such as a CI artifact, instead of building. `test` stops the server when the smoke checks are done. Run `up` to start it again, `logs` to follow the log and `down` to stop it. Telnet only listens inside the container, and the Web UI is on http://127.0.0.1:8285/. Replace `stable` with `experimental` for the head of Steam's `latest_experimental` branch (Web UI on port 8295), and use `experimental build-refs` to compile against it. To join from a game client on another machine, set `DEV_SERVER_BIND` to the host's LAN IP when you run `up` or `test`; by default the ports only listen on 127.0.0.1. Run one server at a time. The servers and their saves live in `_data/dev-server/`.
 
 ## Docs
 

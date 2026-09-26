@@ -26,9 +26,9 @@ services:
       - ../_data/dev-server/stable/saves:/home/sdtdserver/.local/share/7DaysToDie
       - ../_data/dev-server/stable/log:/home/sdtdserver/log
     ports:
-      - "127.0.0.1:26910:26910/tcp"
-      - "127.0.0.1:26910-26912:26910-26912/udp"
-      - "127.0.0.1:8285:8083/tcp"
+      - "${DEV_SERVER_BIND:-127.0.0.1}:26910:26910/tcp"
+      - "${DEV_SERVER_BIND:-127.0.0.1}:26910-26912:26910-26912/udp"
+      - "${DEV_SERVER_BIND:-127.0.0.1}:8285:8083/tcp"
 
   experimental:
     <<: *server
@@ -38,6 +38,6 @@ services:
       - ../_data/dev-server/experimental/saves:/home/sdtdserver/.local/share/7DaysToDie
       - ../_data/dev-server/experimental/log:/home/sdtdserver/log
     ports:
-      - "127.0.0.1:26920:26920/tcp"
-      - "127.0.0.1:26920-26922:26920-26922/udp"
-      - "127.0.0.1:8295:8083/tcp"
+      - "${DEV_SERVER_BIND:-127.0.0.1}:26920:26920/tcp"
+      - "${DEV_SERVER_BIND:-127.0.0.1}:26920-26922:26920-26922/udp"
+      - "${DEV_SERVER_BIND:-127.0.0.1}:8295:8083/tcp"
