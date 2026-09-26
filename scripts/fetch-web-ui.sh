@@ -28,7 +28,7 @@ fi
 echo "Fetching Web UI ${TAG} (${REPOSITORY}, ${ASSET})"
 rm -rf "${DEST}"
 mkdir -p "${DEST}"
-curl -fsSL "https://github.com/${REPOSITORY}/releases/download/${TAG}/${ASSET}" -o "${DEST}/${ASSET}"
+curl -fsSL --retry 3 --connect-timeout 20 --max-time 300 "https://github.com/${REPOSITORY}/releases/download/${TAG}/${ASSET}" -o "${DEST}/${ASSET}"
 echo "${SHA256}  ${DEST}/${ASSET}" | sha256sum --check --status \
   || { echo "error: ${ASSET} doesn't match the sha256 in web-ui-version.json" >&2; rm -rf "${DEST}"; exit 1; }
 unzip -q "${DEST}/${ASSET}" -d "${DEST}"
