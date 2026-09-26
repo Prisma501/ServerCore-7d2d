@@ -16,12 +16,6 @@ ServerCore doesn't depend on Takaro. It works the same with Takaro, CSMM, any ot
 
 PrismaCore was closed source for its whole life. We think a mod this many servers depend on should be open, so that anyone can see how it works, fix it and keep it alive.
 
-## A word from Prisma
-
-> _Placeholder: Prisma's handover statement goes here once it's published._
-
-Thank you, Prisma, for ten years of work and for letting the community carry it on.
-
 ## Compatibility with PrismaCore
 
 ServerCore 3.0.0 is a drop-in replacement for PrismaCore 2.5. Console commands (including the `pc-` forms), command output, log lines and data files like `PrismaCoreSettings.xml` work as before, so your settings, claims and server manager integrations carry over. See the [compatibility page](https://gettakaro.github.io/ServerCore-7d2d/project/compatibility/) for details.
