@@ -9,6 +9,7 @@ This build is for game version 3.3.0 EXP b14.
 ### Changed
 
 - `cvc` (check vehicle content), `rii` (remove an item from a player), `wi` (wipe a player's inventory) and the RegionReset banned-item check now use the player save and container format of game version 3.3.
+- Kills made while riding a vehicle are logged with `meleeHandPlayer` as the weapon, because game version 3.3 no longer swaps the inventory when a player gets on a vehicle.
 - New installs now send server chat messages as "Lara", a nod to Prisma501, the author of PrismaCore. Existing servers keep their saved name; change it with `scn <name>`.
 
 ## [3.0.0]
