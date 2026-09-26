@@ -4,8 +4,12 @@ All notable changes to ServerCore are documented here. The format is based on [K
 
 ## [Unreleased]
 
+This build is for game version 3.3.0 EXP b14.
+
 ### Changed
 
+- `cvc` (check vehicle content), `rii` (remove an item from a player), `wi` (wipe a player's inventory) and the RegionReset banned-item check now use the player save and container format of game version 3.3.
+- Kills made while riding a vehicle are logged with `meleeHandPlayer` as the weapon, because game version 3.3 no longer swaps the inventory when a player gets on a vehicle.
 - New installs now send server chat messages as "Lara", a nod to Prisma501, the author of PrismaCore. Existing servers keep their saved name; change it with `scn <name>`.
 
 ## [3.0.0]
@@ -29,6 +33,6 @@ The first ServerCore release: PrismaCore 2.5 as open source, for game version 3.
 
 The last release of PrismaCore by Prisma501, for game version 3.2.0 b10. This is the baseline ServerCore continues from.
 
-[Unreleased]: https://github.com/gettakaro/ServerCore-7d2d/commits/main
+[Unreleased]: https://github.com/gettakaro/ServerCore-7d2d/commits/experimental
 [3.0.0]: https://github.com/gettakaro/ServerCore-7d2d/releases/tag/v3.0.0
 [2.5]: https://gettakaro.github.io/ServerCore-7d2d/project/changelog/#prismacore-version-history

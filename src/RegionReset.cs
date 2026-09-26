@@ -72,7 +72,7 @@ namespace ServerCore
         public static void HandleBannedItems(ModEvents.SSavePlayerDataData _data)
         {
             bool cmdExecuted = false;
-            items = _data.PlayerDataFile.inventory;
+            items = PlayerDataBlobs.ReadInventory(_data.PlayerDataFile).ItemGrid.CloneItems();
             for (int i = 0; i < items.Length; i++)
             {
                 itemStack = items[i];
@@ -127,7 +127,7 @@ namespace ServerCore
                 }
             }
 
-            items = _data.PlayerDataFile.bag.items;
+            items = PlayerDataBlobs.ReadBag(_data.PlayerDataFile).ItemGrid.CloneItems();
             for (int i = 0; i < items.Length; i++)
             {
                 itemStack = items[i];
@@ -185,10 +185,11 @@ namespace ServerCore
                 }
             }
 
-            int eqCount = _data.PlayerDataFile.equipment.GetSlotCount();
+            Equipment equipment = PlayerDataBlobs.ReadEquipment(_data.PlayerDataFile);
+            int eqCount = equipment.GetSlotCount();
             for (int i = 0; i < eqCount; i++)
             {
-                itemValue = _data.PlayerDataFile.equipment.GetSlotItem(i);
+                itemValue = equipment.GetSlotItem(i);
                 if (itemValue != null && !itemValue.IsEmpty())
                 {
                     itemClass = itemValue.ItemClass;
