@@ -60,7 +60,7 @@ jobs:
             echo "has-source=false" >> "$GITHUB_OUTPUT"
           fi
 
-      - uses: actions/setup-dotnet@9a946fdbd5fb07b82b2f5a4466058b876ab72bb2  # v5
+      - uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68  # v5
         if: steps.source.outputs.has-source == 'true'
         with:
           dotnet-version: 8.0.x
