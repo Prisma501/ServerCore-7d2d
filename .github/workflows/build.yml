@@ -2,7 +2,7 @@ name: Build
 
 on:
   push:
-    branches: [main]
+    branches: [main, experimental]
   pull_request:
   workflow_call:
     inputs:
@@ -41,6 +41,15 @@ jobs:
       - name: Fetch game references
         run: ./scripts/fetch-game-refs.sh
 
+      - name: Cache Web UI
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9  # v6.1.0
+        with:
+          path: _data/web-ui
+          key: web-ui-${{ hashFiles('web-ui-version.json', 'scripts/fetch-web-ui.sh') }}
+
+      - name: Fetch Web UI
+        run: ./scripts/fetch-web-ui.sh
+
       - name: Look for source
         id: source
         run: |
@@ -67,6 +76,21 @@ jobs:
           if [[ -n "${leaked}" ]]; then
             echo "::error::Game assemblies in the build output (set <Private>false</Private> on their references):"
             echo "${leaked}"
+            exit 1
+          fi
+
+      - name: Check the mod folder contents
+        if: steps.source.outputs.has-source == 'true'
+        run: |
+          expected=$'ClaimCreator\nLiteDB.dll\nModInfo.xml\nServerCore.dll\nsteam-intermediate.cer\nsteam-rootca.cer'
+          actual=$(ls -A Mods/ServerCore | sort)
+          if [[ "${actual}" != "${expected}" ]]; then
+            echo "::error::Unexpected files in Mods/ServerCore:"
+            diff <(echo "${expected}") <(echo "${actual}") || true
+            exit 1
+          fi
+          if [[ ! -f Mods/ServerCore/ClaimCreator/index.html ]]; then
+            echo "::error::Mods/ServerCore/ClaimCreator has no index.html"
             exit 1
           fi
 

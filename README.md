@@ -6,7 +6,7 @@ ServerCore is a server-side mod for 7 Days to Die dedicated servers. It adds abo
 
 ServerCore is the continuation of **PrismaCore**, the mod Prisma501 built and maintained for over ten years. It started as CPM, later became the CSMM Patrons Mod, and then PrismaCore. Prisma retired from 7D2D modding in September 2026 and handed the mod over to the community. It's now open source under the MIT licence.
 
-ServerCore 3.0.0 is PrismaCore 2.5 brought to game version 3.3.
+ServerCore 3.0.0 is PrismaCore 2.5 as open source, for game version 3.2.0 b10, with no functional changes. Builds for the experimental game 3.3 follow as pre-releases.
 
 ## Who maintains this
 
@@ -24,8 +24,11 @@ ServerCore 3.0.0 is a drop-in replacement for PrismaCore 2.5. Console commands (
 
 | ServerCore | PrismaCore | Game version |
 |---|---|---|
-| 3.0.0 | – | 3.3 |
+| 3.1.0-exp.N (pre-release) | – | 3.3.0 EXP (experimental branch) |
+| 3.0.0 | – | 3.2.0 b10 |
 | – | 2.5 (last PrismaCore release) | 3.2.0 b10 |
+
+Pre-releases are built from the `experimental` branch for the game's experimental branch. See [RELEASING.md](RELEASING.md) for how releases are made.
 
 ## Installation
 

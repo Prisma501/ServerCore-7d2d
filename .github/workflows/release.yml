@@ -8,7 +8,27 @@ permissions:
   contents: read
 
 jobs:
+  check-tag:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10  # v6
+        with:
+          fetch-depth: 0
+
+      # Stable releases come from main, pre-releases from experimental (see RELEASING.md)
+      - name: Check the tag is on its release branch
+        env:
+          TAG: ${{ github.ref_name }}
+        run: |
+          branch=main
+          [[ "${TAG}" == *-* ]] && branch=experimental
+          if ! git merge-base --is-ancestor "${GITHUB_SHA}" "origin/${branch}"; then
+            echo "::error::${TAG} is not on ${branch}; tags with a '-' release from experimental, the rest from main"
+            exit 1
+          fi
+
   build:
+    needs: check-tag
     uses: ./.github/workflows/build.yml
     with:
       version: ${{ github.ref_name }}
@@ -43,5 +63,7 @@ jobs:
             echo "::error::CHANGELOG.md has no section for [${version}]"
             exit 1
           fi
+          prerelease=()
+          [[ "${TAG}" == *-* ]] && prerelease=(--prerelease)
           gh release create "${TAG}" "dist/ServerCore-${version}.zip" \
-            --title "ServerCore ${version}" --notes-file dist/notes.md
+            --title "ServerCore ${version}" --notes-file dist/notes.md "${prerelease[@]}"

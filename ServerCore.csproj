@@ -1,0 +1,60 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net48</TargetFramework>
+    <LangVersion>7.3</LangVersion>
+    <OutputType>Library</OutputType>
+    <AssemblyName>ServerCore</AssemblyName>
+    <RootNamespace>ServerCore</RootNamespace>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Deterministic>true</Deterministic>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <EnableDefaultItems>false</EnableDefaultItems>
+    <OutputPath>Mods/ServerCore/</OutputPath>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <AllowedReferenceRelatedFileExtensions>none</AllowedReferenceRelatedFileExtensions>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+    <GameReferences>_data/7dtd-binaries</GameReferences>
+    <WebUi>_data/web-ui/dist</WebUi>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+    <Optimize>true</Optimize>
+    <DebugType>none</DebugType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="src/**/*.cs" />
+    <None Include="ModInfo.xml" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="mod-assets/*.cer" Link="%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="$(WebUi)/**" Link="ClaimCreator/%(RecursiveDir)%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+  <Target Name="RequireFetchedInputs" BeforeTargets="BeforeBuild">
+    <Error Condition="!Exists('$(GameReferences)/Assembly-CSharp.dll')" Text="Game references are missing: run scripts/fetch-game-refs.sh" />
+    <Error Condition="!Exists('$(WebUi)/index.html')" Text="The Web UI is missing: run scripts/fetch-web-ui.sh" />
+  </Target>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies.net48" Version="1.0.3" PrivateAssets="all" />
+    <PackageReference Include="LiteDB" Version="4.1.4" />
+  </ItemGroup>
+
+  <!-- Explicit list: globbing the game folder would pull in its own mscorlib and System, which clash with the reference assemblies. -->
+  <ItemGroup>
+    <GameReference Include="0Harmony" />
+    <GameReference Include="Assembly-CSharp" />
+    <GameReference Include="Assembly-CSharp-firstpass" />
+    <GameReference Include="com.rlabrecque.steamworks.net" />
+    <GameReference Include="EOS" />
+    <GameReference Include="LiteNetLib" />
+    <GameReference Include="LogLibrary" />
+    <GameReference Include="UnityEngine" />
+    <GameReference Include="UnityEngine.CoreModule" />
+    <GameReference Include="UnityEngine.ImageConversionModule" />
+    <Reference Include="@(GameReference)" HintPath="$(GameReferences)/%(Identity).dll" Private="false" />
+  </ItemGroup>
+
+</Project>

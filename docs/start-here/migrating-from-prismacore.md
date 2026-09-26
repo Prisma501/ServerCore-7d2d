@@ -7,7 +7,7 @@ ServerCore is the continuation of PrismaCore 2.5. It's built to replace it with 
 
 ## Before you start
 
-- **Game version.** ServerCore 3.0.0 targets game 3.3. PrismaCore 2.5 only works on 3.2.0 b10. Upgrade the game and swap the mod in the same maintenance window.
+- **Game version.** ServerCore 3.0.0 targets game 3.2.0 b10, the same version as PrismaCore 2.5, so you can swap the mod without upgrading the game. Builds for the experimental game 3.3 are published as pre-releases (3.1.0-exp.N).
 - **Other mods.** Anything that worked with PrismaCore 2.5 should work with ServerCore. The one exception is PrismaCore itself: never run both.
 
 ## Steps
@@ -18,8 +18,7 @@ ServerCore is the continuation of PrismaCore 2.5. It's built to replace it with 
    - In each world's save folder: the `PrismaCore*.db` files (players, claims, waypoints, teleports on spawn, group colours, and vehicle and drone owners)
 3. **Remove `Mods/PrismaCore`.**
 4. **Install ServerCore**: extract `ServerCore-<version>.zip` so you have `Mods/ServerCore/`.
-5. **Upgrade the game** to the supported version, if you haven't already.
-6. **Start the server** and check the log for ServerCore loading. Run `pc-help` in the console to confirm the commands are there.
+5. **Start the server** and check the log for ServerCore loading. Run `pc-help` in the console to confirm the commands are there.
 
 Your settings, claims, waypoints and other data are read from the same files as before.
 

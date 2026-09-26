@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xml>
+	<Name value="ServerCore" />
+	<DisplayName value="ServerCore" />
+	<Description value="Additional management and player control functionality" />
+	<Author value="Takaro and contributors (original by Prisma501)" />
+	<Version value="2.5" />
+	<Website value="https://gettakaro.github.io/ServerCore-7d2d/"/>
+</xml>
