@@ -190,8 +190,8 @@ namespace ServerCore
         public string Resetregion_LCB2Close = "[00FF00]You have placed a LCB too close to a reset region! For preventing half base wipes, the LCB has been put back in your inventory.[-]";
         public string Resetregion_LCBinRegion = "[00FF00]You have placed a LCB in a reset region! The LCB has been put back in your inventory.[-]";
 
-        //ServerChatName
-        public string ServerChatName = "Server";
+        //ServerChatName: defaults to Lara as a nod to Prisma501, PrismaCore's author
+        public string ServerChatName = "Lara";
 
         //ShutdownBA
         public string ShutdownBA_CountdownMessage = "[00FF00]Server will restart in [FF0000]{Minutes} MINUTES[-]";
