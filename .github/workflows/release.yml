@@ -43,5 +43,7 @@ jobs:
             echo "::error::CHANGELOG.md has no section for [${version}]"
             exit 1
           fi
+          prerelease=()
+          [[ "${TAG}" == *-* ]] && prerelease=(--prerelease)
           gh release create "${TAG}" "dist/ServerCore-${version}.zip" \
-            --title "ServerCore ${version}" --notes-file dist/notes.md
+            --title "ServerCore ${version}" --notes-file dist/notes.md "${prerelease[@]}"

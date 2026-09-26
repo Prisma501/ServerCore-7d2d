@@ -70,6 +70,17 @@ jobs:
             exit 1
           fi
 
+      - name: Check the mod folder contents
+        if: steps.source.outputs.has-source == 'true'
+        run: |
+          expected=$'LiteDB.dll\nModInfo.xml\nServerCore.dll'
+          actual=$(ls Mods/ServerCore | sort)
+          if [[ "${actual}" != "${expected}" ]]; then
+            echo "::error::Unexpected files in Mods/ServerCore:"
+            diff <(echo "${expected}") <(echo "${actual}") || true
+            exit 1
+          fi
+
       - name: Stamp version
         if: steps.source.outputs.has-source == 'true' && inputs.version != ''
         env:
