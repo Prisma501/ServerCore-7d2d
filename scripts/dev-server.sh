@@ -48,6 +48,9 @@ SERVERFILES="${TARGET_DIR}/serverfiles"
 SAVES="${TARGET_DIR}/saves"
 INSTALLED="${TARGET_DIR}/installed.json"
 TELNET_PORT=8081
+# Ports listen on loopback unless DEV_SERVER_BIND names another address, e.g. the host's
+# LAN IP so a game client on another machine can join.
+export DEV_SERVER_BIND="${DEV_SERVER_BIND:-127.0.0.1}"
 READY_TIMEOUT="${READY_TIMEOUT:-900}"
 CLAIM_ID="servercore-smoke"
 
@@ -216,7 +219,7 @@ cmd_up() {
   require_installed
   render_config
   compose up -d "${TARGET}"
-  echo "${TARGET} is starting: game on 127.0.0.1:${SERVER_PORT}, Web UI on http://127.0.0.1:${WEBUI_PORT}/"
+  echo "${TARGET} is starting: game on ${DEV_SERVER_BIND}:${SERVER_PORT}, Web UI on http://${DEV_SERVER_BIND}:${WEBUI_PORT}/"
 }
 
 cmd_down() {
@@ -336,11 +339,11 @@ cmd_smoke() {
 
   local page
   page="$(mktemp)"
-  if curl -fsSL "http://127.0.0.1:${WEBUI_PORT}/" -o "${page}" 2>"${page}.err" \
+  if curl -fsSL "http://${DEV_SERVER_BIND}:${WEBUI_PORT}/" -o "${page}" 2>"${page}.err" \
     && cmp -s "${page}" "${SERVERFILES}/Mods/ServerCore/ClaimCreator/index.html"; then
     check "Web UI serves ClaimCreator index.html" PASS
   else
-    check "Web UI serves ClaimCreator index.html" FAIL "GET http://127.0.0.1:${WEBUI_PORT}/ returned:"$'\n'"$(cat "${page}.err"; head -c 2000 "${page}")"
+    check "Web UI serves ClaimCreator index.html" FAIL "GET http://${DEV_SERVER_BIND}:${WEBUI_PORT}/ returned:"$'\n'"$(cat "${page}.err"; head -c 2000 "${page}")"
   fi
   rm -f "${page}" "${page}.err"
 
