@@ -4,17 +4,14 @@ All notable changes to ServerCore are documented here. The format is based on [K
 
 ## [Unreleased]
 
-### Changed
-
-- New installs now send server chat messages as "Lara", a nod to Prisma501, the author of PrismaCore. Existing servers keep their saved name; change it with `scn <name>`.
-
-## [3.0.0]
+## [3.0.0] - 2026-09-26
 
 The first ServerCore release: PrismaCore 2.5 as open source, for game version 3.2.0 b10. It behaves like PrismaCore 2.5, apart from the fix below.
 
 ### Changed
 
 - Renamed PrismaCore to ServerCore and released it as open source under the MIT licence. Console commands, aliases, command output, log lines and data files are unchanged.
+- New installs now send server chat messages as "Lara", a nod to Prisma501, the author of PrismaCore. Existing servers keep their saved name; change it with `scn <name>`.
 
 ### Added
 
