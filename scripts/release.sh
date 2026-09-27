@@ -56,19 +56,6 @@ require_clean() {
   [[ -z "$(git status --porcelain)" ]] || die "the working tree has changes: commit or stash them first"
 }
 
-# Asks until the answer is one of $2 (default y/n) and prints it.
-ask() {
-  local question="$1" choices="${2:-y/n}" answer
-  while true; do
-    read -r -p "${question} [${choices}] " answer || exit 1
-    answer="${answer,,}"
-    if [[ -n "${answer}" && "/${choices}/" == *"/${answer}/"* ]]; then
-      printf '%s\n' "${answer}"
-      return
-    fi
-  done
-}
-
 # --- prepare -------------------------------------------------------------------------------
 
 cmd_prepare() {
@@ -86,10 +73,6 @@ cmd_prepare() {
   git commit -m "Release ${VERSION}"
   git --no-pager show --stat --patch HEAD
 
-  if [[ "$(ask "Push ${release_branch} and open a PR against ${BRANCH}?")" != y ]]; then
-    echo "Not pushed. ${release_branch} is committed locally; push it and open the PR yourself, or delete it."
-    return
-  fi
   git push -u origin "${release_branch}"
   gh pr create --base "${BRANCH}" --head "${release_branch}" --title "Release ${VERSION}" \
     --body "Moves the Unreleased changelog entries into ${VERSION}. After merging, run \`scripts/release.sh publish ${VERSION}\` on ${BRANCH}."
@@ -160,10 +143,6 @@ push_tag() {
   echo "Tag:    ${TAG}"
   echo "Commit: $(git log -1 --format='%H %s')"
   echo "Branch: ${BRANCH}"
-  local typed
-  read -r -p "Type ${TAG} to tag this commit and push the tag: " typed
-  [[ "${typed}" == "${TAG}" ]] || die "not tagged"
-
   git tag -a "${TAG}" -m "ServerCore ${VERSION}"
   git push origin "${TAG}"
 }
