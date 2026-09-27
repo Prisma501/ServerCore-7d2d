@@ -15,11 +15,11 @@ Pushing a tag runs `.github/workflows/release.yml`: it builds the mod, stamps th
 
 `scripts/release.sh` does the steps below. Run it from the branch you release from: `main` for `X.Y.Z`, `experimental` for `X.Y.Z-exp.N`. It needs `git`, `gh` (logged in), `jq` and `python3`, and what the dev server needs.
 
-1. Run `./scripts/release.sh prepare X.Y.Z`. It moves the `Unreleased` entries in `CHANGELOG.md` into a `## [X.Y.Z] - YYYY-MM-DD` section (the release fails without one) and adds its link at the bottom. If `CHANGELOG.md` already has an undated `## [X.Y.Z]` section, the entries are added to it and it gets the date. It commits this on a `release/X.Y.Z` branch and, when you confirm, pushes it and opens a PR. Review and merge the PR.
+1. Run `./scripts/release.sh prepare X.Y.Z`. It moves the `Unreleased` entries in `CHANGELOG.md` into a `## [X.Y.Z] - YYYY-MM-DD` section (the release fails without one) and adds its link at the bottom. If `CHANGELOG.md` already has an undated `## [X.Y.Z]` section, the entries are added to it and it gets the date. It commits this on a `release/X.Y.Z` branch, pushes it and opens a PR. Review and merge the PR.
 2. Pull the branch and run `./scripts/release.sh publish X.Y.Z`. It first checks that the working tree is clean, the branch matches `origin`, the tag doesn't exist yet and `CHANGELOG.md` has the dated section. Then it:
    1. waits for the Build workflow run of that commit, and stops unless CI is green.
    2. downloads that run's `ServerCore` artifact and runs the smoke test below on it, on the dev server for the game build in `game-version.json`: `stable` when its `branch` is `public`, `experimental` when it is `latest_experimental`.
-   3. shows the tag, commit and branch, and tags and pushes when you type the tag name: `git tag -a vX.Y.Z -m "ServerCore X.Y.Z" && git push origin vX.Y.Z`.
+   3. shows the tag, commit and branch, then tags and pushes: `git tag -a vX.Y.Z -m "ServerCore X.Y.Z" && git push origin vX.Y.Z`.
    4. waits for the Release workflow and checks the release page: `ServerCore-X.Y.Z.zip` is attached, the `ModInfo.xml` in it has the version, and only versions with a `-` are pre-releases. Check the notes yourself.
 
 ## The changelog on experimental
