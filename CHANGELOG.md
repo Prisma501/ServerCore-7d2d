@@ -4,6 +4,10 @@ All notable changes to ServerCore are documented here. The format is based on [K
 
 ## [Unreleased]
 
+### Added
+
+- VIP ModGuard: flags players who have a listed item mod, such as a donor mod, installed in their armor, toolbelt or backpack items, and runs a configured command for them with `evmg`. Off by default. Written by Prisma501 for PRG, who shared it. See [VIP ModGuard](https://gettakaro.github.io/ServerCore-7d2d/features/vip-modguard/).
+
 ## [3.1.0-exp.1] - 2026-09-26
 
 This build is for game version 3.3.0 EXP b14.

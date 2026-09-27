@@ -19,6 +19,8 @@ namespace ServerCore
 
         public static List<hostilefreeClaim> hostilefreeClaims = new List<hostilefreeClaim>();
 
+        public static Dictionary<int, string> lstVipModUsers = new Dictionary<int, string>();
+
         public static string modPath;
 
         public void InitMod(Mod mod)
@@ -36,11 +38,170 @@ namespace ServerCore
             modPath = mod.Path;
         }
 
+        // Since 3.3 ItemValue no longer exposes its installed mods as an array
+        private static ItemValue[] Modifications(ItemValue item)
+        {
+            return Enumerable.Range(0, item.ModificationCount).Select(item.GetModification).ToArray();
+        }
+
         private void SavePlayerData(ref ModEvents.SSavePlayerDataData _data)
         {
             if(ServerCoreSettings.Instance.BannedItems_Enabled)
             {
                 RegionReset.HandleBannedItems(_data);
+            }
+
+            if (ServerCoreSettings.Instance.VIPModGuard_Enabled)
+            {
+                //armor
+                Equipment eq = PlayerDataBlobs.ReadEquipment(_data.PlayerDataFile);
+                List<ItemValue> armorItems = eq.GetArmor();
+
+                foreach (ItemValue armorItem in armorItems)
+                {
+                    if (armorItem.HasModSlots && armorItem.HasMods())
+                    {
+                        ItemValue[] _parts = Modifications(armorItem);
+
+                        if (_parts != null && _parts.Length > 0)
+                        {
+                            for (int i = 0; i < _parts.Length; i++)
+                            {
+                                if (_parts[i] != null)
+                                {
+                                    if (_parts[i].type != ItemValue.None.type)
+                                    {
+                                        ItemClass ib = ItemClass.list[_parts[i].type];
+                                        string itemName = ib.GetItemName();
+                                        if (RegionReset.lstVIPModGuardItems.Contains(itemName.Trim()))
+                                        {
+                                            int AdminLvL = GameManager.Instance.adminTools.Users.GetUserPermissionLevel(_data.ClientInfo);
+
+                                            if (AdminLvL > ServerCoreSettings.Instance.VIPModGuard_ExcludeAdminLvl)
+                                            {
+                                                //Log.Out($"[PrismaCore]VIP mod on {_cInfo.entityId} Mod: {itemName}");
+                                                if (lstVipModUsers.ContainsKey(_data.ClientInfo.entityId))
+                                                {
+                                                    lstVipModUsers[_data.ClientInfo.entityId] = itemName;
+                                                }
+                                                else
+                                                {
+                                                    lstVipModUsers.Add(_data.ClientInfo.entityId, itemName);
+                                                }
+                                            }
+
+                                            return;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                //belt
+                ItemStack[] itemStackBelt = PlayerDataBlobs.ReadInventory(_data.PlayerDataFile).ItemGrid.CloneItems();
+
+                for (int i = 0; i < itemStackBelt.Length; i++)
+                {
+                    if (itemStackBelt[i] != null)
+                    {
+                        if (itemStackBelt[i].itemValue.type != ItemValue.None.type)
+                        {
+                            if (itemStackBelt[i].itemValue.HasModSlots && itemStackBelt[i].itemValue.HasMods())
+                            {
+                                ItemValue[] _parts = Modifications(itemStackBelt[i].itemValue);
+
+                                if (_parts != null && _parts.Length > 0)
+                                {
+                                    for (int j = 0; j < _parts.Length; j++)
+                                    {
+                                        if (_parts[j] != null)
+                                        {
+                                            if (_parts[j].type != ItemValue.None.type)
+                                            {
+                                                ItemClass ib = ItemClass.list[_parts[j].type];
+                                                string itemName = ib.GetItemName();
+                                                if (RegionReset.lstVIPModGuardItems.Contains(itemName.Trim()))
+                                                {
+                                                    int AdminLvL = GameManager.Instance.adminTools.Users.GetUserPermissionLevel(_data.ClientInfo);
+
+                                                    if (AdminLvL > ServerCoreSettings.Instance.VIPModGuard_ExcludeAdminLvl)
+                                                    {
+                                                        //Log.Out($"[PrismaCore]VIP mod on {_cInfo.entityId} Mod: {itemName}");
+                                                        if (lstVipModUsers.ContainsKey(_data.ClientInfo.entityId))
+                                                        {
+                                                            lstVipModUsers[_data.ClientInfo.entityId] = itemName;
+                                                        }
+                                                        else
+                                                        {
+                                                            lstVipModUsers.Add(_data.ClientInfo.entityId, itemName);
+                                                        }
+                                                    }
+
+                                                    return;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+
+                            }
+                        }
+                    }
+                }
+
+                //backpack
+                ItemStack[] itemStack = PlayerDataBlobs.ReadBag(_data.PlayerDataFile).ItemGrid.CloneItems();
+
+                for (int i = 0; i < itemStack.Length; i++)
+                {
+                    if (itemStack[i] != null)
+                    {
+                        if (itemStack[i].itemValue.type != ItemValue.None.type)
+                        {
+                            if (itemStack[i].itemValue.HasModSlots && itemStack[i].itemValue.HasMods())
+                            {
+                                ItemValue[] _parts = Modifications(itemStack[i].itemValue);
+
+                                if (_parts != null && _parts.Length > 0)
+                                {
+                                    for (int j = 0; j < _parts.Length; j++)
+                                    {
+                                        if (_parts[j] != null)
+                                        {
+                                            if (_parts[j].type != ItemValue.None.type)
+                                            {
+                                                ItemClass ib = ItemClass.list[_parts[j].type];
+                                                string itemName = ib.GetItemName();
+
+                                                if (RegionReset.lstVIPModGuardItems.Contains(itemName.Trim()))
+                                                {
+                                                    int AdminLvL = GameManager.Instance.adminTools.Users.GetUserPermissionLevel(_data.ClientInfo);
+
+                                                    if (AdminLvL > ServerCoreSettings.Instance.VIPModGuard_ExcludeAdminLvl)
+                                                    {
+                                                        //Log.Out($"[PrismaCore]VIP mod on {_cInfo.entityId} Mod: {itemName}");
+                                                        if (lstVipModUsers.ContainsKey(_data.ClientInfo.entityId))
+                                                        {
+                                                            lstVipModUsers[_data.ClientInfo.entityId] = itemName;
+                                                        }
+                                                        else
+                                                        {
+                                                            lstVipModUsers.Add(_data.ClientInfo.entityId, itemName);
+                                                        }
+                                                    }
+
+                                                    return;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
 
@@ -130,6 +291,11 @@ namespace ServerCore
                 using (File.Create(RegionReset.AllPoiExceptionFile)) { }
                 Log.Out("[PrismaCore] Created new empty AllPoi_Exceptions.txt in " + RegionReset.RegionPath);
             }
+            if (!File.Exists(RegionReset.VIPModGuardItemsFile))
+            {
+                using (File.Create(RegionReset.VIPModGuardItemsFile)) { }
+                Log.Out("[PrismaCore] Created new empty VIPModGuardItems.txt in " + RegionReset.RegionPath);
+            }
 
             ServerCoreStrings.Load();
             ServerCoreSettings.Load();
@@ -141,6 +307,7 @@ namespace ServerCore
             PermaDeathClass.Loadxml();
             ReservedSlots.LoadXml();
             RegionReset.LoadRegions();
+            RegionReset.LoadVIPGuardItems();
             RegionReset.LoadBannedItems();
             RegionWatcher.LoadWatchers();
             
