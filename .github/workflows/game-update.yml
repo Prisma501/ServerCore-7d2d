@@ -1,0 +1,91 @@
+name: Game update
+
+# Opens a PR against main or experimental when Steam has a newer build of the game
+# for that branch's game-version.json. RELEASING.md describes what to do with it.
+# Commits and PRs come from the servercore-game-update GitHub App, so the PR's
+# Build runs (pushes made with GITHUB_TOKEN don't trigger workflows).
+
+on:
+  schedule:
+    - cron: "17 6 * * *"
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: Only check this branch (default main and experimental)
+        type: string
+        required: false
+
+permissions:
+  contents: read
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        branch: ${{ inputs.branch && fromJSON(format('["{0}"]', inputs.branch)) || fromJSON('["main","experimental"]') }}
+    concurrency:
+      group: game-update-${{ matrix.branch }}
+    env:
+      HEAD_BRANCH: game-update/${{ matrix.branch }}
+      BASE_BRANCH: ${{ matrix.branch }}
+    steps:
+      - uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1  # v3.2.0
+        id: app
+        with:
+          app-id: ${{ vars.GAME_UPDATE_APP_ID }}
+          private-key: ${{ secrets.GAME_UPDATE_APP_PRIVATE_KEY }}
+
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10  # v6
+        with:
+          ref: ${{ matrix.branch }}
+          token: ${{ steps.app.outputs.token }}
+
+      - name: Check Steam for a newer build
+        id: update
+        run: ./scripts/game-update.sh
+
+      - name: Open or update the PR
+        if: steps.update.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ steps.app.outputs.token }}
+          APP_SLUG: ${{ steps.app.outputs.app-slug }}
+          OLD_BUILDID: ${{ steps.update.outputs.old_buildid }}
+          NEW_BUILDID: ${{ steps.update.outputs.new_buildid }}
+          VERSION: ${{ steps.update.outputs.version }}
+        run: |
+          bot_id="$(gh api "/users/${APP_SLUG}[bot]" --jq .id)"
+          git config user.name "${APP_SLUG}[bot]"
+          git config user.email "${bot_id}+${APP_SLUG}[bot]@users.noreply.github.com"
+          title="Bump game to ${VERSION}"
+          git commit -am "${title}"
+          git push --force origin "HEAD:refs/heads/${HEAD_BRANCH}"
+
+          note=""
+          if [[ "${BASE_BRANCH}" == main ]]; then
+            git fetch --quiet origin experimental
+            exp_buildid="$(git show origin/experimental:game-version.json | jq -r .buildid)"
+            if [[ "${exp_buildid}" == "${NEW_BUILDID}" ]]; then
+              note=$'\n> [!NOTE]\n> `experimental` is already pinned to this build. If the build here is red, merge or cherry-pick its fixes instead of redoing them.\n'
+            fi
+          fi
+
+          body="$(cat <<EOF
+          Steam's \`$(jq -r .branch game-version.json)\` branch moved from build [${OLD_BUILDID}](https://steamdb.info/patchnotes/${OLD_BUILDID}/) to [${NEW_BUILDID}](https://steamdb.info/patchnotes/${NEW_BUILDID}/).
+          ${note}
+          - [ ] Set \`version\` in \`game-version.json\` to the game's own label (for example \`3.3.0 EXP b15\`); \`${VERSION}\` is a guess
+          - [ ] Build green: try this PR's \`pr-N\` build, merge, then release with \`scripts/release.sh\` (it runs the smoke test)
+          - [ ] Build red: push compile fixes to this branch, one commit per game API change
+          - [ ] Update the supported versions tables in \`README.md\` and \`docs/project/compatibility.md\`
+
+          Opened by the game-update workflow; it force-pushes this branch when Steam moves again.
+          EOF
+          )"
+
+          pr="$(gh pr list --head "${HEAD_BRANCH}" --base "${BASE_BRANCH}" --state open --json number --jq '.[0].number')"
+          if [[ -n "${pr}" ]]; then
+            gh pr edit "${pr}" --title "${title}" --body "${body}"
+          else
+            gh pr create --head "${HEAD_BRANCH}" --base "${BASE_BRANCH}" --title "${title}" --body "${body}"
+          fi

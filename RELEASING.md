@@ -66,9 +66,15 @@ When a release changes the Web UI, the Steam certificates or how data files are 
 
 ## Bumping the game version
 
-1. Update `version`, `buildid`, `manifest` and `assemblyCSharpSha256` in `game-version.json` (SteamDB lists build ids and manifests for app 294420, depot 294422). Fetch once with the new manifest to get the `Assembly-CSharp.dll` sha256.
+`.github/workflows/game-update.yml` checks Steam every day. When the `public` or `latest_experimental` branch has a newer build than `game-version.json` on `main` or `experimental`, it opens a PR against that branch titled `Bump game to …` and does step 1 for you. It force-pushes the same PR when Steam moves again before it's merged. A green Build on the PR usually means rebuild and ship. A red one means the game API changed. Run it by hand from the Actions tab, optionally with a `branch` to check only that one.
+
+1. Run `./scripts/game-update.sh`. It updates `buildid`, `manifest` and `assemblyCSharpSha256` in `game-version.json` to the newest build on its Steam branch, and fills `version` with a guess such as `3.2.0 (build 24994542)`. Set `version` to the game's own label (for example `3.3.0 EXP b15`) by hand. `--check` only reports whether there is a newer build.
 2. Run `./scripts/fetch-game-refs.sh` and build. Fix each compile break in its own commit, quoting the game API that changed.
 3. Update the supported versions tables in `README.md` and `docs/project/compatibility.md`.
+
+### The game-update app
+
+The workflow commits and opens PRs as the `servercore-game-update` GitHub App, because PRs opened with the workflow's own `GITHUB_TOKEN` don't run the Build. The app is installed on this repository only, with Contents and Pull requests read and write. Its App ID is the `GAME_UPDATE_APP_ID` repository variable and its private key the `GAME_UPDATE_APP_PRIVATE_KEY` secret. To rotate the key, generate a new one in the app's settings under the `gettakaro` organization, run `gh secret set GAME_UPDATE_APP_PRIVATE_KEY < key.pem`, delete the old key in the app settings and the local `.pem`.
 
 ## Bumping the Web UI
 
