@@ -35,3 +35,10 @@ For Crossplay servers remove the Config folder. Console clients cannot connect i
 Note that some hosting providers do not allow you to upload `.dll` files! In this case you will need to ask help from their customer support in order to install ServerCore.
 
 Moving from PrismaCore? See the [migration guide](/ServerCore-7d2d/start-here/migrating-from-prismacore/).
+
+## Development builds
+
+To try changes that aren't released yet, install the latest build of a branch the same way. Each is replaced on every push, so don't run them in production:
+
+- `main` (stable game version): [ServerCore-rolling-stable.zip](https://github.com/gettakaro/ServerCore-7d2d/releases/download/rolling-stable/ServerCore-rolling-stable.zip)
+- `experimental` (experimental game version): [ServerCore-rolling-experimental.zip](https://github.com/gettakaro/ServerCore-7d2d/releases/download/rolling-experimental/ServerCore-rolling-experimental.zip)

@@ -11,6 +11,18 @@ Maintainers only. `main` builds for the stable game version and `experimental` f
 
 Pushing a tag runs `.github/workflows/release.yml`: it builds the mod, stamps the version into `ModInfo.xml`, zips `Mods/ServerCore/` as `ServerCore-<version>.zip` and publishes a GitHub release with the matching `CHANGELOG.md` section as notes. Any tag containing `-` becomes a pre-release. The release fails if the tagged commit isn't on the branch in the table: `main` for plain tags, `experimental` for tags with a `-`.
 
+## Development builds
+
+These aren't releases, and `release.yml` ignores them. The `publish` job in `.github/workflows/build.yml` runs `scripts/dev-build.sh` after every green build and publishes GitHub pre-releases:
+
+| Trigger | Pre-release | `ModInfo.xml` version |
+|---|---|---|
+| push to `main` | `rolling-stable` | `stable.<sha>` |
+| push to `experimental` | `rolling-experimental` | `experimental.<sha>` |
+| pull request #N | `pr-N`, linked in a comment on the PR | `pr-N.<sha>` |
+
+Each push moves the tag to the new commit and replaces the zip, so the download link stays the same. `.github/workflows/pr-build-cleanup.yml` deletes `pr-N` when the PR closes. PRs from forks build but aren't published, because their token is read-only.
+
 ## Cutting a release
 
 `scripts/release.sh` does the steps below. Run it from the branch you release from: `main` for `X.Y.Z`, `experimental` for `X.Y.Z-exp.N`. It needs `git`, `gh` (logged in), `jq` and `python3`, and what the dev server needs.
