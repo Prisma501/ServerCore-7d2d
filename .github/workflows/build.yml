@@ -107,18 +107,16 @@ jobs:
           path: Mods/ServerCore/
           if-no-files-found: error
 
-  # Branch pushes update the rolling-<branch> pre-release; PRs get a pr-<number> pre-release
-  # and a comment. Fork PRs only get a read-only token, so they build without publishing.
-  publish:
+  # Pushes to main and experimental update the rolling-stable and rolling-experimental
+  # pre-releases, whose download links never change.
+  rolling:
     needs: build
     if: >-
-      needs.build.outputs.has-source == 'true'
-      && ((github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/experimental'))
-      || (github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository))
+      needs.build.outputs.has-source == 'true' && github.event_name == 'push'
+      && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/experimental')
     runs-on: ubuntu-latest
     permissions:
       contents: write
-      pull-requests: write
     steps:
       - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10  # v6
 
@@ -127,9 +125,52 @@ jobs:
           name: ServerCore
           path: dist/Mods/ServerCore
 
-      - name: Publish the development build
+      - name: Publish the rolling build
         env:
           GH_TOKEN: ${{ github.token }}
-          CHANNEL: ${{ github.event_name == 'pull_request' && format('pr-{0}', github.event.pull_request.number) || (github.ref_name == 'main' && 'stable' || 'experimental') }}
-          SHA: ${{ github.event.pull_request.head.sha || github.sha }}
-        run: scripts/dev-build.sh publish "${CHANNEL}" "${SHA}" dist
+          BRANCH: ${{ github.ref_name == 'main' && 'stable' || 'experimental' }}
+        run: scripts/dev-build.sh publish "${BRANCH}" "${GITHUB_SHA}" dist
+
+  # PRs get their stamped build as a workflow artifact, linked in a comment on the PR. Fork PRs
+  # only get a read-only token, so they build without commenting.
+  pr-build:
+    needs: build
+    if: >-
+      needs.build.outputs.has-source == 'true' && github.event_name == 'pull_request'
+      && github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    env:
+      PR_NUMBER: ${{ github.event.pull_request.number }}
+      SHA: ${{ github.event.pull_request.head.sha }}
+    steps:
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10  # v6
+
+      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c  # v8.0.1
+        with:
+          name: ServerCore
+          path: dist/Mods/ServerCore
+
+      - name: Stamp version
+        id: stamp
+        run: |
+          version="pr-${PR_NUMBER}.${SHA:0:7}"
+          scripts/dev-build.sh stamp "${version}" dist
+          echo "version=${version}" >> "$GITHUB_OUTPUT"
+
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a  # v7.0.1
+        id: upload
+        with:
+          name: ServerCore-pr-${{ github.event.pull_request.number }}
+          path: dist/
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Comment on the PR
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ steps.stamp.outputs.version }}
+          ARTIFACT_URL: ${{ steps.upload.outputs.artifact-url }}
+        run: scripts/dev-build.sh comment "${PR_NUMBER}" "${SHA}" "${VERSION}" "${ARTIFACT_URL}"

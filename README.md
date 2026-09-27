@@ -47,7 +47,7 @@ To try unreleased changes, download the latest build of a branch. Each is replac
 - `main` (stable game version): [ServerCore-rolling-stable.zip](https://github.com/gettakaro/ServerCore-7d2d/releases/download/rolling-stable/ServerCore-rolling-stable.zip)
 - `experimental` (experimental game version): [ServerCore-rolling-experimental.zip](https://github.com/gettakaro/ServerCore-7d2d/releases/download/rolling-experimental/ServerCore-rolling-experimental.zip)
 
-Each pull request also gets a build, linked in a comment on the PR.
+Each pull request also gets a build, linked in a comment on the PR (downloading it needs a GitHub login).
 
 ## Features
 

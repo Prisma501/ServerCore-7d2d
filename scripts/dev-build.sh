@@ -1,12 +1,13 @@
 #!/usr/bin/env bash
-# Publishes development builds of ServerCore as GitHub pre-releases. RELEASING.md describes them.
+# Development builds of ServerCore. RELEASING.md describes them.
 #
-#   scripts/dev-build.sh publish <channel> <sha> <dist>
-#       stamp, zip and publish the mod in <dist>/Mods/ServerCore/, built from commit <sha>.
-#       <channel> is stable or experimental (the rolling-<channel> release) or pr-<number>
-#       (that PR's build, also posted as a comment on the PR).
-#   scripts/dev-build.sh cleanup <pr-number>
-#       delete the pr-<number> release and its tag
+#   scripts/dev-build.sh stamp <version> <dist>
+#       stamp <version> into <dist>/Mods/ServerCore/ModInfo.xml
+#   scripts/dev-build.sh publish <stable|experimental> <sha> <dist>
+#       stamp and zip the mod in <dist>/Mods/ServerCore/, built from commit <sha>, and publish
+#       it as the rolling-<branch> pre-release
+#   scripts/dev-build.sh comment <pr-number> <sha> <version> <artifact-url>
+#       post or update the PR comment linking that PR's build artifact
 #
 # Runs in CI (GH_TOKEN and GITHUB_REPOSITORY set) or locally with a logged-in gh. Needs gh and jq.
 set -euo pipefail
@@ -17,7 +18,7 @@ REPO="${GITHUB_REPOSITORY:-$(gh repo view --json nameWithOwner --jq .nameWithOwn
 COMMENT_MARKER="<!-- servercore-pr-build -->"
 
 usage() {
-  sed -n '2,11p' "${BASH_SOURCE[0]}" | sed 's/^# \{0,1\}//' >&2
+  sed -n '2,12p' "${BASH_SOURCE[0]}" | sed 's/^# \{0,1\}//' >&2
   exit 2
 }
 
@@ -62,66 +63,52 @@ upsert_comment() {
   fi
 }
 
-cmd_publish() {
-  local channel="$1" sha="$2" dist="$3" tag pr=""
-  case "${channel}" in
-    stable | experimental) tag="rolling-${channel}" ;;
-    pr-[0-9]*) tag="${channel}"; pr="${channel#pr-}" ;;
-    *) usage ;;
-  esac
+stamp() {
+  sed -i -E "s|(<Version value=\")[^\"]*|\1${1}|" "${2}/Mods/ServerCore/ModInfo.xml"
+}
 
-  local version="${channel}.${sha:0:7}"
+cmd_publish() {
+  local branch="$1" sha="$2" dist="$3"
+  local tag="rolling-${branch}"
+  local version="${branch}.${sha:0:7}"
   local asset="ServerCore-${tag}.zip"
-  local url="https://github.com/${REPO}/releases/download/${tag}/${asset}"
   local game target
   game="$(jq -er .version "${PIN}")"
   target="$(game_target)"
 
-  sed -i -E "s|(<Version value=\")[^\"]*|\1${version}|" "${dist}/Mods/ServerCore/ModInfo.xml"
+  stamp "${version}" "${dist}"
   rm -f "${dist}/${asset}"
   (cd "${dist}" && zip -q -r -X "${asset}" Mods)
   local sha256
   sha256="$(sha256sum "${dist}/${asset}" | cut -d' ' -f1)"
 
-  local source="the \`${channel}\` branch" lifetime="It is replaced on every push"
-  if [[ -n "${pr}" ]]; then
-    source="PR #${pr}"
-    lifetime="${lifetime} and deleted when the PR closes"
-  fi
-  local notes="Development build of ${source} at ${sha}, for the ${target} game version (${game}).
+  local notes="Development build of the \`${branch}\` branch at ${sha}, for the ${target} game version (${game}).
 
-${lifetime}. Not for production: use a [versioned release](https://github.com/${REPO}/releases) for that.
+It is replaced on every push. Not for production: use a [versioned release](https://github.com/${REPO}/releases) for that.
 
 sha256: \`${sha256}\`"
 
   upsert_release "${tag}" "${sha}" "ServerCore ${tag}" "${notes}" "${dist}/${asset}"
-  echo "Published ${url}"
-
-  if [[ -n "${pr}" ]]; then
-    upsert_comment "${pr}" "${COMMENT_MARKER}
-### ServerCore build for this PR
-
-**Download:** [\`${asset}\`](${url}) · **Version:** \`${version}\` · **Game:** ${target} (${game})
-
-Built from ${sha} · sha256 \`${sha256:0:12}\`
-
-Unzip it into the server folder so it becomes \`Mods/ServerCore/\`. This build is replaced on every push and deleted when the PR closes. _Not for production._"
-    echo "Commented on PR #${pr}"
-  fi
+  echo "Published https://github.com/${REPO}/releases/download/${tag}/${asset}"
 }
 
-cmd_cleanup() {
-  local tag="pr-$1"
-  if release_exists "${tag}"; then
-    gh release delete "${tag}" --repo "${REPO}" --cleanup-tag --yes
-    echo "Deleted ${tag}"
-  else
-    echo "No ${tag} release to delete"
-  fi
+cmd_comment() {
+  local pr="$1" sha="$2" version="$3" url="$4"
+  local game target
+  game="$(jq -er .version "${PIN}")"
+  target="$(game_target)"
+  upsert_comment "${pr}" "${COMMENT_MARKER}
+### ServerCore build for this PR
+
+**Download:** [ServerCore build artifact](${url}) (needs a GitHub login) · **Version:** \`${version}\` · **Game:** ${target} (${game})
+
+Built from ${sha}. Extract the zip into the server folder so you get \`Mods/ServerCore/\`. This comment is updated on every push, and the artifact expires after 30 days. _Not for production._"
+  echo "Commented on PR #${pr}"
 }
 
 case "${1:-}" in
-  publish) [[ $# -eq 4 ]] || usage; cmd_publish "$2" "$3" "$4" ;;
-  cleanup) [[ $# -eq 2 && "$2" =~ ^[0-9]+$ ]] || usage; cmd_cleanup "$2" ;;
+  stamp) [[ $# -eq 3 ]] || usage; stamp "$2" "$3" ;;
+  publish) [[ $# -eq 4 && "$2" =~ ^(stable|experimental)$ ]] || usage; cmd_publish "$2" "$3" "$4" ;;
+  comment) [[ $# -eq 5 && "$2" =~ ^[0-9]+$ ]] || usage; cmd_comment "$2" "$3" "$4" "$5" ;;
   *) usage ;;
 esac

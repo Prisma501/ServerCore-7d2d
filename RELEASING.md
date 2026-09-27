@@ -13,15 +13,15 @@ Pushing a tag runs `.github/workflows/release.yml`: it builds the mod, stamps th
 
 ## Development builds
 
-These aren't releases, and `release.yml` ignores them. The `publish` job in `.github/workflows/build.yml` runs `scripts/dev-build.sh` after every green build and publishes GitHub pre-releases:
+These aren't releases, and `release.yml` ignores them. After every green build, `.github/workflows/build.yml` runs `scripts/dev-build.sh`:
 
-| Trigger | Pre-release | `ModInfo.xml` version |
+| Trigger | Where the build goes | `ModInfo.xml` version |
 |---|---|---|
-| push to `main` | `rolling-stable` | `stable.<sha>` |
-| push to `experimental` | `rolling-experimental` | `experimental.<sha>` |
-| pull request #N | `pr-N`, linked in a comment on the PR | `pr-N.<sha>` |
+| push to `main` | the `rolling-stable` pre-release | `stable.<sha>` |
+| push to `experimental` | the `rolling-experimental` pre-release | `experimental.<sha>` |
+| pull request #N | the `ServerCore-pr-N` workflow artifact, linked in a comment on the PR | `pr-N.<sha>` |
 
-Each push moves the tag to the new commit and replaces the zip, so the download link stays the same. `.github/workflows/pr-build-cleanup.yml` deletes `pr-N` when the PR closes. PRs from forks build but aren't published, because their token is read-only.
+For the rolling builds, each push moves the tag to the new commit and replaces the zip, so the download link stays the same. PR builds are workflow artifacts, not releases, so they don't fill up the releases page. Downloading one needs a GitHub login, and it expires after 30 days. PRs from forks build, but get no comment because their token is read-only.
 
 ## Cutting a release
 
