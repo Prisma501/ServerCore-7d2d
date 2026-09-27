@@ -7,6 +7,7 @@ All notable changes to ServerCore are documented here. The format is based on [K
 ### Changed
 
 - New installs now send server chat messages as "Lara", a nod to Prisma501, the author of PrismaCore. Existing servers keep their saved name; change it with `scn <name>`.
+- The ClaimCreator web UI is updated to v2.2.1, which fixes the size of the drone icon on the map. Thanks to Prisma501.
 
 ## [3.0.0]
 
