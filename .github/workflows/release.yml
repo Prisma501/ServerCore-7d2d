@@ -29,6 +29,10 @@ jobs:
 
   build:
     needs: check-tag
+    # build.yml's publish job, skipped for tags, still needs these to be allowed
+    permissions:
+      contents: write
+      pull-requests: write
     uses: ./.github/workflows/build.yml
     with:
       version: ${{ github.ref_name }}
